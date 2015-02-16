@@ -1,0 +1,18 @@
+<!-- Defines the menu item that will appear on the Action Bar in MainActivity -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <!-- Search Button -->
+    <item
+        android:id="@+id/menu_item_search"
+        android:title="Search"
+        android:icon="@drawable/ic_action_search"
+        app:showAsAction="ifRoom" />
+    
+    <!-- Add Item -->
+    <item
+        android:id="@+id/menu_item_add"
+        android:title="Add"
+        android:icon="@drawable/ic_action_new"
+        app:showAsAction="always" />
+</menu>
