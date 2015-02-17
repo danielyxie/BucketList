@@ -65,6 +65,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         // Get the text from the EditText
         String itemText = addEditText.getText().toString();
 
+        // Return to ListActivity with the text
         Intent addedItem = new Intent();
         addedItem.putExtra("result", itemText);
         setResult(RESULT_OK, addedItem);
