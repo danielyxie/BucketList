@@ -14,10 +14,11 @@ import java.util.ArrayList;
 
 public class ListActivity extends ActionBarActivity {
 
-    ListView mainListView;
+    ListModel bucketModel;
+    ListView bucketView;
     ArrayAdapter mArrayAdapter;
     ArrayList mNameList = new ArrayList();
-    ListModel bucket;
+    
     public enum RequestCode{
         ADD_ITEM_REQUEST(0);
         
@@ -33,8 +34,11 @@ public class ListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        // 4. Access the ListView
-        mainListView = (ListView) findViewById(R.id.main_listview);
+        // Create a ListModel for holding bucketModel list items
+        bucketModel = new ListModel();
+        
+        // Access the ListView
+        bucketView = (ListView) findViewById(R.id.bucketlistview);
 
         // Create an ArrayAdapter for the ListView
         mArrayAdapter = new ArrayAdapter(this,
@@ -42,10 +46,7 @@ public class ListActivity extends ActionBarActivity {
                 mNameList);
 
         // Set the ListView to use the ArrayAdapter
-        mainListView.setAdapter(mArrayAdapter);
-        
-        // Create a ListModel for holding bucket list items
-        bucket = new ListModel();
+        bucketView.setAdapter(mArrayAdapter);
     }
 
 
@@ -86,7 +87,7 @@ public class ListActivity extends ActionBarActivity {
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
                 String itemText = data.getStringExtra("result");
-                bucket.addItem(itemText);
+                bucketModel.addItem(itemText);
             }
         }
     }
