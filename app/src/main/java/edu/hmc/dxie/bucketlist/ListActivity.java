@@ -17,6 +17,15 @@ public class ListActivity extends ActionBarActivity {
     ArrayAdapter mArrayAdapter;
     ArrayList mNameList = new ArrayList();
     ListModel bucket;
+    public enum RequestCode{
+        ADD_ITEM_REQUEST(0);
+        
+        private int value;
+        
+        private RequestCode(int value) {
+            this.value = value;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +69,7 @@ public class ListActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_item_add) {
             Intent addItem = new Intent(this, AddActivity.class);
-            startActivity(addItem);
+            startActivityForResult(addItem, RequestCode.ADD_ITEM_REQUEST.value);
             return true;
         }
 
