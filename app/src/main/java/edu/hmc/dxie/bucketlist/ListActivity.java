@@ -86,8 +86,15 @@ public class ListActivity extends ActionBarActivity {
             
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
+                
+                // Get the new item
                 String itemText = data.getStringExtra("result");
+                
+                // Add the item to the bucketModel
                 bucketModel.addItem(itemText);
+                
+                // Update the bucketView
+                mArrayAdapter.notifyDataSetChanged();
             }
         }
     }
