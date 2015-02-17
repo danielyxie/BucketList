@@ -1,5 +1,6 @@
 package edu.hmc.dxie.bucketlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
@@ -42,9 +43,12 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         // Get the text from the EditText
         EditText addEditText = (EditText) findViewById(R.id.text_add);
         
-        // Take what was typed into the EditText and save in ItemModel
+        // Take what was typed into the EditText
         String itemText = addEditText.getText().toString();
-        
 
+        Intent addedItem = new Intent();
+        addedItem.putExtra("result", itemText);
+        setResult(RESULT_OK, addedItem);
+        finish();
     }
 }

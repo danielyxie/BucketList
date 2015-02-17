@@ -1,5 +1,6 @@
 package edu.hmc.dxie.bucketlist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -54,8 +55,6 @@ public class ListActivity extends ActionBarActivity {
         // Inflate the menu; this adds the "new" and "search" buttons to the action bar.
         getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
-        
-        
     }
 
     @Override
@@ -66,13 +65,29 @@ public class ListActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Add button pushed
         if (id == R.id.menu_item_add) {
+            
+            // Go to AddActivity
             Intent addItem = new Intent(this, AddActivity.class);
             startActivityForResult(addItem, RequestCode.ADD_ITEM_REQUEST.value);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // If the request was to add an item
+        if (requestCode == RequestCode.ADD_ITEM_REQUEST.value) {
+            
+            // If the request went well
+            if (resultCode == Activity.RESULT_OK) {
+                String itemText = data.getStringExtra("result");
+                bucket.addItem(itemText);
+            }
+        }
     }
 }
