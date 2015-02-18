@@ -20,13 +20,7 @@ public class ListActivity extends ActionBarActivity {
     ArrayList mNameList = new ArrayList();
     
     public enum RequestCode{
-        ADD_ITEM_REQUEST(0);
-        
-        private int value;
-        
-        private RequestCode(int value) {
-            this.value = value;
-        }
+        ADD_ITEM_REQUEST
     }
 
     @Override
@@ -71,7 +65,7 @@ public class ListActivity extends ActionBarActivity {
             
             // Go to AddActivity
             Intent addItem = new Intent(this, AddActivity.class);
-            startActivityForResult(addItem, RequestCode.ADD_ITEM_REQUEST.value);
+            startActivityForResult(addItem, RequestCode.ADD_ITEM_REQUEST.ordinal());
             return true;
         }
 
@@ -82,7 +76,7 @@ public class ListActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // If the request was to add an item
-        if (requestCode == RequestCode.ADD_ITEM_REQUEST.value) {
+        if (requestCode == RequestCode.ADD_ITEM_REQUEST.ordinal()) {
             
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
