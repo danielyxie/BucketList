@@ -5,18 +5,23 @@ package edu.hmc.dxie.bucketlist;
  */
 public class ItemModel {
     
-    private String item;
+    private String itemText;
 
     // TODO: I think we'll probably want a default constructor in the future
     //          We'll likely want some initial state before we know what parameters are set.
     //          It may also be useful since not every parameter should be required when
     //              creating a new item
     
-    public ItemModel(String item) {
-        this.item = item;
+    public ItemModel(String itemText) {
+        this.itemText = itemText;
     }
     
-    public String getItem() {
-        return item;
+    public String getItemText() {
+        return itemText;
+    }
+    
+    // This is necessary for the ArrayAdapter to properly work
+    public String toString() {
+        return itemText;
     }
 }

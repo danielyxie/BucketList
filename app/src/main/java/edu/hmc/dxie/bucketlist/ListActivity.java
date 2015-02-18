@@ -9,15 +9,12 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 
 public class ListActivity extends ActionBarActivity {
 
     ListModel bucketModel;
     ListView bucketView;
-    ArrayAdapter mArrayAdapter;
-    ArrayList mNameList = new ArrayList();
+    ArrayAdapter bucketArrayAdapter;
     
     public enum RequestCode{
         ADD_ITEM_REQUEST
@@ -35,14 +32,14 @@ public class ListActivity extends ActionBarActivity {
         bucketView = (ListView) findViewById(R.id.bucketlistview);
 
         // TODO: Make the ListModel an Adapter
-        
+
         // Create an ArrayAdapter for the ListView
-        mArrayAdapter = new ArrayAdapter(this,
+        bucketArrayAdapter = new ArrayAdapter<ItemModel>(this,
                 android.R.layout.simple_list_item_1,
-                mNameList);
+                bucketModel.getBucket());
 
         // Set the ListView to use the ArrayAdapter
-        bucketView.setAdapter(mArrayAdapter);
+        bucketView.setAdapter(bucketArrayAdapter);
     }
 
 
@@ -88,9 +85,9 @@ public class ListActivity extends ActionBarActivity {
                 
                 // Add the item to the bucketModel
                 bucketModel.addItem(itemText);
-                
+
                 // Update the bucketView
-                mArrayAdapter.notifyDataSetChanged();
+                bucketArrayAdapter.notifyDataSetChanged();
             }
         }
     }

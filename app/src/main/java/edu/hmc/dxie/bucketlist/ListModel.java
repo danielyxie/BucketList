@@ -10,15 +10,19 @@ public class ListModel {
     private ArrayList<ItemModel> bucket;
     
     public ListModel() {
-        bucket = new ArrayList<ItemModel>();
+        this.bucket = new ArrayList<>();
     }
     
     public void addItem(String itemText) {
         ItemModel item = new ItemModel(itemText);
-        bucket.add(item);
+        this.bucket.add(item);
     }
     
     public void addItem(ItemModel item) {
-        bucket.add(item);
+        this.bucket.add(item);
+    }
+    
+    public ArrayList<ItemModel> getBucket() {
+        return this.bucket;
     }
 }
