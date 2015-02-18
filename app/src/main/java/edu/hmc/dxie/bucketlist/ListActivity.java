@@ -34,7 +34,7 @@ public class ListActivity extends ActionBarActivity {
         // TODO: Make the ListModel an Adapter
 
         // Create an ArrayAdapter for the ListView
-        bucketArrayAdapter = new ArrayAdapter<ItemModel>(this,
+        bucketArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 bucketModel.getBucket());
 
