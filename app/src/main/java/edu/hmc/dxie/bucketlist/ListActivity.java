@@ -34,6 +34,8 @@ public class ListActivity extends ActionBarActivity {
         // Access the ListView
         bucketView = (ListView) findViewById(R.id.bucketlistview);
 
+        // TODO: Make the ListModel an Adapter
+        
         // Create an ArrayAdapter for the ListView
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
@@ -82,7 +84,7 @@ public class ListActivity extends ActionBarActivity {
             if (resultCode == Activity.RESULT_OK) {
                 
                 // Get the new item
-                String itemText = data.getStringExtra("result");
+                String itemText = data.getStringExtra("task");
                 
                 // Add the item to the bucketModel
                 bucketModel.addItem(itemText);

@@ -65,9 +65,11 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         // Get the text from the EditText
         String itemText = addEditText.getText().toString();
 
+        // TODO: input handling - What happens when the button is clicked, but the EditText is empty?
+        
         // Return to ListActivity with the text
         Intent addedItem = getIntent();
-        addedItem.putExtra("result", itemText);
+        addedItem.putExtra("task", itemText);
         setResult(RESULT_OK, addedItem);
         finish();
     }
