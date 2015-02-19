@@ -14,7 +14,7 @@ import android.widget.TextView;
 /**
  * Created by justisallen and kaitlynanderson on 2/15/15.
  */
-public class AddActivity extends ActionBarActivity implements View.OnClickListener{
+public class AddActivity extends ActionBarActivity implements View.OnClickListener {
     
     EditText addEditText;
     
@@ -73,7 +73,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             addEditText.setError("Woops! The text field is empty. Insert text to add an item to your bucket list");
         } else {
 
-            // Otherwise, return to ListActivity with the text
+            // Otherwise, return to MainListActivity with the text
             Intent addedItem = getIntent();
             addedItem.putExtra("item text", itemText);
             setResult(RESULT_OK, addedItem);

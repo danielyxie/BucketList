@@ -10,13 +10,12 @@ import android.view.View;
 import android.widget.TextView;
 
 
-public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener{
+public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener {
 
     Intent viewItem;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("herp", "We're getting somewhere");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
 
@@ -29,6 +28,8 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         
         // Set its text to be that of the item
         itemTextView.setText(itemText);
+        
+        Log.d("herp", "Completed onCreate in ViewItemActivity");
     }
 
 
@@ -58,6 +59,8 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        
+        Log.d("herp", "Entered onClick");
         
         // Check which button was clicked
         switch (v.getId()) {

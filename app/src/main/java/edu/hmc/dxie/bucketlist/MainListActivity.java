@@ -1,18 +1,18 @@
 package edu.hmc.dxie.bucketlist;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
-public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+// TODO: We should probably change the name of this class and have it extend the preexisting MainListActivity
+public class MainListActivity extends ListActivity {
 
     ListModel bucketModel;
     ListView bucketView;
@@ -29,9 +29,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         // Create a ListModel for holding bucketModel list items
         bucketModel = new ListModel();
-        
-        // Access the ListView
-        bucketView = (ListView) findViewById(R.id.bucketlistview);
 
         // Create an ArrayAdapter for the ListView
         bucketArrayAdapter = new ArrayAdapter<>(this,
@@ -39,10 +36,10 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 bucketModel.getBucket());
 
         // Set the ListView to use the ArrayAdapter
-        bucketView.setAdapter(bucketArrayAdapter);
+        getListView().setAdapter(bucketArrayAdapter);
         
         // Set this activity to react to list items being processed
-        bucketView.setOnItemClickListener(this);
+        //bucketView.setOnItemClickListener(this);
     }
 
 
@@ -76,6 +73,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        
+        Log.d("herp", "Returning from an Activity with request");
 
         // If the request was to add an item
         if (requestCode == RequestCode.ADD_ITEM_REQUEST.ordinal()) {
@@ -95,6 +94,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             
         // If the request was to view an item
         } else if (requestCode == RequestCode.VIEW_ITEM_REQUEST.ordinal()) {
+            
+            Log.d("herp", "The request is from View!");
             
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
@@ -126,7 +127,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         
         // Get the clicked item
         ItemModel clickedItem = bucketModel.getBucket().get(position);
