@@ -64,13 +64,20 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
 
         // Get the text from the EditText
         String itemText = addEditText.getText().toString();
-
-        // TODO: input handling - What happens when the button is clicked, but the EditText is empty?
         
-        // Return to ListActivity with the text
-        Intent addedItem = getIntent();
-        addedItem.putExtra("task", itemText);
-        setResult(RESULT_OK, addedItem);
-        finish();
+        // If there is no text
+        if (itemText.isEmpty()) {
+            
+            // Inform the user and stay on the Activity
+            addEditText.setError("Woops! The text field is empty. Insert text to add an item to your bucket list");
+            return;
+        } else {
+
+            // Otherwise, return to ListActivity with the text
+            Intent addedItem = getIntent();
+            addedItem.putExtra("task", itemText);
+            setResult(RESULT_OK, addedItem);
+            finish();
+        }
     }
 }
