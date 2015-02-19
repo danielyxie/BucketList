@@ -15,7 +15,7 @@ import android.widget.ListView;
 public class MainListActivity extends ListActivity {
 
     ListModel bucketModel;
-    ListView bucketView;
+    //ListView bucketView;
     ArrayAdapter bucketArrayAdapter;
 
     public enum RequestCode{
