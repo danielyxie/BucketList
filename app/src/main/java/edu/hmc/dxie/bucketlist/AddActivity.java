@@ -46,6 +46,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -70,12 +71,11 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             
             // Inform the user and stay on the Activity
             addEditText.setError("Woops! The text field is empty. Insert text to add an item to your bucket list");
-            return;
         } else {
 
             // Otherwise, return to ListActivity with the text
             Intent addedItem = getIntent();
-            addedItem.putExtra("task", itemText);
+            addedItem.putExtra("item text", itemText);
             setResult(RESULT_OK, addedItem);
             finish();
         }

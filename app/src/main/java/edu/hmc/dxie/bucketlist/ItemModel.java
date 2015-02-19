@@ -15,14 +15,19 @@ public class ItemModel {
     
     public ItemModel(String itemText) {
         this.itemText = itemText;
+        this.completed = false;
     }
     
     public String getItemText() {
-        return itemText;
+        return this.itemText;
+    }
+    
+    public void complete() {
+        this.completed = true;
     }
     
     // This is necessary for the ArrayAdapter to properly work
     public String toString() {
-        return itemText;
+        return this.itemText;
     }
 }

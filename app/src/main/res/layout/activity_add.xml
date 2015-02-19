@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="Add an item"
         android:id="@+id/text_add"
-        android:layout_marginTop="151dp"
+        android:layout_marginTop="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:inputType="textCapSentences" />
