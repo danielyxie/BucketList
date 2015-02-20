@@ -28,6 +28,14 @@ public class ListModel {
         return this.bucket;
     }
     
+    public ItemModel getItem(int position) {
+        return this.bucket.get(position);
+    }
+    
+    public void removeItem(int position) {
+        this.bucket.remove(position);
+    }
+    
     public String serialize() {
         Gson gson = new Gson();
         return gson.toJson(this);

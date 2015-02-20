@@ -139,14 +139,14 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 if (buttonClicked.equals("Complete")) {
                     
                     // Mark the item as completed
-                    bucketModel.getBucket().get(position).complete();
+                    bucketModel.getItem(position).complete();
                     // TODO: Modify the adapter so that completed items are indicated (green background?)
                     
                 // If the "Delete" button was clicked
                 } else if (buttonClicked.equals("Delete")) {
                     
                     // Delete the item
-                    bucketModel.getBucket().remove(position);
+                    bucketModel.removeItem(position);
                 }
 
                 // Update the bucketView
@@ -159,7 +159,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         
         // Get the clicked item
-        ItemModel clickedItem = bucketModel.getBucket().get(position);
+        ItemModel clickedItem = bucketModel.getItem(position);
 
         // Go to ViewItemActivity with the clicked item
         Intent viewItem = new Intent(this, ViewItemActivity.class);

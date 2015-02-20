@@ -6,7 +6,7 @@ package edu.hmc.dxie.bucketlist;
 public class ItemModel {
     
     private String itemText;
-    private boolean completed;
+    private boolean completed; // This might not actually be the preferred solution
 
     // TODO: I think we'll probably want a default constructor in the future
     //          We'll likely want some initial state before we know what parameters are set.
