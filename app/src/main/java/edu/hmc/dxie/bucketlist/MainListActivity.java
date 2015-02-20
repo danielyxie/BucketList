@@ -1,22 +1,25 @@
 package edu.hmc.dxie.bucketlist;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-// TODO: We should probably change the name of this class and have it extend the preexisting MainListActivity
-public class MainListActivity extends ListActivity {
+// TODO: Consider replacing magic strings with constants in strings.xml
+public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
     ListModel bucketModel;
-    //ListView bucketView;
+    ListView bucketView;
     ArrayAdapter bucketArrayAdapter;
+    SharedPreferences persistentData;
 
     public enum RequestCode{
         ADD_ITEM_REQUEST, VIEW_ITEM_REQUEST
@@ -27,8 +30,25 @@ public class MainListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        // Create a ListModel for holding bucketModel list items
-        bucketModel = new ListModel();
+        // Get persistent data
+        persistentData = getSharedPreferences("persistent data", Context.MODE_PRIVATE);
+        
+        // Get the JSON of the bucketModel if it exists, otherwise get an empty string
+        String bucketModelJSON = persistentData.getString("bucket model", "");
+        
+        // Check whether a bucketModel exists
+        if (bucketModelJSON.isEmpty()) {
+            
+            // If one does not exist, create a new ListModel for holding bucketModel list items
+            bucketModel = new ListModel();
+        } else {
+            
+            // Otherwise, recover the preexisting bucketModel
+            bucketModel = ListModel.deserialize(bucketModelJSON);
+        }
+        
+        // Access the ListView
+        bucketView = (ListView) findViewById(R.id.bucketlistview);
 
         // Create an ArrayAdapter for the ListView
         bucketArrayAdapter = new ArrayAdapter<>(this,
@@ -36,10 +56,23 @@ public class MainListActivity extends ListActivity {
                 bucketModel.getBucket());
 
         // Set the ListView to use the ArrayAdapter
-        getListView().setAdapter(bucketArrayAdapter);
+        bucketView.setAdapter(bucketArrayAdapter);
         
         // Set this activity to react to list items being processed
-        //bucketView.setOnItemClickListener(this);
+        bucketView.setOnItemClickListener(this);
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Serialize the current state of the bucketModel to JSON
+        String serializedData = bucketModel.serialize();
+                
+        // Save the serialized data into a shared preference
+        SharedPreferences.Editor dataEditor = persistentData.edit();
+        dataEditor.putString("bucket model", serializedData);
+        dataEditor.apply();
     }
 
 
@@ -73,8 +106,6 @@ public class MainListActivity extends ListActivity {
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        
-        Log.d("herp", "Returning from an Activity with request");
 
         // If the request was to add an item
         if (requestCode == RequestCode.ADD_ITEM_REQUEST.ordinal()) {
@@ -94,8 +125,6 @@ public class MainListActivity extends ListActivity {
             
         // If the request was to view an item
         } else if (requestCode == RequestCode.VIEW_ITEM_REQUEST.ordinal()) {
-            
-            Log.d("herp", "The request is from View!");
             
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
@@ -127,7 +156,7 @@ public class MainListActivity extends ListActivity {
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         
         // Get the clicked item
         ItemModel clickedItem = bucketModel.getBucket().get(position);
@@ -137,6 +166,5 @@ public class MainListActivity extends ListActivity {
         viewItem.putExtra("item text", clickedItem.toString());
         viewItem.putExtra("item position", position);
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
-        // TODO: Consider replacing putExtra name strings with constants in strings.xml
     }
 }

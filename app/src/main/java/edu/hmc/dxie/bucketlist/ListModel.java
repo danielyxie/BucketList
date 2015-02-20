@@ -1,5 +1,7 @@
 package edu.hmc.dxie.bucketlist;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 /**
@@ -24,5 +26,15 @@ public class ListModel {
     
     public ArrayList<ItemModel> getBucket() {
         return this.bucket;
+    }
+    
+    public String serialize() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+    
+    public static ListModel deserialize(String serializedData) {
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, ListModel.class);
     }
 }

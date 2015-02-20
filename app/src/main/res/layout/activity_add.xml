@@ -17,7 +17,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OK"
+        android:text="Add"
         android:id="@+id/button_confirm_add"
         android:layout_below="@+id/text_add"
         android:layout_centerHorizontal="true" />
