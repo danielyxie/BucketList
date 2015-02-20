@@ -26,8 +26,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         
         // Set its text to be that of the item
         itemTextView.setText(itemText);
-        
-        Log.d("herp", "Completed onCreate in ViewItemActivity");
     }
 
 
@@ -58,8 +56,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     // TODO: Button clicks aren't being registered properly. Fix this
     @Override
     public void onClick(View v) {
-        
-        Log.d("herp", "Entered onClick");
         
         // Check which button was clicked
         switch (v.getId()) {
