@@ -47,7 +47,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             bucketModel = ListModel.deserialize(bucketModelJSON);
         }
         
-        // Access the ListView
+        // Get the ListView
         bucketView = (ListView) findViewById(R.id.bucketlistview);
 
         // Create an ArrayAdapter for the ListView
@@ -160,7 +160,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         
         // Get the clicked item
         ItemModel clickedItem = bucketModel.getBucket().get(position);
-        
+
         // Go to ViewItemActivity with the clicked item
         Intent viewItem = new Intent(this, ViewItemActivity.class);
         viewItem.putExtra("item text", clickedItem.toString());

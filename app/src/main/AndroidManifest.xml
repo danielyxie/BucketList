@@ -24,6 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListActivity"/>
         </activity>
+        <activity
+            android:name=".ViewItemActivity"
+            android:label="@string/title_activity_view_item"
+            android:parentActivityName=".ListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListActivity"/>
+        </activity>
     </application>
 
 </manifest>

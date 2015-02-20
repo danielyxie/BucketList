@@ -23,9 +23,11 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        // Get the "Add" Button
         Button addButton = (Button) findViewById(R.id.button_confirm_add);
         addButton.setOnClickListener(this);
         
+        // Get the EditText for adding an item
         addEditText = (EditText) findViewById(R.id.text_add);
 
         // Clicks the add Button when the Done or Return buttons on the keyboard are pressed

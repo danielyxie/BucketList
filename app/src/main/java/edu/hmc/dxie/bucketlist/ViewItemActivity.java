@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -26,6 +27,14 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         
         // Set its text to be that of the item
         itemTextView.setText(itemText);
+        
+        // Get the "Complete" Button
+        Button completeButton = (Button) findViewById(R.id.button_complete);
+        completeButton.setOnClickListener(this);
+        
+        // Get the "Delete" Button
+        Button deleteButton = (Button) findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(this);
     }
 
 
@@ -53,7 +62,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO: Button clicks aren't being registered properly. Fix this
     @Override
     public void onClick(View v) {
         
