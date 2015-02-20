@@ -29,7 +29,8 @@
         android:text="Complete"
         android:id="@+id/button_complete"
         android:layout_below="@+id/text_itemtext"
-        android:layout_alignRight="@+id/center_dummy" />
+        android:layout_alignRight="@+id/center_dummy"
+        android:layout_alignEnd="@+id/center_dummy" />
     
     <!-- Delete button -->
     <Button
@@ -38,6 +39,7 @@
         android:text="Delete"
         android:id="@+id/button_delete"
         android:layout_below="@+id/text_itemtext"
-        android:layout_alignLeft="@+id/center_dummy" />
+        android:layout_alignLeft="@+id/center_dummy"
+        android:layout_alignStart="@+id/center_dummy" />
 
 </RelativeLayout>
