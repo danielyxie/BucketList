@@ -46,3 +46,4 @@ public class ListModel {
         return gson.fromJson(serializedData, ListModel.class);
     }
 }
+
