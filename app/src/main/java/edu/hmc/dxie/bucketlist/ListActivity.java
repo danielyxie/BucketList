@@ -155,6 +155,9 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                     //          in a separate ArrayList and display them in a separate Activity?
                     //          We'll also need a "View Completed Items" button in this Activity if
                     //          we choose this option.
+                    //  On second thought, I think it would be nicer if, instead of a separate activity,
+                    //      the user stayed on the current activity, but their accomplished items
+                    //      appeared.
                     
                 // If the "Delete" button was clicked
                 } else if (buttonClicked.equals("Delete")) {
