@@ -21,13 +21,15 @@ public class ItemModel {
     public String getItemText() {
         return this.itemText;
     }
-    
-    public void complete() {
-        this.completed = true;
-    }
-    
+
     // This is necessary for the ArrayAdapter to properly work
     public String toString() {
         return this.itemText;
     }
+
+    public void complete() {
+        this.completed = true;
+    }
+    
+    public boolean getCompleted() { return this.completed; }
 }

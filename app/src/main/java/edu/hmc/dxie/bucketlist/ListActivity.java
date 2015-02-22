@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -90,6 +89,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -204,6 +204,9 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         @Override
         public View getView(int position, View v, ViewGroup parent)
         {
+            //A LayoutInflater instantiates a layout XML file into its corresponding View
+            //objects.  It can be used to customize how every ItemModel in the bucketlist
+            //ListView appears on the ListActivity.
             LayoutInflater inflater =
                     (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -213,17 +216,19 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
             if(items.get(position) != null )
             {
-                Log.d("bucket list debug", items.get(position).toString());
+                text.setText(items.get(position).toString());
 
-                if(items.get(position).toString() == null ) {
-                    Log.d("bucket list debug", "null");
+                //Here is where to customize the feature that allows users to visually
+                //distinguish completed and uncompleted tasks.  It looks really ugly right now
+                text.setTextColor(Color.WHITE);
+
+                if(items.get(position).getCompleted()) {
+                    text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
+                } else {
+                    text.setBackgroundColor(Color.RED);
                 }
 
-                text.setTextColor(Color.WHITE);
-                text.setText(items.get(position).toString());
-                //text.setBackgroundColor(Color.RED);
                 //int color = Color.argb( 200, 255, 64, 64 );
-                //text.setBackgroundColor( color );
             }
 
             return itemView;
