@@ -2,7 +2,7 @@
 <resources>
 
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#FF1EBE39</color>
+    <color name="green">#FFBADA5F</color>
     <color name="lightbrown">#FFDAC189</color>
     <color name="yellow">#FFFF00</color>
     <color name="fuchsia">#FF00FF</color>
