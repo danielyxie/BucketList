@@ -147,17 +147,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                     
                     // Mark the item as completed
                     bucketModel.getItem(position).complete();
-                    // TODO: Modify the adapter so that completed items are indicated (green background?)
-                    // TODO: ^^ This might not be the best solution. The user story is probably better
-                    //          as we'll want that functionality in the future. So we can change this to
-                    //          remove the completed item as in delete (though we'll probably want to
-                    //          add a completeItem method to ListModel). Maybe store all completed items
-                    //          in a separate ArrayList and display them in a separate Activity?
-                    //          We'll also need a "View Completed Items" button in this Activity if
-                    //          we choose this option.
-                    //  On second thought, I think it would be nicer if, instead of a separate activity,
-                    //      the user stayed on the current activity, but their accomplished items
-                    //      appeared.
                     
                 // If the "Delete" button was clicked
                 } else if (buttonClicked.equals("Delete")) {
