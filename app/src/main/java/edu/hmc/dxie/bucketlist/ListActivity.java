@@ -4,20 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 // TODO: Consider replacing magic strings with constants in strings.xml
 public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
@@ -172,60 +165,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         viewItem.putExtra("item text", clickedItem.toString());
         viewItem.putExtra("item position", position);
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
-    }
-
-
-    /* Custom ArrayAdapter that will allow the ListView to support several views, formats, and
-     * control data assignment.  Essentially, this custom ArrayAdapter will allow us to customize
-     * the UI of the ListView.  It simply overrides the getView() function in ArrayAdapter
-     */
-    private class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
-
-        private Context mContext;
-        private int id;
-        private ArrayList<ItemModel> items ;
-
-        public bucketlistArrayAdapter(Context context, int textViewResourceId , ArrayList<ItemModel> list )
-        {
-            super(context, textViewResourceId, list);
-            mContext = context;
-            id = textViewResourceId;
-            items = list;
-        }
-
-        @Override
-        public View getView(int position, View v, ViewGroup parent)
-        {
-            //A LayoutInflater instantiates a layout XML file into its corresponding View
-            //objects.  It can be used to customize how every ItemModel in the bucketlist
-            //ListView appears on the ListActivity.
-            LayoutInflater inflater =
-                    (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
-
-            TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
-
-            if(items.get(position) != null )
-            {
-                text.setText(items.get(position).toString());
-
-                //Here is where to customize the feature that allows users to visually
-                //distinguish completed and uncompleted tasks.  It looks really ugly right now
-                text.setTextColor(Color.WHITE);
-
-                if(items.get(position).getCompleted()) {
-                    text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
-                } else {
-                    text.setBackgroundColor(Color.RED);
-                }
-
-                //int color = Color.argb( 200, 255, 64, 64 );
-            }
-
-            return itemView;
-        }
-
     }
 }
 
