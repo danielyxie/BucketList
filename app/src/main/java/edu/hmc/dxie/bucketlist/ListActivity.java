@@ -113,11 +113,12 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
                 
-                // Get the new item
-                String itemText = data.getStringExtra("item text");
+                // Recover the new item
+                String serializedItem = data.getStringExtra("item");
+                ItemModel newItem = ItemModel.deserialize(serializedItem);
                 
                 // Add the item to the bucketModel
-                bucketModel.addItem(itemText);
+                bucketModel.addItem(newItem);
 
                 // Update the bucketView
                 bucketArrayAdapter.notifyDataSetChanged();

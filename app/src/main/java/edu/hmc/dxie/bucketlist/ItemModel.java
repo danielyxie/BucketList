@@ -1,5 +1,7 @@
 package edu.hmc.dxie.bucketlist;
 
+import com.google.gson.Gson;
+
 /**
  * Created by justisallen and kaitlynanderson on 2/15/15.
  */
@@ -41,4 +43,14 @@ public class ItemModel {
     }
     
     public boolean getCompleted() { return this.completed; }
+
+    public String serialize() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static ItemModel deserialize(String serializedData) {
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, ItemModel.class);
+    }
 }

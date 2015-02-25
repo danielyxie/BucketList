@@ -73,12 +73,20 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             
             // Inform the user and stay on the Activity
             addEditText.setError("Woops! The text field is empty. Insert text to add an item to your bucket list");
-        } else {
 
-            // Otherwise, return to MainListActivity with the text
-            Intent addedItem = getIntent();
-            addedItem.putExtra("item text", itemText);
-            setResult(RESULT_OK, addedItem);
+        // Otherwise, return to MainListActivity with the text
+        } else {
+            
+            // Create the item object
+            ItemModel newItem = new ItemModel(itemText);
+            
+            // Serialize the new item to JSON
+            String serializedItem = newItem.serialize();
+            
+            // Store the serialized item in the intent
+            Intent addItem = getIntent();
+            addItem.putExtra("item", serializedItem);
+            setResult(RESULT_OK, addItem);
             finish();
         }
     }
