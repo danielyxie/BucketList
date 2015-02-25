@@ -12,7 +12,7 @@ public class ItemModel {
     private String deadline;
     private int moneyCost;
     private int priority;
-    private int timeCost;
+    private String timeCost;
     private String travelDistance;
 
     // Default initializes all values. To set them use available mutator methods.
@@ -22,21 +22,48 @@ public class ItemModel {
         this.deadline = "";
         this.moneyCost = -1;
         this.priority = -1;
-        this.timeCost = -1;
+        this.timeCost = "";
         this.travelDistance = "";
     }
+    
+    ////////////////////
+    // Accessor Methods
+    ////////////////////
     
     public String getItemText() {
         return this.itemText;
     }
+
+    public boolean getCompleted() {
+        return this.completed;
+    }
+    
+    public String getDeadline() {
+        return this.deadline;
+    }
+    
+    public int getMoneyCost() {
+        return this.moneyCost;
+    }
+    
+    public int getPriority() {
+        return this.priority;
+    }
+    
+    public String getTimeCost() {
+        return this.timeCost;
+    }
+    
+    public String getTravelDistance() {
+        return this.travelDistance;
+    }
+    
+    ////////////////////
+    // Mutator Methods
+    ////////////////////
     
     public void setItemText(String itemText) {
         this.itemText = itemText;
-    }
-
-    // This is necessary for the ArrayAdapter to properly work
-    public String toString() {
-        return this.itemText;
     }
 
     public void complete() {
@@ -47,7 +74,30 @@ public class ItemModel {
         this.completed = false;
     }
     
-    public boolean getCompleted() { return this.completed; }
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+    
+    public void setMoneyCost(int moneyCost) {
+        this.moneyCost = moneyCost;        
+    }
+    
+    public void setPriority(int priority) {
+        this.priority = priority;        
+    }
+    
+    public void setTimeCost(String timeCost) {
+        this.timeCost = timeCost;        
+    }
+    
+    public void setTravelDistance(String travelDistance) {
+        this.travelDistance = travelDistance;
+    }
+
+    // This is necessary for the ArrayAdapter to properly work
+    public String toString() {
+        return this.itemText;
+    }    
 
     public String serialize() {
         Gson gson = new Gson();
