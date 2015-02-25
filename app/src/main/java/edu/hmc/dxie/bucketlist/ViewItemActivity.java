@@ -13,6 +13,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
     Intent viewItem;
     Button completeButton;
+    ItemModel currentItem;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +22,21 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         // Get the text of the item to be viewed
         viewItem = getIntent();
-        String itemText = viewItem.getStringExtra("item text");
+        String serializedItem = viewItem.getStringExtra("item");
+        currentItem = ItemModel.deserialize(serializedItem);
         
         // Get the TextView
         TextView itemTextView = (TextView) findViewById(R.id.text_itemtext);
         
         // Set its text to be that of the item
-        itemTextView.setText(itemText);
+        itemTextView.setText(currentItem.getItemText());
         
         // Get the "Complete" Button
         completeButton = (Button) findViewById(R.id.button_complete);
         completeButton.setOnClickListener(this);
         
-        // Get the completed status of the item
-        boolean itemCompleted = viewItem.getBooleanExtra("item completed status", false);
-        
-        if (itemCompleted) {
+        // Choose whether to show a "Complete" or "Uncomplete" Button
+        if (currentItem.getCompleted()) {
             completeButton.setText("Uncomplete");
         } else {
             completeButton.setText("Complete");

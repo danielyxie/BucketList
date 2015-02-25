@@ -167,12 +167,14 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         
         // Get the clicked item
         ItemModel clickedItem = bucketModel.getItem(position);
+        
+        // Serialize the item to JSON
+        String serializedItem = clickedItem.serialize();
 
         // Go to ViewItemActivity with the clicked item
         Intent viewItem = new Intent(this, ViewItemActivity.class);
-        viewItem.putExtra("item text", clickedItem.toString());
+        viewItem.putExtra("item", serializedItem);
         viewItem.putExtra("item position", position);
-        viewItem.putExtra("item completed status", clickedItem.getCompleted());
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
     }
 }

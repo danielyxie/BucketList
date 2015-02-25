@@ -15,11 +15,6 @@ public class ListModel {
         this.bucket = new ArrayList<>();
     }
     
-    public void addItem(String itemText) {
-        ItemModel item = new ItemModel(itemText);
-        this.bucket.add(item);
-    }
-    
     public void addItem(ItemModel item) {
         this.bucket.add(item);
     }
