@@ -78,7 +78,8 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         } else {
             
             // Create the item object
-            ItemModel newItem = new ItemModel(itemText);
+            ItemModel newItem = new ItemModel();
+            newItem.setItemText(itemText);
             
             // Serialize the new item to JSON
             String serializedItem = newItem.serialize();

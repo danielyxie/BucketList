@@ -15,18 +15,23 @@ public class ItemModel {
     private int timeCost;
     private String travelDistance;
 
-    // TODO: I think we'll probably want a default constructor in the future
-    //          We'll likely want some initial state before we know what parameters are set.
-    //          It may also be useful since not every parameter should be required when
-    //              creating a new item
-    
-    public ItemModel(String itemText) {
-        this.itemText = itemText;
+    // Default initializes all values. To set them use available mutator methods.
+    public ItemModel() {
+        this.itemText = "";
         this.completed = false;
+        this.deadline = "";
+        this.moneyCost = -1;
+        this.priority = -1;
+        this.timeCost = -1;
+        this.travelDistance = "";
     }
     
     public String getItemText() {
         return this.itemText;
+    }
+    
+    public void setItemText(String itemText) {
+        this.itemText = itemText;
     }
 
     // This is necessary for the ArrayAdapter to properly work
