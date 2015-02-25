@@ -135,17 +135,24 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 // Get the button clicked
                 String buttonClicked = data.getStringExtra("button clicked");
                 
-                // If the "Complete" button was clicked
-                if (buttonClicked.equals("Complete")) {
+                switch (buttonClicked) {
+                    case "Complete":
                     
-                    // Mark the item as completed
-                    bucketModel.getItem(position).complete();
+                        // Mark the item as completed
+                        bucketModel.getItem(position).complete();
+                        break;
                     
-                // If the "Delete" button was clicked
-                } else if (buttonClicked.equals("Delete")) {
+                    case "Uncomplete":
+                        
+                        // Mark the item as not completed
+                        bucketModel.getItem(position).uncomplete();
+                        break;
                     
-                    // Delete the item
-                    bucketModel.removeItem(position);
+                    case "Delete":
+                    
+                        // Delete the item
+                        bucketModel.removeItem(position);
+                        break;
                 }
 
                 // Update the bucketView
@@ -164,6 +171,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         Intent viewItem = new Intent(this, ViewItemActivity.class);
         viewItem.putExtra("item text", clickedItem.toString());
         viewItem.putExtra("item position", position);
+        viewItem.putExtra("item completed status", clickedItem.getCompleted());
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
     }
 }

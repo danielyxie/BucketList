@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener {
 
     Intent viewItem;
+    Button completeButton;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,17 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         itemTextView.setText(itemText);
         
         // Get the "Complete" Button
-        Button completeButton = (Button) findViewById(R.id.button_complete);
+        completeButton = (Button) findViewById(R.id.button_complete);
         completeButton.setOnClickListener(this);
+        
+        // Get the completed status of the item
+        boolean itemCompleted = viewItem.getBooleanExtra("item completed status", false);
+        
+        if (itemCompleted) {
+            completeButton.setText("Uncomplete");
+        } else {
+            completeButton.setText("Complete");
+        }
         
         // Get the "Delete" Button
         Button deleteButton = (Button) findViewById(R.id.button_delete);
@@ -70,7 +80,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             
             // "Complete" button
             case R.id.button_complete:
-                viewItem.putExtra("button clicked", "Complete");
+                viewItem.putExtra("button clicked", completeButton.getText());
                 setResult(RESULT_OK, viewItem);
                 break;
             

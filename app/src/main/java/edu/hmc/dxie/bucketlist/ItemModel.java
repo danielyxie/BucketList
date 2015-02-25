@@ -6,7 +6,12 @@ package edu.hmc.dxie.bucketlist;
 public class ItemModel {
     
     private String itemText;
-    private boolean completed; // This might not actually be the preferred solution
+    private boolean completed;
+    private String deadline;
+    private int moneyCost;
+    private int priority;
+    private int timeCost;
+    private String travelDistance;
 
     // TODO: I think we'll probably want a default constructor in the future
     //          We'll likely want some initial state before we know what parameters are set.
@@ -29,6 +34,10 @@ public class ItemModel {
 
     public void complete() {
         this.completed = true;
+    }
+    
+    public void uncomplete() {
+        this.completed = false;
     }
     
     public boolean getCompleted() { return this.completed; }
