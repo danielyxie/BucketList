@@ -10,7 +10,7 @@ public class ItemModel {
     private String itemText;
     private boolean completed;
     private String deadline;
-    private int moneyCost;
+    private double moneyCost;
     private int priority;
     private String timeCost;
     private String travelDistance;
@@ -42,7 +42,7 @@ public class ItemModel {
         return this.deadline;
     }
     
-    public int getMoneyCost() {
+    public double getMoneyCost() {
         return this.moneyCost;
     }
     
@@ -78,7 +78,7 @@ public class ItemModel {
         this.deadline = deadline;
     }
     
-    public void setMoneyCost(int moneyCost) {
+    public void setMoneyCost(double moneyCost) {
         this.moneyCost = moneyCost;        
     }
     
