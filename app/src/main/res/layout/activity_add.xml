@@ -1,64 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    
+    <!-- New Item -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="New Item"
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:hint="New item"
         android:id="@+id/add_edittext_text"
         android:inputType="textCapSentences"
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
     
-    <EditText
+    <!-- Deadline -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/add_edittext_deadline"
-        android:hint="Deadline"
-        android:inputType="text"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Deadline"
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_edittext_deadline"
+        android:inputType="text"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Priority -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Priority"
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
+    
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/add_edittext_priority"
-        android:hint="Priority"
         android:inputType="number"
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+    
+    <!-- Money Cost -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Money cost"
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
     
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/add_edittext_moneycost"
-        android:hint="Money cost"
         android:inputType="numberDecimal"
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Time Cost -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time cost"
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
+    
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/add_edittext_timecost"
-        android:hint="Time cost"
         android:inputType="text"
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Travel Distance -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Travel distance"
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
+    
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/add_edittext_traveldistance"
-        android:hint="Travel distance"
         android:inputType="text"
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Confirm Button -->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
