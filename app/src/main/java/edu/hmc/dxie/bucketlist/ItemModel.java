@@ -74,16 +74,20 @@ public class ItemModel {
         this.completed = false;
     }
     
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+    public void setDeadline(String number, String unit) {
+        this.deadline = number + " " + unit;
     }
     
-    public void setMoneyCost(double moneyCost) {
-        this.moneyCost = moneyCost;        
+    public void setMoneyCost(String moneyCost) {
+        if (!moneyCost.isEmpty()) {
+            this.moneyCost = Double.parseDouble(moneyCost);
+        }
     }
     
-    public void setPriority(int priority) {
-        this.priority = priority;        
+    public void setPriority(String priority) {
+        if (!priority.isEmpty()) {
+            this.priority = Integer.parseInt(priority);
+        }
     }
     
     public void setTimeCost(String timeCost) {

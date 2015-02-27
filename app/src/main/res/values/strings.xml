@@ -7,5 +7,13 @@
     <string name="greeting">Tap the plus symbol to add an item!</string>
     <string name="title_activity_view_item">View Item</string>
     <string name="title_activity_add">Back to List</string>
+    <string name="priority_min">0</string> <!-- 0 for ease of use with SeekBar -->
+    <string name="priority_max">10</string>
+    <string-array name="deadline_units">
+        <item>days</item>
+        <item>weeks</item>
+        <item>months</item>
+        <item>years</item>
+    </string-array>
 
 </resources>
