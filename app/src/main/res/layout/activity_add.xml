@@ -14,15 +14,32 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/input_divider_padding"/>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/add_edittext_text"
-        android:inputType="textCapSentences"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"
-        android:layout_marginBottom="@dimen/input_divider_padding"/>
+        android:orientation="horizontal">
+        
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/add_edittext_text"
+            android:inputType="textCapSentences"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/label_divider_padding"
+            android:layout_marginBottom="@dimen/input_divider_padding"
+            android:layout_weight="6"/>
+        
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
     
     <!-- Deadline -->
     <TextView
@@ -63,14 +80,15 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/input_divider_padding"/>
     
-    <!--EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_edittext_priority"
-        android:inputType="number"
+        android:id="@+id/add_textview_priority_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/priority_min"
         android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"
-        android:layout_marginBottom="@dimen/input_divider_padding"/-->
+        android:layout_marginTop="@dimen/label_divider_padding"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

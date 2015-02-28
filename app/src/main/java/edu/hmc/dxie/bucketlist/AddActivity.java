@@ -8,13 +8,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Created by justisallen and kaitlynanderson on 2/15/15.
  */
-public class AddActivity extends ActionBarActivity implements View.OnClickListener {
-   
+public class AddActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,10 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         // Initialize the "Add" Button
         Button addButton = (Button) findViewById(R.id.add_button_confirm);
         addButton.setOnClickListener(this);
+        
+        // Initialize the priority SeekBar
+        SeekBar prioritySeekBar = (SeekBar) findViewById(R.id.add_seekbar_priority);
+        prioritySeekBar.setOnSeekBarChangeListener(this);
     }
 
     @Override
@@ -72,7 +78,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             // Get the other Widgets
             EditText deadlineEditText = (EditText) findViewById(R.id.add_edittext_deadline);
             Spinner  deadlineSpinner = (Spinner) findViewById(R.id.add_spinner_deadline);
-            //EditText priorityEditText = (EditText) findViewById(R.id.add_edittext_priority);
+            SeekBar prioritySeekBar = (SeekBar) findViewById(R.id.add_seekbar_priority);
             EditText moneyCostEditText = (EditText) findViewById(R.id.add_edittext_moneycost);
             EditText timeCostEditText = (EditText) findViewById(R.id.add_edittext_timecost);
             EditText travelDistanceEditText = (EditText) findViewById(R.id.add_edittext_traveldistance);
@@ -80,7 +86,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             // Get their associated data
             String deadlineNum = deadlineEditText.getText().toString();
             String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
-            //String priority = priorityEditText.getText().toString();
+            int priority = prioritySeekBar.getProgress();
             String moneyCost = moneyCostEditText.getText().toString();
             String timeCost = timeCostEditText.getText().toString();
             String travelDistance = travelDistanceEditText.getText().toString();
@@ -88,7 +94,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             // Set the parameters of the new item
             newItem.setItemText(itemText);
             newItem.setDeadline(deadlineNum, deadlineUnit);
-            //newItem.setPriority(priority);
+            newItem.setPriority(priority);
             newItem.setMoneyCost(moneyCost);
             newItem.setTimeCost(timeCost);
             newItem.setTravelDistance(travelDistance);
@@ -102,5 +108,33 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             setResult(RESULT_OK, addItem);
             finish();
         }
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+        // Get the priority label TextView
+        TextView priorityLabelTextView = (TextView) findViewById(R.id.add_textview_priority_label);
+
+        // Get the priority label
+        String priorityLabel = Integer.toString(progress);
+
+        // Set the label text
+        priorityLabelTextView.setText(priorityLabel);
+        
+        /* Partial code for getting text above Thumb
+        int thumbOffset = seekBar.getThumb().getBounds().centerX();
+        int seekBarOffset = seekBar.getLeft();
+        priorityLabelTextView.setX(seekBarOffset+thumbOffset);*/
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

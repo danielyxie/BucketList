@@ -84,10 +84,8 @@ public class ItemModel {
         }
     }
     
-    public void setPriority(String priority) {
-        if (!priority.isEmpty()) {
-            this.priority = Integer.parseInt(priority);
-        }
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
     
     public void setTimeCost(String timeCost) {
