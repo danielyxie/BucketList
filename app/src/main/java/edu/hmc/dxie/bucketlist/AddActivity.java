@@ -16,23 +16,37 @@ import android.widget.TextView;
  * Created by justisallen and kaitlynanderson on 2/15/15.
  */
 public class AddActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        
+
         // Initialize the Deadline spinner with its units
-        Spinner spinner = (Spinner) findViewById(R.id.add_spinner_deadline);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        Spinner deadlineSpinner = (Spinner) findViewById(R.id.add_spinner_deadline);
+        ArrayAdapter<CharSequence> deadlineAdapter = ArrayAdapter.createFromResource(this,
                 R.array.deadline_units, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        deadlineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        deadlineSpinner.setAdapter(deadlineAdapter);
+
+        // Initialize the Time Cost spinner with its units
+        Spinner timeCostSpinner = (Spinner) findViewById(R.id.add_spinner_timecost);
+        ArrayAdapter<CharSequence> timeCostAdapter = ArrayAdapter.createFromResource(this,
+                R.array.timecost_units, android.R.layout.simple_spinner_item);
+        timeCostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeCostSpinner.setAdapter(timeCostAdapter);
+
+        // Initialize the Travel Distance spinner with its units
+        Spinner travelDistanceSpinner = (Spinner) findViewById(R.id.add_spinner_traveldistance);
+        ArrayAdapter<CharSequence> travelDistanceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.traveldistance_units, android.R.layout.simple_spinner_item);
+        travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        travelDistanceSpinner.setAdapter(travelDistanceAdapter);
 
         // Initialize the "Add" Button
         Button addButton = (Button) findViewById(R.id.add_button_confirm);
         addButton.setOnClickListener(this);
-        
+
         // Initialize the priority SeekBar
         SeekBar prioritySeekBar = (SeekBar) findViewById(R.id.add_seekbar_priority);
         prioritySeekBar.setOnSeekBarChangeListener(this);
@@ -40,7 +54,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -62,46 +76,50 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
 
         // Get the text from the EditText
         String itemText = textEditText.getText().toString();
-        
+
         // If there is no text
         if (itemText.isEmpty()) {
-            
+
             // Inform the user and stay on the Activity
             textEditText.setError("Woops! The text field is empty. Insert text to add an item to your bucket list");
 
-        // Otherwise, return to MainListActivity with the text
+            // Otherwise, return to MainListActivity with the text
         } else {
 
             // Create the item object
             ItemModel newItem = new ItemModel();
-            
+
             // Get the other Widgets
             EditText deadlineEditText = (EditText) findViewById(R.id.add_edittext_deadline);
             Spinner  deadlineSpinner = (Spinner) findViewById(R.id.add_spinner_deadline);
             SeekBar prioritySeekBar = (SeekBar) findViewById(R.id.add_seekbar_priority);
             EditText moneyCostEditText = (EditText) findViewById(R.id.add_edittext_moneycost);
             EditText timeCostEditText = (EditText) findViewById(R.id.add_edittext_timecost);
+            Spinner timeCostSpinner = (Spinner) findViewById(R.id.add_spinner_timecost);
             EditText travelDistanceEditText = (EditText) findViewById(R.id.add_edittext_traveldistance);
-            
+            Spinner travelDistanceSpinner = (Spinner) findViewById(R.id.add_spinner_traveldistance);
+
             // Get their associated data
             String deadlineNum = deadlineEditText.getText().toString();
             String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
             int priority = prioritySeekBar.getProgress();
             String moneyCost = moneyCostEditText.getText().toString();
             String timeCost = timeCostEditText.getText().toString();
+            String timeCostUnit = timeCostSpinner.getSelectedItem().toString();
             String travelDistance = travelDistanceEditText.getText().toString();
-            
+            String travelDistanceUnit = travelDistanceSpinner.getSelectedItem().toString();
+
             // Set the parameters of the new item
             newItem.setItemText(itemText);
             newItem.setDeadline(deadlineNum, deadlineUnit);
             newItem.setPriority(priority);
             newItem.setMoneyCost(moneyCost);
-            newItem.setTimeCost(timeCost);
-            newItem.setTravelDistance(travelDistance);
-            
+            newItem.setTimeCost(timeCost, timeCostUnit);
+            newItem.setTravelDistance(travelDistance, travelDistanceUnit);
+
             // Serialize the new item to JSON
             String serializedItem = newItem.serialize();
-            
+
             // Store the serialized item in the intent
             Intent addItem = getIntent();
             addItem.putExtra("item", serializedItem);
