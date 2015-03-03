@@ -77,6 +77,8 @@ public class ItemModel {
     public void setDeadline(String number, String unit) {
         this.deadline = number + " " + unit;
     }
+
+    public void setDeadline(String deadline) { this.deadline = deadline; }
     
     public void setMoneyCost(String moneyCost) {
         if (!moneyCost.isEmpty()) {

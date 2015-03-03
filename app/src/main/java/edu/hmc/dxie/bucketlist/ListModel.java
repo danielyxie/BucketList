@@ -26,7 +26,9 @@ public class ListModel {
     public ItemModel getItem(int position) {
         return this.bucket.get(position);
     }
-    
+
+    public void setItem(int position, ItemModel newItem) { bucket.set(position, newItem); }
+
     public void removeItem(int position) {
         this.bucket.remove(position);
     }
