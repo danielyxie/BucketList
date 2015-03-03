@@ -27,7 +27,7 @@
 
             <Space
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"/>
 
             <EditText
@@ -133,14 +133,31 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/input_divider_padding"/>
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/add_edittext_moneycost"
-            android:inputType="numberDecimal"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/label_divider_padding"
-            android:layout_marginBottom="@dimen/input_divider_padding"/>
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_edittext_moneycost"
+                android:inputType="numberDecimal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"
+                android:layout_weight="6"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <!-- Time Cost -->
         <TextView
@@ -151,14 +168,26 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/input_divider_padding"/>
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/add_edittext_timecost"
-            android:inputType="text"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/label_divider_padding"
-            android:layout_marginBottom="@dimen/input_divider_padding"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_edittext_timecost"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_spinner_timecost"/>
+        </LinearLayout>
 
         <!-- Travel Distance -->
         <TextView
@@ -169,14 +198,26 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/input_divider_padding"/>
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/add_edittext_traveldistance"
-            android:inputType="text"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/label_divider_padding"
-            android:layout_marginBottom="@dimen/input_divider_padding"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_edittext_traveldistance"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_spinner_traveldistance"/>
+        </LinearLayout>
 
         <!-- Confirm Button -->
         <Button
