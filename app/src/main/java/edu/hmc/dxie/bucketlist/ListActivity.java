@@ -136,6 +136,11 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 // Get the viewed item's position; default to 0 (should never happen)
                 int position = data.getIntExtra("item position", 0);
                 
+                // Get the serialized item
+                String serializedItem = data.getStringExtra("item");
+                ItemModel viewedItem = ItemModel.deserialize(serializedItem);
+                bucketModel.setItem(position, viewedItem);
+                
                 // Get the button clicked
                 String buttonClicked = data.getStringExtra("button clicked");
                 

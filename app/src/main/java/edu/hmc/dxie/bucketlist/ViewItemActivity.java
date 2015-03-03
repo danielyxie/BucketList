@@ -175,12 +175,12 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             return true;
         }*/
 
-        // Serialize the new item to JSON
+        /*// Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
 
         // Store the serialized item in the intent
         viewItem.putExtra("item", serializedItem);
-        setResult(RESULT_OK, viewItem);
+        setResult(RESULT_OK, viewItem);*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -215,11 +215,11 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                     editButton.setText("Edit");
 
                     //Update the new values of the item
-                    currentItem.setDeadline(deadlineEditText.getText().toString());
+                    currentItem.setDeadline((deadlineEditText.getText()).toString());
                     currentItem.setPriority(Integer.valueOf((priorityEditText.getText()).toString()));
-                    currentItem.setMoneyCost(moneycostEditText.getText().toString());
-                    currentItem.setTimeCost(timecostEditText.getText().toString());
-                    currentItem.setTravelDistance(traveldistanceEditText.getText().toString());
+                    currentItem.setMoneyCost((moneycostEditText.getText()).toString());
+                    currentItem.setTimeCost((timecostEditText.getText()).toString());
+                    currentItem.setTravelDistance((traveldistanceEditText.getText()).toString());
                 } else {
                     deadlineEditText.setKeyListener(deadlineListener);
                     deadlineEditText.setEnabled(true);
@@ -249,5 +249,17 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                 finish();
                 break;
         }
+    }
+    
+    @Override
+    public void onBackPressed() {
+        
+        // Serialize the new item to JSON
+        String serializedItem = currentItem.serialize();
+
+        // Store the serialized item in the intent
+        viewItem.putExtra("item", serializedItem);
+        setResult(RESULT_OK, viewItem);
+        finish();
     }
 }
