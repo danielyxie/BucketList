@@ -1,182 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    <!-- New Item -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="New Item"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/input_divider_padding"/>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        
-        <EditText
-            android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+        <!-- New Item -->
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/add_edittext_text"
-            android:inputType="textCapSentences"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="New Item"
             android:gravity="center"
-            android:layout_marginTop="@dimen/label_divider_padding"
-            android:layout_marginBottom="@dimen/input_divider_padding"
-            android:layout_weight="6"/>
-        
-        <Space
-            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    
-    <!-- Deadline -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Deadline"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"/>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/add_edittext_text"
+                android:inputType="textCapSentences"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"
+                android:layout_weight="6"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <!-- Deadline -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Deadline"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/label_divider_padding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_edittext_deadline"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_spinner_deadline"/>
+        </LinearLayout>
+
+        <!-- Priority -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Priority"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_textview_priority_label"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/priority_min"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/label_divider_padding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_textview_priority_min"
+                android:text="@string/priority_min"
+                android:gravity="center|end"
+                android:layout_weight="1"/>
+
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_seekbar_priority"
+                android:max="@string/priority_max"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_textview_priority_max"
+                android:text="@string/priority_max"
+                android:gravity="center|start"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <!-- Money Cost -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Money cost"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
         <EditText
-            android:layout_width="80dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/add_edittext_deadline"
-            android:inputType="number"
+            android:id="@+id/add_edittext_moneycost"
+            android:inputType="numberDecimal"
             android:gravity="center"
             android:layout_marginTop="@dimen/label_divider_padding"
             android:layout_marginBottom="@dimen/input_divider_padding"/>
-        
-        <Spinner
-            android:layout_width="wrap_content"
+
+        <!-- Time Cost -->
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/add_spinner_deadline"/>
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Time cost"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_edittext_timecost"
+            android:inputType="text"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/label_divider_padding"
+            android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+        <!-- Travel Distance -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Travel distance"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_edittext_traveldistance"
+            android:inputType="text"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/label_divider_padding"
+            android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+        <!-- Confirm Button -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/add_button_confirm" />
+
     </LinearLayout>
 
-    <!-- Priority -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Priority"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/input_divider_padding"/>
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_textview_priority_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/priority_min"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_textview_priority_min"
-            android:text="@string/priority_min"
-            android:gravity="center|end"
-            android:layout_weight="1"/>
-        
-        <SeekBar
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_seekbar_priority"
-            android:max="@string/priority_max"
-            android:layout_weight="3"/>
-        
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_textview_priority_max"
-            android:text="@string/priority_max"
-            android:gravity="center|start"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    
-    <!-- Money Cost -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Money cost"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/input_divider_padding"/>
-    
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_edittext_moneycost"
-        android:inputType="numberDecimal"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"
-        android:layout_marginBottom="@dimen/input_divider_padding"/>
-
-    <!-- Time Cost -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Time cost"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/input_divider_padding"/>
-    
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_edittext_timecost"
-        android:inputType="text"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"
-        android:layout_marginBottom="@dimen/input_divider_padding"/>
-
-    <!-- Travel Distance -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Travel distance"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/input_divider_padding"/>
-    
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_edittext_traveldistance"
-        android:inputType="text"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/label_divider_padding"
-        android:layout_marginBottom="@dimen/input_divider_padding"/>
-
-    <!-- Confirm Button -->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:id="@+id/add_button_confirm" />
-
-</LinearLayout>
+</ScrollView>
