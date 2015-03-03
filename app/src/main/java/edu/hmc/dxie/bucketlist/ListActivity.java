@@ -11,14 +11,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 // TODO: Consider replacing magic strings with constants in strings.xml
-public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
+                                                               View.OnClickListener{
 
     ListModel bucketModel;
     ListView bucketView;
     bucketlistArrayAdapter bucketArrayAdapter;
     SharedPreferences persistentData;
+
+    
 
     public enum RequestCode{
         ADD_ITEM_REQUEST, VIEW_ITEM_REQUEST
@@ -40,11 +45,9 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         
         // Check whether a bucketModel exists
         if (bucketModelJSON.isEmpty()) {
-            
             // If one does not exist, create a new ListModel for holding bucketModel list items
             bucketModel = new ListModel();
         } else {
-            
             // Otherwise, recover the preexisting bucketModel
             bucketModel = ListModel.deserialize(bucketModelJSON);
         }
@@ -62,6 +65,17 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         
         // Set this activity to react to list items being processed
         bucketView.setOnItemClickListener(this);
+        
+        // Set greeting
+        setGreeting();
+       
+        // Set defaults for toggle/"tab" buttons
+        ToggleButton unaccomplishedToggle = (ToggleButton) findViewById(R.id.list_toggle_unaccomplished);
+        ToggleButton accomplishedToggle = (ToggleButton) findViewById(R.id.list_toggle_accomplished);
+        unaccomplishedToggle.setChecked(true);
+        accomplishedToggle.setChecked(false);
+        unaccomplishedToggle.setOnClickListener(this);
+        accomplishedToggle.setOnClickListener(this);
     }
     
     @Override
@@ -163,6 +177,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 bucketArrayAdapter.notifyDataSetChanged();
             }
         }
+        setGreeting();
     }
 
     @Override
@@ -179,6 +194,54 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         viewItem.putExtra("item", serializedItem);
         viewItem.putExtra("item position", position);
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
+    }
+
+    @Override
+    public void onClick(View v) {
+        ToggleButton tbv = (ToggleButton) v;
+        switch (v.getId()) {
+
+            // "Accomplished" selected
+            case R.id.list_toggle_accomplished:
+                if(tbv.isChecked()){
+                    tbv.setChecked(true);
+                    bucketArrayAdapter.setAccomplishedToggle(true);
+                    ToggleButton unaccomplishedToggle = (ToggleButton) findViewById(R.id.list_toggle_unaccomplished);
+                    unaccomplishedToggle.setChecked(false);
+                } else {
+                    tbv.setChecked(true);
+                }
+                // Update the bucketView
+                bucketArrayAdapter.notifyDataSetChanged();
+                break;
+
+            // "Unaccomplished" selected
+            case R.id.list_toggle_unaccomplished:
+                if(tbv.isChecked()){
+                    tbv.setChecked(true);
+                    bucketArrayAdapter.setAccomplishedToggle(false);
+                    ToggleButton accomplishedToggle = (ToggleButton) findViewById(R.id.list_toggle_accomplished);
+                    accomplishedToggle.setChecked(false);
+                } else {
+                    tbv.setChecked(true);
+                }
+                // Update the bucketView
+                bucketArrayAdapter.notifyDataSetChanged();
+                break;
+            
+            
+        }
+    }
+    
+    public void setGreeting(){
+        // Sets the greeting text to invisible when items in bucket
+        TextView greetingTextView = (TextView) findViewById(R.id.greeting);
+        if(bucketModel.isEmpty()){
+            greetingTextView.setVisibility(View.VISIBLE);
+        } else {
+            greetingTextView.setVisibility(View.GONE);
+        }
+        
     }
 }
 

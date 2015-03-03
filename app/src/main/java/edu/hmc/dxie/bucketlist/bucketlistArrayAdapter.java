@@ -24,6 +24,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
     private Context mContext;
     private int id;
     private ArrayList<ItemModel> items ;
+    private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
 
     public bucketlistArrayAdapter(Context context, int textViewResourceId , ArrayList<ItemModel> list )
     {
@@ -31,6 +32,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
         mContext = context;
         id = textViewResourceId;
         items = list;
+        accomplishedToggle = false;
     }
 
     @Override
@@ -53,17 +55,29 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
             //Here is where to customize the feature that allows users to visually
             //distinguish completed and uncompleted tasks.  It looks really ugly right now
             text.setTextColor(Color.WHITE);
-
+            //text.setBackgroundColor(Color.GRAY);
             if(items.get(position).getCompleted()) {
                 text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
+                if(!accomplishedToggle){
+                    text.setVisibility(View.GONE);
+                }
             } else {
                 text.setBackgroundColor(Color.RED);
+                if(accomplishedToggle){
+                    text.setVisibility(View.GONE);
+                }
             }
+            
+
 
             //int color = Color.argb( 200, 255, 64, 64 );
         }
 
         return itemView;
+    }
+
+    public void setAccomplishedToggle(boolean toggle){
+        this.accomplishedToggle = toggle;      
     }
 
 }

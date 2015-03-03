@@ -10,6 +10,38 @@
     android:background="@color/lightbrown"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="-7dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginLeft="-7dp"
+        android:layout_marginRight="-7dp">
+
+
+        <ToggleButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textOn="Unaccomplished"
+            android:textOff="Unaccomplished"
+            android:id="@+id/list_toggle_unaccomplished"
+            android:layout_weight="1"
+            android:textColor="@drawable/toggle_text"
+            android:layout_marginRight="-4.5dp"
+            />
+
+        <ToggleButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textOn="Accomplished"
+            android:textOff="Accomplished"
+            android:id="@+id/list_toggle_accomplished"
+            android:layout_weight="1"
+            android:textColor="@drawable/toggle_text"
+            android:layout_marginLeft="-4.5dp"/>
+    </LinearLayout>
+    
     <TextView
         android:id="@+id/greeting"
         android:text="@string/greeting"

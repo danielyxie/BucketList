@@ -31,6 +31,8 @@ public class ListModel {
         this.bucket.remove(position);
     }
     
+    public boolean isEmpty() {return this.bucket.isEmpty(); }
+    
     public String serialize() {
         Gson gson = new Gson();
         return gson.toJson(this);
