@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     EditText traveldistanceEditText;
 
     private boolean edit;
+    private int position;    //index of item in bucket list
 
     //Key listeners for every parameter
     private KeyListener deadlineListener;
@@ -46,7 +48,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         viewItem = getIntent();
         String serializedItem = viewItem.getStringExtra("item");
         currentItem = ItemModel.deserialize(serializedItem);
-        
+
+        int position = viewItem.getIntExtra("item position", 0);
+
         // Get the Item Name textView and set its text
         TextView itemTextView = (TextView) findViewById(R.id.text_itemtext);
         itemTextView.setText(currentItem.getItemText());
@@ -175,13 +179,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             return true;
         }*/
 
-        // Serialize the new item to JSON
-        String serializedItem = currentItem.serialize();
-
-        // Store the serialized item in the intent
-        viewItem.putExtra("item", serializedItem);
-        setResult(RESULT_OK, viewItem);
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -215,11 +212,11 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                     editButton.setText("Edit");
 
                     //Update the new values of the item
-                    currentItem.setDeadline(deadlineEditText.getText().toString());
+                    currentItem.setDeadline((deadlineEditText.getText()).toString());
                     currentItem.setPriority(Integer.valueOf((priorityEditText.getText()).toString()));
-                    currentItem.setMoneyCost(moneycostEditText.getText().toString());
-                    currentItem.setTimeCost(timecostEditText.getText().toString());
-                    currentItem.setTravelDistance(traveldistanceEditText.getText().toString());
+                    currentItem.setMoneyCost((moneycostEditText.getText()).toString());
+                    currentItem.setTimeCost((timecostEditText.getText()).toString());
+                    currentItem.setTravelDistance((traveldistanceEditText.getText()).toString());
                 } else {
                     deadlineEditText.setKeyListener(deadlineListener);
                     deadlineEditText.setEnabled(true);
@@ -235,6 +232,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                     editButton.setText("Finish Editing");
                 }
 
+                viewItem.putExtra("button clicked", "Edit");
                 break;
             
             // "Delete" button
@@ -250,4 +248,22 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                 break;
         }
     }
+
+    @Override
+    public Intent getSupportParentActivityIntent() {
+        viewItem.putExtra("button clicked", "Back");
+
+        Log.w("Bucket list", "onBackPressed() called");
+        // Serialize the new item to JSON
+        String serializedItem = currentItem.serialize();
+
+        // Store the serialized item in the intent
+        viewItem.putExtra("item", serializedItem);
+        viewItem.putExtra("item position", position);
+        setResult(RESULT_OK, viewItem);
+        this.finish();
+
+        return viewItem;
+    }
+
 }

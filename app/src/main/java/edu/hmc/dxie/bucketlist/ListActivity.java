@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
@@ -123,6 +124,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.w("Bucket List", "test");
 
         // If the request was to add an item
         if (requestCode == RequestCode.ADD_ITEM_REQUEST.ordinal()) {
@@ -143,33 +145,46 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             
         // If the request was to view an item
         } else if (requestCode == RequestCode.VIEW_ITEM_REQUEST.ordinal()) {
-            
+            Log.w("Bucket List", "View Item Request called coming out of View Activity");
+
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
                 
                 // Get the viewed item's position; default to 0 (should never happen)
                 int position = data.getIntExtra("item position", 0);
+                Log.w("Bucket List", String.valueOf(position));
+
+                // Get the serialized item
+                String serializedItem = data.getStringExtra("item");
+                ItemModel viewedItem = ItemModel.deserialize(serializedItem);
+                bucketModel.setItem(position, viewedItem);
                 
                 // Get the button clicked
                 String buttonClicked = data.getStringExtra("button clicked");
-                
+
                 switch (buttonClicked) {
                     case "Complete":
-                    
+
                         // Mark the item as completed
                         bucketModel.getItem(position).complete();
                         break;
-                    
+
                     case "Uncomplete":
-                        
+
                         // Mark the item as not completed
                         bucketModel.getItem(position).uncomplete();
                         break;
-                    
+
+                    case "Edit":
+                        break;
+
                     case "Delete":
-                    
+
                         // Delete the item
                         bucketModel.removeItem(position);
+                        break;
+
+                    default:
                         break;
                 }
 
@@ -182,7 +197,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        
         // Get the clicked item
         ItemModel clickedItem = bucketModel.getItem(position);
         
