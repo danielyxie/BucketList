@@ -62,6 +62,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/lightgray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -73,15 +74,34 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <EditText
-                android:id="@+id/param_deadline"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:gravity="center"
-                android:layout_below="@+id/param_deadline_title"
-                android:layout_marginLeft="15dp"/>
+                android:orientation="horizontal"
+                android:paddingLeft="135dp">
+
+                <EditText
+                    android:id="@+id/param_deadline_value"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_below="@+id/param_deadline_title"/>
+
+                <Spinner
+                    android:id="@+id/param_deadline_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/param_deadline_value"/>
+
+                <Spinner
+                    android:id="@+id/param_deadline_viewspinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/param_deadline_value"/>
+            </LinearLayout>
         </RelativeLayout>
 
 
@@ -106,15 +126,45 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <EditText
-                android:id="@+id/param_priority"
+            <TextView
+            android:id="@+id/param_priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_below="@+id/param_priority_title"
+            android:layout_marginLeft="15dp"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:gravity="center"
-                android:layout_below="@+id/param_priority_title"
-                android:layout_marginLeft="15dp"/>
+                android:orientation="horizontal"
+                android:layout_below="@id/param_priority">
+
+                <TextView
+                    android:id="@+id/edit_textview_priority_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/priority_min"
+                    android:gravity="center|end"
+                    android:layout_weight="1"/>
+
+                <SeekBar
+                    android:id="@+id/param_priority_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="@string/priority_max"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/edit_textview_priority_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/priority_max"
+                    android:gravity="center|start"
+                    android:layout_weight="1"/>
+            </LinearLayout>
         </RelativeLayout>
 
 
@@ -127,6 +177,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/lightgray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -138,15 +189,36 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <EditText
-                android:id="@+id/param_moneycost"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_below="@+id/param_moneycost_title"
-                android:layout_marginLeft="15dp"/>
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/param_moneycost_title">
+
+                <TextView
+                    android:id="@+id/param_moneycost_dollarsign"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/label_divider_padding"
+                    android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+                <EditText
+                    android:id="@+id/param_moneycost"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:layout_below="@+id/param_moneycost_title"
+                    android:layout_marginLeft="15dp"/>
+            </LinearLayout>
         </RelativeLayout>
 
 
@@ -171,15 +243,37 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <EditText
-                android:id="@+id/param_timecost"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:gravity="center"
-                android:layout_below="@+id/param_timecost_title"
-                android:layout_marginLeft="15dp"/>
+                android:orientation="horizontal"
+                android:layout_marginLeft="135dp"
+                android:layout_below="@+id/param_timecost_title">
+
+                <EditText
+                    android:id="@+id/param_timecost_value"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_below="@+id/param_timecost_title"/>
+
+                <Spinner
+                    android:id="@+id/param_timecost_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/param_timecost_value"/>
+
+                <Spinner
+                    android:id="@+id/param_timecost_viewspinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/param_timecost_value"/>
+
+
+            </LinearLayout>
         </RelativeLayout>
 
 
@@ -192,6 +286,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/lightgray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -203,15 +298,35 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <EditText
-                android:id="@+id/param_traveldistance"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:gravity="center"
-                android:layout_below="@+id/param_traveldistance_title"
-                android:layout_marginLeft="15dp"/>
+                android:orientation="horizontal"
+                android:layout_marginLeft="135dp"
+                android:layout_below="@+id/param_traveldistance_title">
+
+                <EditText
+                    android:id="@+id/param_traveldistance_value"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_below="@+id/param_traveldistance_title"/>
+
+                <Spinner
+                    android:id="@+id/param_traveldistance_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/param_traveldistance_value"/>
+
+                <Spinner
+                    android:id="@+id/param_traveldistance_viewspinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/param_traveldistance_value"/>
+            </LinearLayout>
         </RelativeLayout>
 
 
@@ -224,6 +339,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/lightgray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Complete button -->

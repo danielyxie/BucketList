@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.KeyListener;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
-public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener {
+public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     //Should these be private?
     Intent viewItem;
@@ -20,23 +22,43 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     Button editButton;
     Button deleteButton;
     ItemModel currentItem;
-    EditText deadlineEditText;
-    EditText priorityEditText;
-    EditText timecostEditText;
+
+    //Deadline layout View objects
+    EditText deadlineValueEditText;
+    Spinner deadlineViewSpinner;    //This Spinner is used only for viewing the deadline.  It
+                                    //it set to be invisible if the user is editing
+    Spinner deadlineSpinner;        //This spinner is used only for editing the deadline.  It is
+                                    //set to be invisible if the user is only viewing the item
+
+    //Priority layout View objects
+    TextView priorityTextView;
+    SeekBar prioritySeekBar;
+
+    //Time cost layout View Object
+    EditText timecostValueEditText;
+    Spinner timecostViewSpinner;
+    Spinner timecostSpinner;
+
+    //Money Cost layout View Objects
     EditText moneycostEditText;
-    EditText traveldistanceEditText;
+
+    //Travel Distance layout View Objects
+    EditText traveldistanceValueEditText;
+    Spinner traveldistanceViewSpinner;
+    Spinner traveldistanceSpinner;
+
 
     private boolean edit;
     private int position;    //index of item in bucket list
 
     //Key listeners for every parameter
     private KeyListener deadlineListener;
-    private KeyListener priorityListener;
     private KeyListener moneycostListener;
     private KeyListener timecostListener;
     private KeyListener traveldistanceListener;
 
-    
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +71,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         String serializedItem = viewItem.getStringExtra("item");
         currentItem = ItemModel.deserialize(serializedItem);
 
-        int position = viewItem.getIntExtra("item position", 0);
+        position = viewItem.getIntExtra("item position", 0);
 
         // Get the Item Name textView and set its text
         TextView itemTextView = (TextView) findViewById(R.id.text_itemtext);
@@ -59,33 +81,63 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         // DEADLINE PARAMETER
         //////////////////////
 
-        deadlineEditText = (EditText) findViewById(R.id.param_deadline);
-        deadlineEditText.setText(currentItem.getDeadline());
+        //Split the deadline into its value and its unit
+        String deadlineString = currentItem.getDeadline();
+        String deadlineSplit[] = deadlineString.split(" ");
+        String deadlineValue = deadlineSplit[0];
+        String deadlineUnit = deadlineSplit[1];
+
+        //Initialize EditText
+        deadlineValueEditText = (EditText) findViewById(R.id.param_deadline_value);
+        deadlineValueEditText.setText(deadlineValue);
+
+        //Initialize both spinners
+        int spinnerVal = getDeadlineSpinnerIndex(deadlineUnit);
+
+        ArrayAdapter<CharSequence> deadlineAdapter = ArrayAdapter.createFromResource(this,
+                R.array.deadline_units, android.R.layout.simple_spinner_item);
+        deadlineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        deadlineViewSpinner = (Spinner) findViewById(R.id.param_deadline_viewspinner);
+        deadlineViewSpinner.setAdapter(deadlineAdapter);
+        deadlineViewSpinner.setSelection(spinnerVal);
+        deadlineViewSpinner.setBackgroundColor(0xFFE8E8E8);
+
+        deadlineSpinner = (Spinner) findViewById(R.id.param_deadline_spinner);
+        deadlineSpinner.setAdapter(deadlineAdapter);
+        deadlineSpinner.setSelection(spinnerVal);
 
         // Get the listener for the EditText
-        deadlineListener = deadlineEditText.getKeyListener();
+        deadlineListener = deadlineValueEditText.getKeyListener();
 
         // Disable the edit feature
-        deadlineEditText.setKeyListener(null);
-        deadlineEditText.setEnabled(false);
+        deadlineValueEditText.setKeyListener(null);
+        deadlineValueEditText.setEnabled(false);
+        deadlineViewSpinner.setClickable(false);
+        deadlineSpinner.setClickable(false);
+        deadlineSpinner.setVisibility(View.GONE);
 
 
         //////////////////////
         // PRIORITY PARAMETER
         //////////////////////
 
-        priorityEditText = (EditText) findViewById(R.id.param_priority);
-        if(currentItem.getPriority() != -1) {
-            priorityEditText.setText(String.valueOf(currentItem.getPriority()));
+        //Initialize the TextView that displays the Priority value
+        priorityTextView = (TextView) findViewById(R.id.param_priority);
+        if (currentItem.getPriority() != -1) {
+            priorityTextView.setText(String.valueOf(currentItem.getPriority()));
         }
 
-        // Get the listener for the EditText
-        priorityListener = priorityEditText.getKeyListener();
+        //Initialize the SeekBar
+        prioritySeekBar = (SeekBar) findViewById(R.id.param_priority_seekbar);
+        prioritySeekBar.setOnSeekBarChangeListener(this);
+
+        if (currentItem.getPriority() != - 1) {
+            prioritySeekBar.setProgress(currentItem.getPriority());
+        }
 
         // Disable the edit feature
-        priorityEditText.setKeyListener(null);
-        priorityEditText.setEnabled(false);
-
+        prioritySeekBar.setEnabled(false);
 
         ////////////////////////
         // MONEY COST PARAMETER
@@ -107,29 +159,82 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         // TIME COST PARAMETER
         //////////////////////
 
-        timecostEditText = (EditText) findViewById(R.id.param_timecost);
-        timecostEditText.setText(currentItem.getTimeCost());
+        //Split the time cost into its value and units
+        String timecostString = currentItem.getTimeCost();
+        String timecostSplit[] = timecostString.split(" ");
+        String timecostValue = timecostSplit[0];
+        String timecostUnit = timecostSplit[1];
+
+        spinnerVal = getTimecostSpinnerIndex(timecostUnit);
+
+        //Initialize the time cost's EditText
+        timecostValueEditText = (EditText) findViewById(R.id.param_timecost_value);
+        timecostValueEditText.setText(timecostValue);
+
+        //Initialize Spinners
+        ArrayAdapter<CharSequence> timeCostAdapter = ArrayAdapter.createFromResource(this,
+                R.array.timecost_units, android.R.layout.simple_spinner_item);
+        timeCostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        timecostViewSpinner = (Spinner) findViewById(R.id.param_timecost_viewspinner);
+        timecostViewSpinner.setAdapter(timeCostAdapter);
+        timecostViewSpinner.setBackgroundColor(0xFFDAC189);
+        timecostViewSpinner.setSelection(spinnerVal);
+
+        timecostSpinner = (Spinner)findViewById(R.id.param_timecost_spinner);
+        timecostSpinner.setAdapter(timeCostAdapter);
+        timecostSpinner.setSelection(spinnerVal);
+
 
         // Get the listener for the EditText
-        timecostListener = timecostEditText.getKeyListener();
+        timecostListener = timecostValueEditText.getKeyListener();
 
         // Disable the edit feature
-        timecostEditText.setKeyListener(null);
-        timecostEditText.setEnabled(false);
+        timecostValueEditText.setKeyListener(null);
+        timecostValueEditText.setEnabled(false);
+        timecostViewSpinner.setClickable(false);
+        timecostSpinner.setClickable(false);
+        timecostSpinner.setVisibility(View.GONE);
 
         ////////////////////////////
         // TRAVEL DISTANCE PARAMETER
         ////////////////////////////
 
-        traveldistanceEditText = (EditText) findViewById(R.id.param_traveldistance);
-        traveldistanceEditText.setText(currentItem.getTravelDistance());
+        //Split the travel distance into its value and its unit
+        String traveldistanceString = currentItem.getTravelDistance();
+        String traveldistanceSplit[] = traveldistanceString.split(" ");
+        String traveldistanceValue = traveldistanceSplit[0];
+        String traveldistanceUnit = traveldistanceSplit[1];
+
+        spinnerVal = getTraveldistanceSpinnerIndex(traveldistanceUnit);
+
+        //Initialize EditText
+        traveldistanceValueEditText = (EditText) findViewById(R.id.param_traveldistance_value);
+        traveldistanceValueEditText.setText(traveldistanceValue);
+
+        //Initialize Spinners
+        ArrayAdapter<CharSequence> travelDistanceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.traveldistance_units, android.R.layout.simple_spinner_item);
+        travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        traveldistanceViewSpinner = (Spinner) findViewById(R.id.param_traveldistance_viewspinner);
+        traveldistanceViewSpinner.setAdapter(travelDistanceAdapter);
+        traveldistanceViewSpinner.setBackgroundColor(0xFFE8E8E8);
+        traveldistanceViewSpinner.setSelection(spinnerVal);
+
+        traveldistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
+        traveldistanceSpinner.setAdapter(travelDistanceAdapter);
+        traveldistanceSpinner.setSelection(spinnerVal);
 
         // Get the listener for the EditText
-        traveldistanceListener = traveldistanceEditText.getKeyListener();
+        traveldistanceListener = traveldistanceValueEditText.getKeyListener();
 
         // Disable the edit feature
-        traveldistanceEditText.setKeyListener(null);
-        traveldistanceEditText.setEnabled(false);
+        traveldistanceValueEditText.setKeyListener(null);
+        traveldistanceValueEditText.setEnabled(false);
+        traveldistanceViewSpinner.setClickable(false);
+        traveldistanceSpinner.setClickable(false);
+        traveldistanceSpinner.setVisibility(View.GONE);
 
 
         ////////////////
@@ -198,36 +303,80 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             // "Edit" button
             case R.id.button_edit:
                 if (edit) {
-                    deadlineEditText.setKeyListener(null);
-                    deadlineEditText.setEnabled(false);
-                    priorityEditText.setKeyListener(null);
-                    priorityEditText.setEnabled(false);
+                    //Disable editing for each parameter
+                    deadlineValueEditText.setKeyListener(null);
+                    deadlineValueEditText.setEnabled(false);
+                    deadlineSpinner.setClickable(false);
+                    deadlineSpinner.setVisibility(View.GONE);
+                    deadlineViewSpinner.setVisibility(View.VISIBLE);
+
+                    prioritySeekBar.setEnabled(false);
+
                     moneycostEditText.setKeyListener(null);
                     moneycostEditText.setEnabled(false);
-                    timecostEditText.setKeyListener(null);
-                    timecostEditText.setEnabled(false);
-                    traveldistanceEditText.setKeyListener(null);
-                    traveldistanceEditText.setEnabled(false);
+
+                    timecostValueEditText.setKeyListener(null);
+                    timecostValueEditText.setEnabled(false);
+                    timecostSpinner.setClickable(false);
+                    timecostSpinner.setVisibility(View.GONE);
+                    timecostViewSpinner.setVisibility(View.VISIBLE);
+
+                    traveldistanceValueEditText.setKeyListener(null);
+                    traveldistanceValueEditText.setEnabled(false);
+                    traveldistanceSpinner.setClickable(false);
+                    traveldistanceSpinner.setVisibility(View.GONE);
+                    traveldistanceViewSpinner.setVisibility(View.VISIBLE);
+
                     edit = false;
                     editButton.setText("Edit");
 
                     //Update the new values of the item
-                    currentItem.setDeadline((deadlineEditText.getText()).toString());
-                    currentItem.setPriority(Integer.valueOf((priorityEditText.getText()).toString()));
+                    String deadlineValue = deadlineValueEditText.getText().toString();
+                    String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
+                    int spinnerVal = getDeadlineSpinnerIndex(deadlineUnit);
+                    deadlineViewSpinner.setSelection(spinnerVal);
+                    currentItem.setDeadline(deadlineValue, deadlineUnit);
+
+                    currentItem.setPriority(prioritySeekBar.getProgress());
+
                     currentItem.setMoneyCost((moneycostEditText.getText()).toString());
-                    currentItem.setTimeCost((timecostEditText.getText()).toString());
-                    currentItem.setTravelDistance((traveldistanceEditText.getText()).toString());
+
+                    String timecostValue = timecostValueEditText.getText().toString();
+                    String timecostUnit = timecostSpinner.getSelectedItem().toString();
+                    spinnerVal = getTimecostSpinnerIndex(timecostUnit);
+                    timecostViewSpinner.setSelection(spinnerVal);
+                    currentItem.setTimeCost(timecostValue, timecostUnit);
+
+                    String traveldistanceValue = traveldistanceValueEditText.getText().toString();
+                    String traveldistanceUnit = traveldistanceSpinner.getSelectedItem().toString();
+                    spinnerVal = getTraveldistanceSpinnerIndex(traveldistanceUnit);
+                    traveldistanceViewSpinner.setSelection(spinnerVal);
+                    currentItem.setTravelDistance(traveldistanceValue, traveldistanceUnit);
                 } else {
-                    deadlineEditText.setKeyListener(deadlineListener);
-                    deadlineEditText.setEnabled(true);
-                    priorityEditText.setKeyListener(priorityListener);
-                    priorityEditText.setEnabled(true);
+                    deadlineValueEditText.setKeyListener(deadlineListener);
+                    deadlineValueEditText.setEnabled(true);
+                    deadlineSpinner.setClickable(true);
+                    deadlineSpinner.setVisibility(View.VISIBLE);
+                    deadlineViewSpinner.setVisibility(View.GONE);
+
+                    prioritySeekBar.setEnabled(true);
+
                     moneycostEditText.setKeyListener(moneycostListener);
                     moneycostEditText.setEnabled(true);
-                    timecostEditText.setKeyListener(timecostListener);
-                    timecostEditText.setEnabled(true);
-                    traveldistanceEditText.setKeyListener(traveldistanceListener);
-                    traveldistanceEditText.setEnabled(true);
+
+                    timecostValueEditText.setKeyListener(timecostListener);
+                    timecostValueEditText.setEnabled(true);
+                    timecostSpinner.setClickable(true);
+                    timecostSpinner.setVisibility(View.VISIBLE);
+                    timecostViewSpinner.setVisibility(View.GONE);
+
+                    traveldistanceValueEditText.setKeyListener(traveldistanceListener);
+                    traveldistanceValueEditText.setEnabled(true);
+                    traveldistanceSpinner.setClickable(true);
+                    traveldistanceSpinner.setVisibility(View.VISIBLE);
+                    traveldistanceViewSpinner.setVisibility(View.GONE);
+
+
                     edit = true;
                     editButton.setText("Finish Editing");
                 }
@@ -249,11 +398,32 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         }
     }
 
+
+    /*
+     * This function manages the SeekBar that is used for editing the Priority parameter
+     */
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+        // Get the priority label TextView
+        TextView priorityLabelTextView = (TextView) findViewById(R.id.param_priority);
+
+        // Get the priority label
+        String priorityLabel = Integer.toString(progress);
+
+        // Set the label text
+        priorityLabelTextView.setText(priorityLabel);
+    }
+
+
+    /*
+     * This function handles what occurs when the "Back/Up" button on the Action Bar
+     * is pressed.
+     */
     @Override
     public Intent getSupportParentActivityIntent() {
         viewItem.putExtra("button clicked", "Back");
 
-        Log.w("Bucket list", "onBackPressed() called");
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
 
@@ -264,6 +434,82 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         this.finish();
 
         return viewItem;
+    }
+
+
+    /*
+     * onStartTrackingTouch and onStopTrackingTouch are required for implementing SeekBars.
+     */
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+
+    /*
+     * Returns the index of the array of deadline units that corresponds with the input unit
+     * for the deadline parameter.  This is the same array used by the deadline Spinner.
+     * The input String must be only the units of the parameter, such as "week(s)" or "month(s)"
+     */
+    public int getDeadlineSpinnerIndex(String deadlineUnit){
+        switch(deadlineUnit) {
+            case "day(s)":
+                return 0;
+            case "week(s)":
+                return 1;
+            case "month(s)":
+                return 2;
+            case "year(s)":
+                return 3;
+            default:
+                return 0;
+        }
+    }
+
+    /*
+     * Returns the index of the array of travel distance units that corresponds with the input unit
+     * for the travel distance parameter.  This is the same array used by the travel distance Spinner.
+     * The input String must be only the units of the parameter, such as "miles(s)"
+     */
+    public int getTraveldistanceSpinnerIndex(String traveldistanceUnit){
+        switch(traveldistanceUnit) {
+            case "mile(s)":
+                return 0;
+            case "kilometer(s)":
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+
+    /*
+     * Returns the index of the array of time cost units that corresponds with the input unit
+     * for the time cost parameter.  This is the same array used by the time cost Spinner.
+     * The input String must be only the units of the parameter, such as "miles(s)"
+     */
+    public int getTimecostSpinnerIndex(String timecostUnit){
+        switch(timecostUnit) {
+            case "minute(s)":
+                return 0;
+            case "hour(s)":
+                return 1;
+            case "day(s)":
+                return 2;
+            case "week(s)":
+                return 3;
+            case "month(s)":
+                return 4;
+            case "year(s)":
+                return 5;
+            default:
+                return 0;
+        }
     }
 
 }

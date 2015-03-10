@@ -78,8 +78,6 @@ public class ItemModel {
         this.deadline = number + " " + unit;
     }
 
-    public void setDeadline(String deadline) { this.deadline = deadline; }
-
     public void setMoneyCost(String moneyCost) {
         if (!moneyCost.isEmpty()) {
             this.moneyCost = Double.parseDouble(moneyCost);
@@ -100,10 +98,6 @@ public class ItemModel {
 
     public void setTravelDistance(String travelDistance, String unit) {
         this.travelDistance = travelDistance + " " + unit;
-    }
-
-    public void setTravelDistance(String travelDistance) {
-        this.travelDistance = travelDistance;
     }
 
     // This is necessary for the ArrayAdapter to properly work
