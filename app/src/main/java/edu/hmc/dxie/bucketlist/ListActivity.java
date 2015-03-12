@@ -23,7 +23,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     bucketlistArrayAdapter bucketArrayAdapter;
     SharedPreferences persistentData;
 
-    
 
     public enum RequestCode{
         ADD_ITEM_REQUEST, VIEW_ITEM_REQUEST
@@ -92,6 +91,9 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
 
+    /*
+     * Initializes the Action Bar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
@@ -101,6 +103,9 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
 
+    /*
+     * This method implements what happens when the buttons on the Action Bar are pressed.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         
@@ -120,7 +125,12 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         return super.onOptionsItemSelected(item);
     }
-    
+
+
+    /*
+     * This method handles what happens when the application returns to the ListActivity.
+     * It manages and processes Intents from the AddActivity and the ViewItemActivity.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -190,6 +200,12 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         setGreeting();
     }
 
+
+    /*
+     * Handles what occurs when one of the items in the Bucket List's ListView is pressed.
+     * The data for the selected bucket list item is passed through an Intent and the
+     * ViewItemActivity is launched.
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Get the clicked item
@@ -205,6 +221,10 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
     }
 
+
+    /*
+     * Implements the "Accomplished" and "Unaccomplished" navigation tabs
+     */
     @Override
     public void onClick(View v) {
         ToggleButton tbv = (ToggleButton) v;

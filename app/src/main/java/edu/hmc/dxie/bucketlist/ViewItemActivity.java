@@ -19,6 +19,8 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     //Should these be private?
     Intent viewItem;
     Button completeButton;
+
+    //Button View Objects
     Button editButton;
     Button deleteButton;
     ItemModel currentItem;
@@ -34,21 +36,23 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     TextView priorityTextView;
     SeekBar prioritySeekBar;
 
-    //Time cost layout View Object
+    //Time cost layout View objects
     EditText timecostValueEditText;
     Spinner timecostViewSpinner;
     Spinner timecostSpinner;
 
-    //Money Cost layout View Objects
+    //Money Cost layout View objects
     EditText moneycostEditText;
 
-    //Travel Distance layout View Objects
+    //Travel Distance layout View objects
     EditText traveldistanceValueEditText;
     Spinner traveldistanceViewSpinner;
     Spinner traveldistanceSpinner;
 
-
+    //Keeps track of whether the item is currently being Edited
+    //True if item is edited, false if item is just being viewed
     private boolean edit;
+
     private int position;    //index of item in bucket list
 
     //Key listeners for every parameter
@@ -56,7 +60,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     private KeyListener moneycostListener;
     private KeyListener timecostListener;
     private KeyListener traveldistanceListener;
-
 
 
     @Override
@@ -73,13 +76,13 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         position = viewItem.getIntExtra("item position", 0);
 
-        // Get the Item Name textView and set its text
+        // Initialize the Item Name textView and set its text
         TextView itemTextView = (TextView) findViewById(R.id.text_itemtext);
         itemTextView.setText(currentItem.getItemText());
 
-        //////////////////////
-        // DEADLINE PARAMETER
-        //////////////////////
+        //////////////////////////////////////////////
+        // Initialize DEADLINE PARAMETER View Objects
+        //////////////////////////////////////////////
 
         //Split the deadline into its value and its unit
         String deadlineString = currentItem.getDeadline();
@@ -118,9 +121,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         deadlineSpinner.setVisibility(View.GONE);
 
 
-        //////////////////////
-        // PRIORITY PARAMETER
-        //////////////////////
+        //////////////////////////////////////////////
+        // Initialize PRIORITY PARAMETER View Objects
+        //////////////////////////////////////////////
 
         //Initialize the TextView that displays the Priority value
         priorityTextView = (TextView) findViewById(R.id.param_priority);
@@ -128,7 +131,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             priorityTextView.setText(String.valueOf(currentItem.getPriority()));
         }
 
-        //Initialize the SeekBar
+        //Initialize the SeekBar used for changing the priority value
         prioritySeekBar = (SeekBar) findViewById(R.id.param_priority_seekbar);
         prioritySeekBar.setOnSeekBarChangeListener(this);
 
@@ -139,9 +142,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         // Disable the edit feature
         prioritySeekBar.setEnabled(false);
 
-        ////////////////////////
-        // MONEY COST PARAMETER
-        ////////////////////////
+        ////////////////////////////////////////////////
+        // Initialize MONEY COST PARAMETER View Objects
+        ////////////////////////////////////////////////
 
         moneycostEditText = (EditText) findViewById(R.id.param_moneycost);
         if(currentItem.getMoneyCost() != -1) {
@@ -155,9 +158,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         moneycostEditText.setKeyListener(null);
         moneycostEditText.setEnabled(false);
 
-        //////////////////////
-        // TIME COST PARAMETER
-        //////////////////////
+        //////////////////////////////////////////////
+        // Initialize TIME COST PARAMETER View Objects
+        //////////////////////////////////////////////
 
         //Split the time cost into its value and units
         String timecostString = currentItem.getTimeCost();
@@ -196,9 +199,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         timecostSpinner.setClickable(false);
         timecostSpinner.setVisibility(View.GONE);
 
-        ////////////////////////////
-        // TRAVEL DISTANCE PARAMETER
-        ////////////////////////////
+        /////////////////////////////////////////////////////
+        // Initialize TRAVEL DISTANCE PARAMETER View Objects
+        /////////////////////////////////////////////////////
 
         //Split the travel distance into its value and its unit
         String traveldistanceString = currentItem.getTravelDistance();
@@ -237,9 +240,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         traveldistanceSpinner.setVisibility(View.GONE);
 
 
-        ////////////////
-        // BUTTONS
-        ////////////////
+        //////////////////////
+        // Initialize BUTTONS
+        //////////////////////
 
         // Get the "Complete" Button
         completeButton = (Button) findViewById(R.id.button_complete);
@@ -287,6 +290,11 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
+
+    /*
+     * Handles what processes are run when one of the "Complete", "Edit", and
+     * "Delete" buttons are pressed.
+     */
     @Override
     public void onClick(View v) {
         
@@ -302,6 +310,15 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
             // "Edit" button
             case R.id.button_edit:
+                /* When the Edit button is pressed, check to see whether the item is currently
+                 * being edited or not.  If the item is currently being edited, the Activity
+                 * should exit the Edit mode by disabling editing for all of the View Objects and
+                 * updating the new parameter values for the item. If the item is currently not
+                 * being edited, the editing features for each View Object should be enabled.
+                 *
+                 * The 'edit' variable is used to keep track of whether the item is currently
+                 * being edited.
+                 */
                 if (edit) {
                     //Disable editing for each parameter
                     deadlineValueEditText.setKeyListener(null);
@@ -330,7 +347,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                     edit = false;
                     editButton.setText("Edit");
 
-                    //Update the new values of the item
+                    //Update the new parameter values for the item
                     String deadlineValue = deadlineValueEditText.getText().toString();
                     String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
                     int spinnerVal = getDeadlineSpinnerIndex(deadlineUnit);

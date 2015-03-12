@@ -52,6 +52,10 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         prioritySeekBar.setOnSeekBarChangeListener(this);
     }
 
+
+    /*
+     * This method implements what happens when the buttons on the Action Bar are pressed.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -68,6 +72,13 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
+
+    /*
+     * This method implements what happens when the "Add" button on the main Activity screen
+     * is pressed. The name of the new item and its parameter values are obtained from the
+     * View Objects and are used to create an ItemModel.  This ItemModel is then passed
+     * back to the ListActivity through an Intent.
+     */
     @Override
     public void onClick(View v) {
 
@@ -128,6 +139,11 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         }
     }
 
+
+    /*
+     * This method handles the implementation of the SeekBar.  The SeekBar in this activity
+     * is used to change the Priority parameter.
+     */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
