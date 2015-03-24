@@ -1,11 +1,13 @@
 package edu.hmc.dxie.bucketlist;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +18,16 @@ import android.widget.ToggleButton;
 
 // TODO: Consider replacing magic strings with constants in strings.xml
 public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
-                                                               View.OnClickListener{
+                                                               View.OnClickListener,
+                                                               SearchView.OnQueryTextListener{
 
     ListModel bucketModel;
     ListView bucketView;
     bucketlistArrayAdapter bucketArrayAdapter;
     SharedPreferences persistentData;
+    SearchView searchView;
+
+
 
 
     public enum RequestCode{
@@ -99,6 +105,17 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         
         // Inflate the menu; this adds the "new" and "search" buttons to the action bar.
         getMenuInflater().inflate(R.menu.menu_list, menu);
+
+        // Sets up the searchView widget for Searching through tasks.
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView =
+                (SearchView) menu.findItem(R.id.menu_item_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint("Search for an item!");
+
         return true;
     }
 
@@ -227,18 +244,16 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      */
     @Override
     public void onClick(View v) {
-        ToggleButton tbv = (ToggleButton) v;
         switch (v.getId()) {
-
             // "Accomplished" selected
             case R.id.list_toggle_accomplished:
-                if(tbv.isChecked()){
-                    tbv.setChecked(true);
+                if(((ToggleButton) v).isChecked()){
+                    ((ToggleButton) v).setChecked(true);
                     bucketArrayAdapter.setAccomplishedToggle(true);
                     ToggleButton unaccomplishedToggle = (ToggleButton) findViewById(R.id.list_toggle_unaccomplished);
                     unaccomplishedToggle.setChecked(false);
                 } else {
-                    tbv.setChecked(true);
+                    ((ToggleButton) v).setChecked(true);
                 }
                 // Update the bucketView
                 bucketArrayAdapter.notifyDataSetChanged();
@@ -246,19 +261,17 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
             // "Unaccomplished" selected
             case R.id.list_toggle_unaccomplished:
-                if(tbv.isChecked()){
-                    tbv.setChecked(true);
+                if(((ToggleButton) v).isChecked()){
+                    ((ToggleButton) v).setChecked(true);
                     bucketArrayAdapter.setAccomplishedToggle(false);
                     ToggleButton accomplishedToggle = (ToggleButton) findViewById(R.id.list_toggle_accomplished);
                     accomplishedToggle.setChecked(false);
                 } else {
-                    tbv.setChecked(true);
+                    ((ToggleButton) v).setChecked(true);
                 }
                 // Update the bucketView
                 bucketArrayAdapter.notifyDataSetChanged();
-                break;
-            
-            
+                break;            
         }
     }
     
@@ -271,6 +284,22 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             greetingTextView.setVisibility(View.GONE);
         }
         
+    }
+    
+    // Not really utilized but it refines search when submit button is pressed.
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        bucketArrayAdapter.setSearchQuery(searchView.getQuery().toString());
+        bucketArrayAdapter.notifyDataSetChanged();
+        return true;
+    } 
+
+    // Updates the list live as the user types in their search query.
+    @Override
+    public boolean onQueryTextChange(String s) {
+        bucketArrayAdapter.setSearchQuery(searchView.getQuery().toString());
+        bucketArrayAdapter.notifyDataSetChanged();
+        return true;
     }
 }
 

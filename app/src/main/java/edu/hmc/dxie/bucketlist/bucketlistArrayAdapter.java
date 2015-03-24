@@ -25,6 +25,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
     private int id;
     private ArrayList<ItemModel> items ;
     private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
+    private String query;
 
     public bucketlistArrayAdapter(Context context, int textViewResourceId , ArrayList<ItemModel> list )
     {
@@ -33,6 +34,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
         id = textViewResourceId;
         items = list;
         accomplishedToggle = false;
+        query = "";
     }
 
     @Override
@@ -48,14 +50,26 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
 
         TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
 
+        
+
         if(items.get(position) != null )
         {
             text.setText(items.get(position).toString());
-
+            
+            //Following conditional sets the items not relevant to the current search query to
+            //invisible.
+            if(items.get(position).toString().toLowerCase().contains(query.toLowerCase())){
+                text.setVisibility(View.VISIBLE);
+            } else {
+                text.setVisibility(View.GONE);
+            }
             //Here is where to customize the feature that allows users to visually
             //distinguish completed and uncompleted tasks.  It looks really ugly right now
             text.setTextColor(Color.WHITE);
-            //text.setBackgroundColor(Color.GRAY);
+            
+            //Following two commands make the boxes bigger (easier to press)
+            text.setHeight(100);
+            text.setGravity(0x11);
             if(items.get(position).getCompleted()) {
                 text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
                 if(!accomplishedToggle){
@@ -67,10 +81,6 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
                     text.setVisibility(View.GONE);
                 }
             }
-            
-
-
-            //int color = Color.argb( 200, 255, 64, 64 );
         }
 
         return itemView;
@@ -79,5 +89,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
     public void setAccomplishedToggle(boolean toggle){
         this.accomplishedToggle = toggle;      
     }
+
+    public void setSearchQuery(String query) {this.query = query; }
 
 }

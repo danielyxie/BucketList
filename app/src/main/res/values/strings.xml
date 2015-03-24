@@ -9,6 +9,7 @@
     <string name="title_activity_add">Back to List</string>
     <string name="priority_min">0</string> <!-- 0 for ease of use with SeekBar -->
     <string name="priority_max">10</string>
+    <string name="search_hint">Search for an item!</string>
     <string-array name="deadline_units">
         <item>day(s)</item>
         <item>week(s)</item>
