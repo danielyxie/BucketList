@@ -23,7 +23,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
 
     private Context mContext;
     private int id;
-    private ArrayList<ItemModel> items ;
+    private ArrayList<ItemModel> items;
     private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
     private String query;
 
@@ -45,42 +45,34 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
         //ListView appears on the ListActivity.
         LayoutInflater inflater =
                 (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
-
-        TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
-
+        View itemView;
         
+        ItemModel currentItem = items.get(position);
 
-        if(items.get(position) != null )
+        // Only show list item if:
+        //  1) item exists
+        //  2) item contains search text
+        //  3) item matches the criteria of toggled accomplished tab
+        if(currentItem != null
+                && currentItem.toString().toLowerCase().contains(query.toLowerCase())
+                && currentItem.getCompleted() == accomplishedToggle)
         {
-            text.setText(items.get(position).toString());
-            
-            //Following conditional sets the items not relevant to the current search query to
-            //invisible.
-            if(items.get(position).toString().toLowerCase().contains(query.toLowerCase())){
-                text.setVisibility(View.VISIBLE);
-            } else {
-                text.setVisibility(View.GONE);
-            }
+            itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
+
+            TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
+            text.setText(currentItem.toString());
+
             //Here is where to customize the feature that allows users to visually
             //distinguish completed and uncompleted tasks.  It looks really ugly right now
             text.setTextColor(Color.WHITE);
             
-            //Following two commands make the boxes bigger (easier to press)
-            text.setHeight(100);
-            text.setGravity(0x11);
-            if(items.get(position).getCompleted()) {
+            if(accomplishedToggle) {
                 text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
-                if(!accomplishedToggle){
-                    text.setVisibility(View.GONE);
-                }
             } else {
                 text.setBackgroundColor(Color.RED);
-                if(accomplishedToggle){
-                    text.setVisibility(View.GONE);
-                }
             }
+        } else {
+            itemView = inflater.inflate(R.layout.empty_list_item, parent, false);
         }
 
         return itemView;
