@@ -114,7 +114,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint("Search for an item!");
+        searchView.setQueryHint(getString(R.string.search_hint));
 
         return true;
     }
