@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * control data assignment.  Essentially, this custom ArrayAdapter will allow us to customize
  * the UI of the ListView.  It simply overrides the getView() function in ArrayAdapter
  */
-public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
+public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements View.OnClickListener {
 
 
     private Context mContext;
@@ -62,6 +63,11 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
             TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
             text.setText(currentItem.toString());
 
+            CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.item_checkbox_completed);
+            checkBox.setChecked(accomplishedToggle);
+            checkBox.setTag(currentItem);
+            checkBox.setOnClickListener(this);
+
             //Here is where to customize the feature that allows users to visually
             //distinguish completed and uncompleted tasks.  It looks really ugly right now
             text.setTextColor(Color.WHITE);
@@ -84,4 +90,18 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
 
     public void setSearchQuery(String query) {this.query = query; }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.item_checkbox_completed:
+                CheckBox checkBox = (CheckBox) v;
+                ItemModel item = (ItemModel) checkBox.getTag();
+                if (checkBox.isChecked()) {
+                    item.complete();
+                } else {
+                    item.uncomplete();
+                } notifyDataSetChanged();
+                break;
+        }
+    }
 }
