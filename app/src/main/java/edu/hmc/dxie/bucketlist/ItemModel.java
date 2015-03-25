@@ -26,6 +26,7 @@ public class ItemModel {
         this.travelDistance = "";
     }
 
+    
     ////////////////////
     // Accessor Methods
     ////////////////////
@@ -58,6 +59,7 @@ public class ItemModel {
         return this.travelDistance;
     }
 
+    
     ////////////////////
     // Mutator Methods
     ////////////////////
@@ -100,7 +102,7 @@ public class ItemModel {
         this.travelDistance = travelDistance + " " + unit;
     }
 
-    // This is necessary for the ArrayAdapter to properly work
+    @Override
     public String toString() {
         return this.itemText;
     }

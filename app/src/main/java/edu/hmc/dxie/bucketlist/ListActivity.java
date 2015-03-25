@@ -48,30 +48,25 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         // Get the JSON of the bucketModel if it exists, otherwise get an empty string
         String bucketModelJSON = persistentData.getString("bucket model", "");
         
-        // Check whether a bucketModel exists
+        // If a bucketModel does not exist
         if (bucketModelJSON.isEmpty()) {
-            // If one does not exist, create a new ListModel for holding bucketModel list items
+            
+            // Create a new one for holding list items
             bucketModel = new ListModel();
         } else {
-            // Otherwise, recover the preexisting bucketModel
+            
+            // Otherwise, recover the existing bucketModel
             bucketModel = ListModel.deserialize(bucketModelJSON);
         }
 
-        // Create an ArrayAdapter for the ListView
+        // Setup an ArrayAdapter for the ListView
         bucketArrayAdapter = new bucketlistArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 bucketModel.getBucket());
-
-        // Get the ListView
         bucketView = (ListView) findViewById(R.id.bucketlistview);
-
-        // Set the ListView to use the ArrayAdapter
         bucketView.setAdapter(bucketArrayAdapter);
-        
-        // Set this activity to react to list items being processed
         bucketView.setOnItemClickListener(this);
         
-        // Set greeting
         setGreeting();
        
         // Set defaults for toggle/"tab" buttons
@@ -202,6 +197,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                         break;
 
                     case "Delete":
+                        
                         // Delete the item
                         bucketModel.removeItem(position);
                         break;
