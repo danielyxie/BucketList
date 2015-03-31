@@ -1,9 +1,11 @@
 package edu.hmc.dxie.bucketlist;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.KeyListener;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,8 +23,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     Button completeButton;
 
     //Button View Objects
-    Button editButton;
-    Button deleteButton;
     ItemModel currentItem;
 
     //Deadline layout View objects
@@ -51,7 +51,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
     //Keeps track of whether the item is currently being Edited
     //True if item is edited, false if item is just being viewed
-    private boolean edit;
+    private boolean edit = false;
 
     private int position;    //index of item in bucket list
 
@@ -104,7 +104,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         deadlineViewSpinner = (Spinner) findViewById(R.id.param_deadline_viewspinner);
         deadlineViewSpinner.setAdapter(deadlineAdapter);
         deadlineViewSpinner.setSelection(spinnerVal);
-        deadlineViewSpinner.setBackgroundColor(0xFFE8E8E8);
+        deadlineViewSpinner.setBackgroundColor(Color.parseColor("#FFDAC189"));
 
         deadlineSpinner = (Spinner) findViewById(R.id.param_deadline_spinner);
         deadlineSpinner.setAdapter(deadlineAdapter);
@@ -181,7 +181,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         timecostViewSpinner = (Spinner) findViewById(R.id.param_timecost_viewspinner);
         timecostViewSpinner.setAdapter(timeCostAdapter);
-        timecostViewSpinner.setBackgroundColor(0xFFDAC189);
+        timecostViewSpinner.setBackgroundColor(Color.parseColor("#70AB8F"));
         timecostViewSpinner.setSelection(spinnerVal);
 
         timecostSpinner = (Spinner)findViewById(R.id.param_timecost_spinner);
@@ -222,7 +222,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         traveldistanceViewSpinner = (Spinner) findViewById(R.id.param_traveldistance_viewspinner);
         traveldistanceViewSpinner.setAdapter(travelDistanceAdapter);
-        traveldistanceViewSpinner.setBackgroundColor(0xFFE8E8E8);
+        traveldistanceViewSpinner.setBackgroundColor(Color.parseColor("#FFDAC189"));
         traveldistanceViewSpinner.setSelection(spinnerVal);
 
         traveldistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
@@ -254,24 +254,16 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         } else {
             completeButton.setText("Complete");
         }
-
-        //Get the "Edit" Button
-        editButton = (Button) findViewById(R.id.button_edit);
-        editButton.setOnClickListener(this);
-
-        // Get the "Delete" Button
-        deleteButton = (Button) findViewById(R.id.button_delete);
-        deleteButton.setOnClickListener(this);
     }
 
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_item, menu);
         return true;
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -282,34 +274,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        }*/
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    /*
-     * Handles what processes are run when one of the "Complete", "Edit", and
-     * "Delete" buttons are pressed.
-     */
-    @Override
-    public void onClick(View v) {
-        
-        // Check which button was clicked
-        switch (v.getId()) {
-            
-            // "Complete" button
-            case R.id.button_complete:
-                viewItem.putExtra("button clicked", completeButton.getText());
-                setResult(RESULT_OK, viewItem);
-                finish();
-                break;
-
+        switch(id) {
             // "Edit" button
-            case R.id.button_edit:
+            case R.id.menu_item_edit:
                 /* When the Edit button is pressed, check to see whether the item is currently
                  * being edited or not.  If the item is currently being edited, the Activity
                  * should exit the Edit mode by disabling editing for all of the View Objects and
@@ -319,6 +286,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                  * The 'edit' variable is used to keep track of whether the item is currently
                  * being edited.
                  */
+                edit = !edit;
                 if (edit) {
                     //Disable editing for each parameter
                     deadlineValueEditText.setKeyListener(null);
@@ -345,7 +313,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                     traveldistanceViewSpinner.setVisibility(View.VISIBLE);
 
                     edit = false;
-                    editButton.setText("Edit");
 
                     //Update the new parameter values for the item
                     String deadlineValue = deadlineValueEditText.getText().toString();
@@ -395,19 +362,44 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
 
                     edit = true;
-                    editButton.setText("Finish Editing");
                 }
 
                 viewItem.putExtra("button clicked", "Edit");
                 break;
-            
+
             // "Delete" button
-            case R.id.button_delete:
+            case R.id.menu_item_discard:
                 viewItem.putExtra("button clicked", "Delete");
                 setResult(RESULT_OK, viewItem);
                 finish();
                 break;
-                        
+        }
+
+        //noinspection SimplifiableIfStatement
+        /*if (id == R.id.action_settings) {
+            return true;
+        }*/
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    /*
+     * Handles what processes are run when the "Complete" button is pressed.
+     */
+    @Override
+    public void onClick(View v) {
+        
+        // Check which button was clicked
+        switch (v.getId()) {
+            
+            // "Complete" button
+            case R.id.button_complete:
+                viewItem.putExtra("button clicked", completeButton.getText());
+                setResult(RESULT_OK, viewItem);
+                finish();
+                break;
+
             default:
                 setResult(RESULT_CANCELED, viewItem);
                 finish();

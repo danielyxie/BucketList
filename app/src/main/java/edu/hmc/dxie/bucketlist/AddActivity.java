@@ -29,6 +29,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         deadlineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         deadlineSpinner.setAdapter(deadlineAdapter);
 
+
         // Initialize the Time Cost spinner with its units
         Spinner timeCostSpinner = (Spinner) findViewById(R.id.add_spinner_timecost);
         ArrayAdapter<CharSequence> timeCostAdapter = ArrayAdapter.createFromResource(this,
@@ -92,7 +93,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         if (itemText.isEmpty()) {
 
             // Inform the user and stay on the Activity
-            textEditText.setError("Woops! The text field is empty. Insert text to add an item to your bucket list");
+            textEditText.setError(getString(R.string.empty_text_error));
 
             // Otherwise, return to MainListActivity with the text
         } else {

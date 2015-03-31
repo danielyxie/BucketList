@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,13 +19,14 @@ import java.util.ArrayList;
  * control data assignment.  Essentially, this custom ArrayAdapter will allow us to customize
  * the UI of the ListView.  It simply overrides the getView() function in ArrayAdapter
  */
-public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
+public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements View.OnClickListener {
 
 
     private Context mContext;
     private int id;
-    private ArrayList<ItemModel> items ;
+    private ArrayList<ItemModel> items;
     private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
+    private String query;
 
     public bucketlistArrayAdapter(Context context, int textViewResourceId , ArrayList<ItemModel> list )
     {
@@ -33,6 +35,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
         id = textViewResourceId;
         items = list;
         accomplishedToggle = false;
+        query = "";
     }
 
     @Override
@@ -43,34 +46,39 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
         //ListView appears on the ListActivity.
         LayoutInflater inflater =
                 (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View itemView;
+        
+        ItemModel currentItem = items.get(position);
 
-        View itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
-
-        TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
-
-        if(items.get(position) != null )
+        // Only show list item if:
+        //  1) item exists
+        //  2) item contains search text
+        //  3) item matches the criteria of toggled accomplished tab
+        if(currentItem != null
+                && currentItem.toString().toLowerCase().contains(query.toLowerCase())
+                && currentItem.getCompleted() == accomplishedToggle)
         {
-            text.setText(items.get(position).toString());
+            itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
+
+            TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
+            text.setText(currentItem.toString());
+
+            CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.item_checkbox_completed);
+            checkBox.setChecked(accomplishedToggle);
+            checkBox.setTag(currentItem);
+            checkBox.setOnClickListener(this);
 
             //Here is where to customize the feature that allows users to visually
             //distinguish completed and uncompleted tasks.  It looks really ugly right now
             text.setTextColor(Color.WHITE);
-            //text.setBackgroundColor(Color.GRAY);
-            if(items.get(position).getCompleted()) {
-                text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
-                if(!accomplishedToggle){
-                    text.setVisibility(View.GONE);
-                }
-            } else {
-                text.setBackgroundColor(Color.RED);
-                if(accomplishedToggle){
-                    text.setVisibility(View.GONE);
-                }
-            }
             
-
-
-            //int color = Color.argb( 200, 255, 64, 64 );
+            if(accomplishedToggle) {
+                text.setBackgroundColor(Color.parseColor("#70AB8F")); // mint
+            } else {
+                text.setBackgroundColor(Color.parseColor("#DC5B21")); //red orange
+            }
+        } else {
+            itemView = inflater.inflate(R.layout.empty_list_item, parent, false);
         }
 
         return itemView;
@@ -80,4 +88,20 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> {
         this.accomplishedToggle = toggle;      
     }
 
+    public void setSearchQuery(String query) {this.query = query; }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.item_checkbox_completed:
+                CheckBox checkBox = (CheckBox) v;
+                ItemModel item = (ItemModel) checkBox.getTag();
+                if (checkBox.isChecked()) {
+                    item.complete();
+                } else {
+                    item.uncomplete();
+                } notifyDataSetChanged();
+                break;
+        }
+    }
 }

@@ -1,13 +1,15 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/lightbrown">
+
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <!-- Task Name -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +20,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/mint"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
 
@@ -37,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_alignParentTop="true"
-                android:textColor="#a7a7a7"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <!-- Text of item being viewed -->
@@ -49,7 +51,8 @@
                 android:width="275dp"
                 android:layout_below="@+id/text_iwantto"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:gravity="center_horizontal" />
         </RelativeLayout>
 
 
@@ -62,7 +65,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightgray"
+            android:background="@color/lightbrown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -78,7 +81,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="135dp">
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/param_deadline_title" >
 
                 <EditText
                     android:id="@+id/param_deadline_value"
@@ -87,19 +92,21 @@
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:inputType="number"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:layout_below="@+id/param_deadline_title"/>
 
                 <Spinner
                     android:id="@+id/param_deadline_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/lightbrown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
 
                 <Spinner
                     android:id="@+id/param_deadline_viewspinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/lightbrown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
             </LinearLayout>
         </RelativeLayout>
@@ -114,7 +121,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/mint"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -155,6 +162,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:max="@string/priority_max"
+                    android:scrollbarStyle="@color/black"
                     android:layout_weight="3"/>
 
                 <TextView
@@ -177,7 +185,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightgray"
+            android:background="@color/lightbrown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -231,7 +239,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/mint"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -247,7 +255,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="135dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/param_timecost_title">
 
                 <EditText
@@ -285,8 +294,8 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightgray"
+            android:paddingBottom="50dp"
+            android:background="@color/lightbrown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -302,7 +311,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="135dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/param_traveldistance_title">
 
                 <EditText
@@ -339,7 +349,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightgray"
+            android:background="@color/lightbrown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Complete button -->
@@ -348,23 +358,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Complete"
-                android:layout_toLeftOf="@+id/button_edit" />
-
-            <!-- Edit button -->
-            <Button
-                android:id="@+id/button_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:layout_centerHorizontal="true"/>
-
-            <!-- Delete button -->
-            <Button
-                android:id="@+id/button_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:layout_toRightOf="@+id/button_edit" />
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
     </LinearLayout>

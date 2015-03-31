@@ -38,7 +38,7 @@ public class ItemModel {
         this.travelDistance = Integer.toString(i) + " mile(s)";
     }
 
-    ////////////////////
+        ////////////////////
     // Accessor Methods
     ////////////////////
 
@@ -183,7 +183,7 @@ public class ItemModel {
         this.travelDistance = travelDistance + " " + unit;
     }
 
-    // This is necessary for the ArrayAdapter to properly work
+    @Override
     public String toString() {
         return this.itemText;
     }
