@@ -6,6 +6,7 @@
     <color name="green">#FFBADA5F</color>
     <color name="lightbrown">#FFDAC189</color>
     <color name="yellow">#FFFF00</color>
+    <color name="darkyellow">#FFB90F</color>
     <color name="lightyellow">#E5F04C</color>
     <color name="fuchsia">#FF00FF</color>
     <color name="red">#690202</color>
@@ -21,5 +22,12 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
     <color name="brown">#774F38</color>
-
+    <color name="charcoal">#303030</color>
+    <color name="forestgreen">#006400</color>
+    <color name="lightBackground">#FFE8E8E8</color>
+    <color name="darkBackgound">#008080</color>
+    <color name="lightcolor">#E4DBBF</color>
+    <color name="redorange">#DC5B21</color>
+    <color name="mint">#70AB8F</color>
+    <color name="darkColor">#383127</color>
 </resources>

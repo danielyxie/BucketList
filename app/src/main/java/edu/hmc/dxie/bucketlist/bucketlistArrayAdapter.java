@@ -62,20 +62,21 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
 
             TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
             text.setText(currentItem.toString());
-            text.setTextColor(Color.WHITE);
-
-            if(accomplishedToggle) {
-                text.setBackgroundColor(Color.parseColor("#1EBE39")); //green
-            } else {
-                text.setBackgroundColor(Color.RED);
-            }
 
             CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.item_checkbox_completed);
             checkBox.setChecked(accomplishedToggle);
             checkBox.setTag(currentItem);
             checkBox.setOnClickListener(this);
+
+            //Here is where to customize the feature that allows users to visually
+            //distinguish completed and uncompleted tasks.  It looks really ugly right now
+            text.setTextColor(Color.WHITE);
             
-        // Otherwise, don't show the item
+            if(accomplishedToggle) {
+                text.setBackgroundColor(Color.parseColor("#70AB8F")); // mint
+            } else {
+                text.setBackgroundColor(Color.parseColor("#DC5B21")); //red orange
+            }
         } else {
             itemView = inflater.inflate(R.layout.empty_list_item, parent, false);
         }
