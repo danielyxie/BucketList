@@ -28,4 +28,13 @@
         <item>kilometer(s)</item>
     </string-array>
 
+    <string-array name="sort_params">
+        <item>---</item>
+        <item>Deadline</item>
+        <item>Priority</item>
+        <item>Cost</item>
+        <item>Duration</item>s
+        <item>Travel Distance</item>
+    </string-array>
+
 </resources>

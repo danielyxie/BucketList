@@ -26,6 +26,18 @@ public class ItemModel {
         this.travelDistance = "";
     }
 
+    // Constructor used for Testing.  Takes in a integer and initializes the name and all parameter
+    // values to be that integer
+    public ItemModel(int i) {
+        this.itemText = Integer.toString(i);
+        this.completed = false;
+        this.deadline = Integer.toString(i) + " day(s)";
+        this.moneyCost = i;
+        this.priority = i;
+        this.timeCost = Integer.toString(i) + " minute(s)";
+        this.travelDistance = Integer.toString(i) + " mile(s)";
+    }
+
     ////////////////////
     // Accessor Methods
     ////////////////////
@@ -56,6 +68,77 @@ public class ItemModel {
 
     public String getTravelDistance() {
         return this.travelDistance;
+    }
+
+    ////////////////////////////
+    // Accessor Methods for Sort
+    ////////////////////////////
+
+    //Convert deadline to days, and cast it as a double
+    public double getDeadlineForSort(){
+        String split[] = this.deadline.split(" ");
+        double deadlineValue = Double.parseDouble(split[0]);
+        String deadlineUnit = split[1];
+
+        switch (deadlineUnit) {
+            case "day(s)":
+                return deadlineValue;
+            case "week(s)":
+                return deadlineValue * 7.0;
+            case "month(s)":
+                return deadlineValue * 30.0;
+            case "year(s)":
+                return deadlineValue * 365.0;
+            default:
+                return 0;
+        }
+    }
+
+
+    //Cast priority as a double
+    public double getPriorityForSort(){
+        return (double)this.priority;
+    }
+
+    //convert duration to minutes, and cast it as a double
+    //TO-DO: Need some case for handling int overflow
+    public double getDurationForSort(){
+        String split[] = this.timeCost.split(" ");
+        double durationValue = Double.parseDouble(split[0]);
+        String durationUnit = split[1];
+
+        switch (durationUnit) {
+            case "minute(s)":
+                return durationValue;
+            case "hour(s)":
+                return durationValue * 60.0;
+            case "day(s)":
+                return durationValue * 1440.0;
+            case "week(s)":
+                return durationValue * 10080.0;
+            case "month(s)":
+                return durationValue * 43200.0;
+            case "year(s)":
+                return durationValue * 525949.0;
+            default:
+                return 0;
+        }
+    }
+
+    //convert travel distance to miles, and cast it as a double
+    public double getTravelDistanceForSort(){
+        String split[] = this.travelDistance.split(" ");
+        double travelDistanceValue = Double.parseDouble(split[0]);
+        String travelDistanceUnit = split[1];
+
+        switch (travelDistanceUnit) {
+            case "mile(s)":
+                return travelDistanceValue;
+            case "kilometer(s)":
+                return travelDistanceValue * 0.621371;
+            default:
+                return 0;
+        }
     }
 
     ////////////////////

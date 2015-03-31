@@ -453,6 +453,23 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         return viewItem;
     }
 
+    /*
+     * This method implements what happens when the Android's "Back" button is pressed.  Note
+     * that this is different than the "Up" button on the Action Bar
+     */
+    @Override
+    public void onBackPressed() {
+        viewItem.putExtra("button clicked", "Back");
+
+        // Serialize the new item to JSON
+        String serializedItem = currentItem.serialize();
+
+        // Store the serialized item in the intent
+        viewItem.putExtra("item", serializedItem);
+        viewItem.putExtra("item position", position);
+        setResult(RESULT_OK, viewItem);
+        this.finish();
+    }
 
     /*
      * onStartTrackingTouch and onStopTrackingTouch are required for implementing SeekBars.
