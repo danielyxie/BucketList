@@ -40,7 +40,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
 
     public enum RequestCode{
-        ADD_ITEM_REQUEST, VIEW_ITEM_REQUEST
+        ADD_ITEM, VIEW_ITEM
     }
 
     @Override
@@ -157,7 +157,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
             // Go to AddActivity
             Intent addItem = new Intent(this, AddActivity.class);
-            startActivityForResult(addItem, RequestCode.ADD_ITEM_REQUEST.ordinal());
+            startActivityForResult(addItem, RequestCode.ADD_ITEM.ordinal());
             return true;
         }
 
@@ -173,7 +173,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // If the request was to add an item
-        if (requestCode == RequestCode.ADD_ITEM_REQUEST.ordinal()) {
+        if (requestCode == RequestCode.ADD_ITEM.ordinal()) {
 
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
@@ -190,7 +190,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             }
 
         // If the request was to view an item
-        } else if (requestCode == RequestCode.VIEW_ITEM_REQUEST.ordinal()) {
+        } else if (requestCode == RequestCode.VIEW_ITEM.ordinal()) {
 
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
@@ -257,7 +257,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         Intent viewItem = new Intent(this, ViewItemActivity.class);
         viewItem.putExtra("item", serializedItem);
         viewItem.putExtra("item position", position);
-        startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
+        startActivityForResult(viewItem, RequestCode.VIEW_ITEM.ordinal());
     }
 
 
