@@ -73,7 +73,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             if(accomplishedToggle) {
                 text.setBackgroundColor(res.getColor(R.color.mint));
             } else {
-                text.setBackgroundColor(res.getColor(R.color.redorange));
+                text.setBackgroundColor(res.getColor(R.color.red_orange));
             }
         } else {
             itemView = inflater.inflate(R.layout.empty_list_item, parent, false);

@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/lightbrown">
+    android:background="@color/light_brown">
 
 
     <LinearLayout
@@ -58,7 +58,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Empty layout for aligning widgets to horizontal center -->
@@ -99,14 +99,14 @@
                     android:id="@+id/param_deadline_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/lightbrown"
+                    android:background="@color/light_brown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
 
                 <Spinner
                     android:id="@+id/param_deadline_viewspinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/lightbrown"
+                    android:background="@color/light_brown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
             </LinearLayout>
         </RelativeLayout>
@@ -185,7 +185,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -295,7 +295,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="50dp"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -349,7 +349,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Complete button -->
