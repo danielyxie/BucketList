@@ -31,7 +31,7 @@
     </string-array>
 
     <string-array name="sort_params">
-        <item>---</item>
+        <item>Item Name</item>
         <item>Deadline</item>
         <item>Priority</item>
         <item>Cost</item>

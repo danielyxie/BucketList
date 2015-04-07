@@ -10,6 +10,47 @@
     android:background="@color/lightbrown"
     tools:context=".MainActivity">
 
+
+    <!-- Menu used to select which parameter to sort by -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp">
+
+        <TextView
+            android:id="@+id/sortby_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:text="Sort by: "
+            android:textSize="20dp"/>
+
+        <ImageButton
+            android:id="@+id/sort_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/sort_up_arrow"/>
+
+        <Spinner
+            android:id="@+id/sort_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/sortby_text"
+            android:layout_toLeftOf="@id/sort_button"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="22dp"/>
+    </RelativeLayout>
+
+
     <!-- Handles creation of the Unaccomlished and Accomplished tabs below the Action Bar -->
     <LinearLayout
         android:layout_width="fill_parent"
@@ -44,29 +85,6 @@
             android:layout_gravity="center" />
     </LinearLayout>
 
-    <!-- Menu used to select which parameter to sort by -->
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp">
-
-        <TextView
-            android:id="@+id/sortby_text"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Sort by: "
-            android:textSize="20dp"/>
-        <Spinner
-            android:id="@+id/sort_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"/>
-    </LinearLayout>
 
     <!-- Greeting -->
     <TextView

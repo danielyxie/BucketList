@@ -26,7 +26,8 @@ public class ItemModel {
         this.travelDistance = "";
     }
 
-    // Constructor used for Testing.  Takes in a integer and initializes the name and all parameter
+    // Constructor used for testing purposes only.
+    // Takes in a integer as an argument and initializes the name and all parameter
     // values to be that integer
     public ItemModel(int i) {
         this.itemText = Integer.toString(i);
@@ -38,7 +39,21 @@ public class ItemModel {
         this.travelDistance = Integer.toString(i) + " mile(s)";
     }
 
-        ////////////////////
+    // Constructor used for testing purposes only.
+    // Takes in a String as an argument and initializes the name of the
+    // ItemModel
+    public ItemModel(String name) {
+        this.itemText = name;
+        this.completed = false;
+        this.deadline = "";
+        this.moneyCost = -1;
+        this.priority = -1;
+        this.timeCost = "";
+        this.travelDistance = "";
+    }
+
+
+    ////////////////////
     // Accessor Methods
     ////////////////////
 
