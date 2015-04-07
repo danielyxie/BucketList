@@ -24,7 +24,6 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     TextView itemTextView;
     Intent viewItem;
 
-    //Button View Objects
     ItemModel currentItem;
 
     //Deadline layout View objects
