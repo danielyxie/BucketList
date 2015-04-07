@@ -172,7 +172,7 @@
         </RelativeLayout>
 
 
-        <!-- Money Cost -->
+        <!-- Cost -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -185,11 +185,11 @@
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
-            android:id="@+id/add_moneycost_title"
+            android:id="@+id/add_cost_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Money cost"
+            android:text="Cost"
             android:gravity="center"
             android:layout_marginTop="@dimen/input_divider_padding"/>
 
@@ -199,10 +199,10 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/add_moneycost_title">
+                android:layout_below="@+id/add_cost_title">
 
                 <TextView
-                    android:id="@+id/add_moneycost_dollarsign"
+                    android:id="@+id/add_cost_dollarsign"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content"
                     android:text="$"
@@ -223,7 +223,7 @@
         </RelativeLayout>
 
 
-        <!-- Time Cost -->
+        <!-- Duration -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -236,11 +236,11 @@
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
-                android:id="@+id/add_timecost_title"
+                android:id="@+id/add_duration_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Time cost"
+                android:text="Duration"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/input_divider_padding"/>
 
@@ -249,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_below="@+id/add_timecost_title">
+                android:layout_below="@+id/add_duration_title">
 
                 <EditText
                     android:id="@+id/add_edittext_duration"
