@@ -31,6 +31,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListActivity"/>
         </activity>
+        <activity
+            android:name=".EditItemActivity"
+            android:label="Go Back Without Saving"
+            android:parentActivityName=".ViewItemActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ViewItemActivity"/>
+        </activity>
     </application>
 
 </manifest>

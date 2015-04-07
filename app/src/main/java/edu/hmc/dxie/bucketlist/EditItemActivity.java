@@ -3,31 +3,34 @@ package edu.hmc.dxie.bucketlist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.KeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * Created by Kaitlyn Anderson on 4/3/2015.
+ */
 
-public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+
+
+public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener {
 
 
     TextView itemTextView;
     //Should these be private?
     Intent viewItem;
-    Button completeButton;
 
     //Button View Objects
     ItemModel currentItem;
 
     //Deadline layout View objects
     EditText deadlineValueEditText;
-    Spinner deadlineViewSpinner;    //This Spinner is used only for viewing the deadline.
+    Spinner deadlineSpinner;
 
     //Priority layout View objects
     TextView priorityTextView;
@@ -35,27 +38,30 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
     //Time cost layout View objects
     EditText timecostValueEditText;
-    Spinner timecostViewSpinner;
+    Spinner timecostSpinner;
 
     //Money Cost layout View objects
     EditText moneycostEditText;
 
     //Travel Distance layout View objects
     EditText traveldistanceValueEditText;
-    Spinner traveldistanceViewSpinner;
+    Spinner traveldistanceSpinner;
 
-
-    public enum RequestCode{
-        EDIT_ITEM_REQUEST
-    }
+    int EDIT_ITEM_REQUEST = 0;
 
     private int position;    //index of item in bucket list
+
+    //Key listeners for every parameter
+    private KeyListener deadlineListener;
+    private KeyListener moneycostListener;
+    private KeyListener timecostListener;
+    private KeyListener traveldistanceListener;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_item);
+        setContentView(R.layout.activity_edit_item);
 
         // Get the text of the item to be viewed
         viewItem = getIntent();
@@ -71,28 +77,20 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         // Initialize DEADLINE PARAMETER View Objects
         //////////////////////////////////////////////
 
-        //Split the deadline into its value and its unit
-        String deadlineString = currentItem.getDeadline();
-        String deadlineSplit[] = deadlineString.split(" ");
-        String deadlineValue = deadlineSplit[0];
-        String deadlineUnit = deadlineSplit[1];
 
         //Initialize EditText
         deadlineValueEditText = (EditText) findViewById(R.id.param_deadline_value);
 
-        //Initialize both spinners
 
         ArrayAdapter<CharSequence> deadlineAdapter = ArrayAdapter.createFromResource(this,
                 R.array.deadline_units, android.R.layout.simple_spinner_item);
         deadlineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        deadlineViewSpinner = (Spinner) findViewById(R.id.param_deadline_viewspinner);
-        deadlineViewSpinner.setAdapter(deadlineAdapter);
+        deadlineSpinner = (Spinner) findViewById(R.id.param_deadline_spinner);
+        deadlineSpinner.setAdapter(deadlineAdapter);
 
-        // Disable the edit feature
-        deadlineValueEditText.setKeyListener(null);
-        deadlineValueEditText.setEnabled(false);
-        deadlineViewSpinner.setClickable(false);
+        // Get the listener for the EditText
+        deadlineListener = deadlineValueEditText.getKeyListener();
 
 
         //////////////////////////////////////////////
@@ -106,8 +104,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         prioritySeekBar = (SeekBar) findViewById(R.id.param_priority_seekbar);
         prioritySeekBar.setOnSeekBarChangeListener(this);
 
-        // Disable the edit feature
-        prioritySeekBar.setEnabled(false);
 
         ////////////////////////////////////////////////
         // Initialize MONEY COST PARAMETER View Objects
@@ -115,9 +111,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         moneycostEditText = (EditText) findViewById(R.id.param_moneycost);
 
-        // Disable the edit feature
-        moneycostEditText.setKeyListener(null);
-        moneycostEditText.setEnabled(false);
+        // Get the listener for the EditText
+        moneycostListener = moneycostEditText.getKeyListener();
+
 
         //////////////////////////////////////////////
         // Initialize TIME COST PARAMETER View Objects
@@ -129,6 +125,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         String timecostValue = timecostSplit[0];
         String timecostUnit = timecostSplit[1];
 
+
         //Initialize the time cost's EditText
         timecostValueEditText = (EditText) findViewById(R.id.param_timecost_value);
 
@@ -137,13 +134,12 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                 R.array.timecost_units, android.R.layout.simple_spinner_item);
         timeCostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        timecostViewSpinner = (Spinner) findViewById(R.id.param_timecost_viewspinner);
-        timecostViewSpinner.setAdapter(timeCostAdapter);
+        timecostSpinner = (Spinner)findViewById(R.id.param_timecost_spinner);
+        timecostSpinner.setAdapter(timeCostAdapter);
 
-        // Disable the edit feature
-        timecostValueEditText.setKeyListener(null);
-        timecostValueEditText.setEnabled(false);
-        timecostViewSpinner.setClickable(false);
+
+        // Get the listener for the EditText
+        timecostListener = timecostValueEditText.getKeyListener();
 
         /////////////////////////////////////////////////////
         // Initialize TRAVEL DISTANCE PARAMETER View Objects
@@ -164,46 +160,28 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                 R.array.traveldistance_units, android.R.layout.simple_spinner_item);
         travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        traveldistanceViewSpinner = (Spinner) findViewById(R.id.param_traveldistance_viewspinner);
-        traveldistanceViewSpinner.setAdapter(travelDistanceAdapter);
+        traveldistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
+        traveldistanceSpinner.setAdapter(travelDistanceAdapter);
 
-
-        // Disable the edit feature
-        traveldistanceValueEditText.setKeyListener(null);
-        traveldistanceValueEditText.setEnabled(false);
-        traveldistanceViewSpinner.setClickable(false);
-
-
-        //////////////////////
-        // Initialize BUTTONS
-        //////////////////////
-
-        // Get the "Complete" Button
-        completeButton = (Button) findViewById(R.id.button_complete);
-        completeButton.setOnClickListener(this);
-        
-        // Choose whether to show a "Complete" or "Uncomplete" Button
-        if (currentItem.getCompleted()) {
-            completeButton.setText("Uncomplete");
-        } else {
-            completeButton.setText("Complete");
-        }
+        // Get the listener for the EditText
+        traveldistanceListener = traveldistanceValueEditText.getKeyListener();
 
         refreshItemData(currentItem);
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_item, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_item, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -211,16 +189,32 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         int id = item.getItemId();
 
         switch(id) {
-            // "Edit" button
-            case R.id.menu_item_edit:
+            // "Finish Editing" button
+            case R.id.menu_item_finish_edit:
+                /* When the user is finished editing, the app should take them back to
+                 * ViewItemActivity
+                 */
+
+                String deadlineValue = deadlineValueEditText.getText().toString();
+                String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
+                currentItem.setDeadline(deadlineValue, deadlineUnit);
+                currentItem.setPriority(prioritySeekBar.getProgress());
+                currentItem.setMoneyCost((moneycostEditText.getText()).toString());
+                String timecostValue = timecostValueEditText.getText().toString();
+                String timecostUnit = timecostSpinner.getSelectedItem().toString();
+                currentItem.setTimeCost(timecostValue, timecostUnit);
+                String traveldistanceValue = traveldistanceValueEditText.getText().toString();
+                String traveldistanceUnit = traveldistanceSpinner.getSelectedItem().toString();
+                currentItem.setTravelDistance(traveldistanceValue, traveldistanceUnit);
 
                 // Serialize the new item to JSON
                 String serializedItem = currentItem.serialize();
 
-                // Go to EditActivity
-                Intent editItem = new Intent(this, EditItemActivity.class);
+                // Store the serialized item in the intent
+                Intent editItem = getIntent();
                 editItem.putExtra("item", serializedItem);
-                startActivityForResult(editItem, RequestCode.EDIT_ITEM_REQUEST.ordinal());
+                setResult(RESULT_OK, editItem);
+                finish();
                 return true;
 
             // "Delete" button
@@ -235,28 +229,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     }
 
 
-    /*
-     * Handles what processes are run when the "Complete" button is pressed.
-     */
-    @Override
-    public void onClick(View v) {
-        
-        // Check which button was clicked
-        switch (v.getId()) {
-            
-            // "Complete" button
-            case R.id.button_complete:
-                viewItem.putExtra("button clicked", completeButton.getText());
-                setResult(RESULT_OK, viewItem);
-                finish();
-                break;
 
-            default:
-                setResult(RESULT_CANCELED, viewItem);
-                finish();
-                break;
-        }
-    }
 
 
     /*
@@ -319,7 +292,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
      */
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        
+
     }
 
     @Override
@@ -362,18 +335,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             default:
                 return 0;
         }
-    }
-
-    /*
-     * This method handles what happens when the application returns to the ListActivity.
-     * It manages and processes Intents from the AddActivity and the ViewItemActivity.
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        String serializedItem = data.getStringExtra("item");
-        currentItem = ItemModel.deserialize(serializedItem);
-        refreshItemData(currentItem);
     }
 
 
@@ -422,7 +383,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         //Initialize spinner
         int spinnerVal = getDeadlineSpinnerIndex(deadlineUnit);
 
-        deadlineViewSpinner.setSelection(spinnerVal);
+        deadlineSpinner.setSelection(spinnerVal);
 
 
 
@@ -465,7 +426,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         timecostValueEditText.setText(timecostValue);
 
         //Initialize Spinners
-        timecostViewSpinner.setSelection(spinnerVal);
+        timecostSpinner.setSelection(spinnerVal);
 
         /////////////////////////////////////////////////////
         // Initialize TRAVEL DISTANCE PARAMETER View Objects
@@ -483,7 +444,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         traveldistanceValueEditText.setText(traveldistanceValue);
 
         //Initialize Spinners
-        traveldistanceViewSpinner.setSelection(spinnerVal);
+        traveldistanceSpinner.setSelection(spinnerVal);
     }
 
 }
