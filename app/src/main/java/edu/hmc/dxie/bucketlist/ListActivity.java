@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +20,6 @@ import android.widget.ToggleButton;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.Object;
 
 // TODO: Consider replacing magic strings with constants in strings.xml
 public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
@@ -82,8 +80,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         bucketView.setOnItemClickListener(this);
 
         // Set greeting
-        bucketView.setOnItemClickListener(this);
-        
         setGreeting();
 
         // Set defaults for toggle/"tab" buttons
@@ -271,35 +267,33 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         ItemModel itemModelObject = new ItemModel();
 
-        Class itemModelClass = itemModelObject.getClass();
-        Method paramMethod = null;
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod;
 
         try {
             switch(param) {
                 case "---":
                     return;
                 case "Deadline":
-                    paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+                    paramMethod = itemModelClass.getMethod("getDeadlineForSort");
                     break;
                 case "Priority":
-                    paramMethod = itemModelClass.getMethod("getPriorityForSort", null);
+                    paramMethod = itemModelClass.getMethod("getPriorityForSort");
                     break;
                 case "Cost":
-                    paramMethod = itemModelClass.getMethod("getMoneyCost", null);
+                    paramMethod = itemModelClass.getMethod("getMoneyCost");
                     break;
                 case "Duration":
-                    paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+                    paramMethod = itemModelClass.getMethod("getDurationForSort");
                     break;
                 case "Travel Distance":
-                    paramMethod = itemModelClass.getMethod("getTravelDistanceForSort", null);
+                    paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
                     break;
                 default:
                     return;
             }
-            Log.w("bucket list", "sort called");
             sortBucketList(paramMethod);
         } catch (NoSuchMethodException e) {
-            Log.w("bucket list", "can't get method");
             e.printStackTrace();
         }
 
