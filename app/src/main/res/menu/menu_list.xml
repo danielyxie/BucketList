@@ -5,16 +5,16 @@
     <!-- Search Button -->
     <item
         android:id="@+id/menu_item_search"
-        android:title="Search"
+        android:title="@string/search_title"
         android:icon="@drawable/ic_action_search"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         app:actionViewClass="android.support.v7.widget.SearchView" />
 
 
     <!-- Add Item -->
     <item
         android:id="@+id/menu_item_add"
-        android:title="Add"
+        android:title="@string/add_item_title"
         android:icon="@drawable/ic_action_new"
         app:showAsAction="always" />
 

@@ -1,7 +1,7 @@
 package edu.hmc.dxie.bucketlist;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +41,8 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
     @Override
     public View getView(int position, View v, ViewGroup parent)
     {
+        Resources res = mContext.getResources();
+        
         //A LayoutInflater instantiates a layout XML file into its corresponding View
         //objects.  It can be used to customize how every ItemModel in the bucketlist
         //ListView appears on the ListActivity.
@@ -67,15 +69,11 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             checkBox.setChecked(accomplishedToggle);
             checkBox.setTag(currentItem);
             checkBox.setOnClickListener(this);
-
-            //Here is where to customize the feature that allows users to visually
-            //distinguish completed and uncompleted tasks.  It looks really ugly right now
-            text.setTextColor(Color.WHITE);
             
             if(accomplishedToggle) {
-                text.setBackgroundColor(Color.parseColor("#70AB8F")); // mint
+                text.setBackgroundColor(res.getColor(R.color.mint));
             } else {
-                text.setBackgroundColor(Color.parseColor("#DC5B21")); //red orange
+                text.setBackgroundColor(res.getColor(R.color.red_orange));
             }
         } else {
             itemView = inflater.inflate(R.layout.empty_list_item, parent, false);

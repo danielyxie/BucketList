@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/lightbrown">
+    android:background="@color/light_brown">
 
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/mint"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
 
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_alignParentTop="true"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="24sp" />
 
             <!-- Text of item being viewed -->
@@ -58,7 +58,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Empty layout for aligning widgets to horizontal center -->
@@ -95,18 +95,11 @@
                     android:gravity="center_horizontal"
                     android:layout_below="@+id/param_deadline_title"/>
 
-                <Spinner
-                    android:id="@+id/param_deadline_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/lightbrown"
-                    android:layout_toRightOf="@id/param_deadline_value"/>
-
-                <Spinner
+               <Spinner
                     android:id="@+id/param_deadline_viewspinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/lightbrown"
+                    android:background="@color/light_brown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
             </LinearLayout>
         </RelativeLayout>
@@ -121,7 +114,6 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/mint"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -185,7 +177,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -239,7 +231,6 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/mint"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -270,12 +261,6 @@
                     android:layout_below="@+id/param_timecost_title"/>
 
                 <Spinner
-                    android:id="@+id/param_timecost_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/param_timecost_value"/>
-
-                <Spinner
                     android:id="@+id/param_timecost_viewspinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -295,7 +280,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="50dp"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -326,12 +311,6 @@
                     android:layout_below="@+id/param_traveldistance_title"/>
 
                 <Spinner
-                    android:id="@+id/param_traveldistance_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/param_traveldistance_value"/>
-
-                <Spinner
                     android:id="@+id/param_traveldistance_viewspinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -349,7 +328,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/lightbrown"
+            android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Complete button -->

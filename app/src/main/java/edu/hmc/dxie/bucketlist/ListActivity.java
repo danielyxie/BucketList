@@ -23,7 +23,6 @@ import android.widget.ToggleButton;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-// TODO: Consider replacing magic strings with constants in strings.xml
 public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
                                                                View.OnClickListener,
                                                                AdapterView.OnItemSelectedListener,
@@ -40,7 +39,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
 
     public enum RequestCode{
-        ADD_ITEM_REQUEST, VIEW_ITEM_REQUEST
+        ADD_ITEM, VIEW_ITEM
     }
 
     @Override
@@ -82,8 +81,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         bucketView.setOnItemClickListener(this);
 
         // Set greeting
-        bucketView.setOnItemClickListener(this);
-        
         setGreeting();
 
         // Set defaults for toggle/"tab" buttons
@@ -163,7 +160,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
             // Go to AddActivity
             Intent addItem = new Intent(this, AddActivity.class);
-            startActivityForResult(addItem, RequestCode.ADD_ITEM_REQUEST.ordinal());
+            startActivityForResult(addItem, RequestCode.ADD_ITEM.ordinal());
             return true;
         }
 
@@ -179,7 +176,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // If the request was to add an item
-        if (requestCode == RequestCode.ADD_ITEM_REQUEST.ordinal()) {
+        if (requestCode == RequestCode.ADD_ITEM.ordinal()) {
 
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
@@ -196,7 +193,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             }
 
         // If the request was to view an item
-        } else if (requestCode == RequestCode.VIEW_ITEM_REQUEST.ordinal()) {
+        } else if (requestCode == RequestCode.VIEW_ITEM.ordinal()) {
 
             // If the request went well
             if (resultCode == Activity.RESULT_OK) {
@@ -263,7 +260,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         Intent viewItem = new Intent(this, ViewItemActivity.class);
         viewItem.putExtra("item", serializedItem);
         viewItem.putExtra("item position", position);
-        startActivityForResult(viewItem, RequestCode.VIEW_ITEM_REQUEST.ordinal());
+        startActivityForResult(viewItem, RequestCode.VIEW_ITEM.ordinal());
     }
 
 
@@ -466,8 +463,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             i_item = bucketModel.getItem(i);
             j_item = bucketModel.getItem(j);
 
-            i_obj = paramMethod.invoke(i_item, null);
-            j_obj = paramMethod.invoke(j_item, null);
+            i_obj = paramMethod.invoke(i_item);
+            j_obj = paramMethod.invoke(j_item);
 
             if (paramMethod.equals(getItemTextMethod)) {
                 i_string = (String) i_obj;
