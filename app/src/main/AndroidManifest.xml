@@ -19,7 +19,8 @@
         <activity
             android:name=".AddActivity"
             android:parentActivityName=".ListActivity"
-            android:label="Back to List">
+            android:label="Back to List"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListActivity"/>
@@ -27,7 +28,8 @@
         <activity
             android:name=".ViewItemActivity"
             android:label="Back to List"
-            android:parentActivityName=".ListActivity" >
+            android:parentActivityName=".ListActivity"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListActivity"/>
@@ -35,7 +37,8 @@
         <activity
             android:name=".EditItemActivity"
             android:label="Go Back Without Saving"
-            android:parentActivityName=".ViewItemActivity" >
+            android:parentActivityName=".ViewItemActivity"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ViewItemActivity"/>

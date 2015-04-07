@@ -72,7 +72,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Deadline"
                 android:gravity="left"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="7dp"/>
 
             <TextView
                 android:id="@+id/param_deadline_value"
@@ -93,7 +94,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
@@ -156,7 +157,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
@@ -209,7 +210,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
@@ -241,7 +242,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp"
             android:paddingBottom="50dp"
             android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
@@ -274,7 +275,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
