@@ -17,39 +17,35 @@ import android.widget.TextView;
 public class ViewItemActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
 
-    TextView itemTextView;
-    //Should these be private?
     Intent viewItem;
+    ItemModel currentItem;
+    
+    TextView itemTextView;
     Button completeButton;
 
-    //Button View Objects
-    ItemModel currentItem;
-
-    //Deadline layout View objects
+    // Deadline layout View objects
     EditText deadlineValueEditText;
-    Spinner deadlineViewSpinner;    //This Spinner is used only for viewing the deadline.
+    Spinner deadlineViewSpinner;    // This Spinner is used only for viewing the deadline.
 
-    //Priority layout View objects
+    // Priority layout View objects
     TextView priorityTextView;
     SeekBar prioritySeekBar;
 
-    //Time cost layout View objects
+    // Time cost layout View objects
     EditText timecostValueEditText;
     Spinner timecostViewSpinner;
 
-    //Money Cost layout View objects
+    // Money Cost layout View objects
     EditText moneycostEditText;
 
-    //Travel Distance layout View objects
+    // Travel Distance layout View objects
     EditText traveldistanceValueEditText;
     Spinner traveldistanceViewSpinner;
 
 
     public enum RequestCode{
-        EDIT_ITEM_REQUEST
+        EDIT_ITEM
     }
-
-    private int position;    //index of item in bucket list
 
 
     @Override
@@ -61,8 +57,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         viewItem = getIntent();
         String serializedItem = viewItem.getStringExtra("item");
         currentItem = ItemModel.deserialize(serializedItem);
-
-        position = viewItem.getIntExtra("item position", 0);
 
         // Initialize the Item Name textView and set its text
         itemTextView = (TextView) findViewById(R.id.text_itemtext);
@@ -220,7 +214,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
                 // Go to EditActivity
                 Intent editItem = new Intent(this, EditItemActivity.class);
                 editItem.putExtra("item", serializedItem);
-                startActivityForResult(editItem, RequestCode.EDIT_ITEM_REQUEST.ordinal());
+                startActivityForResult(editItem, RequestCode.EDIT_ITEM.ordinal());
                 return true;
 
             // "Delete" button
@@ -289,7 +283,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         // Store the serialized item in the intent
         viewItem.putExtra("item", serializedItem);
-        viewItem.putExtra("item position", position);
         setResult(RESULT_OK, viewItem);
         this.finish();
 
@@ -309,9 +302,8 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         // Store the serialized item in the intent
         viewItem.putExtra("item", serializedItem);
-        viewItem.putExtra("item position", position);
         setResult(RESULT_OK, viewItem);
-        this.finish();
+        finish();
     }
 
     /*

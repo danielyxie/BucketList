@@ -22,7 +22,6 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
 
 
     TextView itemTextView;
-    //Should these be private?
     Intent viewItem;
 
     //Button View Objects
@@ -46,8 +45,6 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     //Travel Distance layout View objects
     EditText traveldistanceValueEditText;
     Spinner traveldistanceSpinner;
-
-    int EDIT_ITEM_REQUEST = 0;
 
     private int position;    //index of item in bucket list
 
