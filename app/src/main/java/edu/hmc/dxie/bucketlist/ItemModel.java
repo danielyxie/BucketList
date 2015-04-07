@@ -163,14 +163,6 @@ public class ItemModel {
     public void setItemText(String itemText) {
         this.itemText = itemText;
     }
-
-    public void complete() {
-        this.completed = true;
-    }
-
-    public void uncomplete() {
-        this.completed = false;
-    }
     
     public void toggleCompleted() {
         this.completed = !this.completed;

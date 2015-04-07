@@ -94,11 +94,8 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             case R.id.item_checkbox_completed:
                 CheckBox checkBox = (CheckBox) v;
                 ItemModel item = (ItemModel) checkBox.getTag();
-                if (checkBox.isChecked()) {
-                    item.complete();
-                } else {
-                    item.uncomplete();
-                } notifyDataSetChanged();
+                item.toggleCompleted();
+                notifyDataSetChanged();
                 break;
         }
     }

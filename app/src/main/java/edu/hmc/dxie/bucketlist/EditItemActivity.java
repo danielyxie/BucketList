@@ -27,7 +27,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     Intent editItem;
     ItemModel currentItem;
 
-    TextView itemTextView;
+    EditText itemTextEditText;
 
     //Deadline layout View objects
     EditText deadlineValueEditText;
@@ -49,6 +49,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     Spinner traveldistanceSpinner;
 
     //Key listeners for every parameter
+    KeyListener itemTextListener;
     KeyListener deadlineListener;
     KeyListener moneycostListener;
     KeyListener timecostListener;
@@ -99,7 +100,9 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
                 /* When the user is finished editing, the app should take them back to
                  * ViewItemActivity
                  */
-
+    
+                String itemText = itemTextEditText.getText().toString();
+                currentItem.setItemText(itemText);
                 String deadlineValue = deadlineValueEditText.getText().toString();
                 String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
                 currentItem.setDeadline(deadlineValue, deadlineUnit);
@@ -204,8 +207,11 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     private void initItemTextEditing() {
         
         // Initialize the TextView that displays the item text
-        itemTextView = (TextView) findViewById(R.id.text_itemtext);
-        itemTextView.setText( currentItem.getItemText() );
+        itemTextEditText = (EditText) findViewById(R.id.param_itemtext);
+        itemTextEditText.setText( currentItem.getItemText() );
+
+        // Get the listener for the EditText
+        itemTextListener = itemTextEditText.getKeyListener();
     }
     
     private void initDeadlineEditing() {
