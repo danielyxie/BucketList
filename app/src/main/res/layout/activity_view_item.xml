@@ -77,31 +77,15 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/param_deadline_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:textColor="@color/black"
+                android:textSize="18dp"
                 android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/param_deadline_title" >
-
-                <EditText
-                    android:id="@+id/param_deadline_value"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:inputType="number"
-                    android:gravity="center_horizontal"
-                    android:layout_below="@+id/param_deadline_title"/>
-
-               <Spinner
-                    android:id="@+id/param_deadline_viewspinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/light_brown"
-                    android:layout_toRightOf="@id/param_deadline_value"/>
-            </LinearLayout>
+                android:layout_below="@+id/param_deadline_title"/>
+            
         </RelativeLayout>
 
 
@@ -126,14 +110,14 @@
                 android:layout_marginLeft="15dp"/>
 
             <TextView
-            android:id="@+id/param_priority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:layout_below="@+id/param_priority_title"
-            android:layout_marginLeft="15dp"/>
+                android:id="@+id/param_priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:layout_below="@+id/param_priority_title"
+                android:layout_marginLeft="15dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,11 +192,10 @@
                     android:layout_marginTop="@dimen/label_divider_padding"
                     android:layout_marginBottom="@dimen/input_divider_padding"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/param_moneycost"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:gravity="center"
@@ -242,32 +225,15 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/param_timecost_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:textColor="@color/black"
+                android:textSize="18dp"
                 android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/param_timecost_title">
+                android:layout_below="@+id/param_timecost_title"/>
 
-                <EditText
-                    android:id="@+id/param_timecost_value"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:inputType="number"
-                    android:gravity="center"
-                    android:layout_below="@+id/param_timecost_title"/>
-
-                <Spinner
-                    android:id="@+id/param_timecost_viewspinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/param_timecost_value"/>
-
-
-            </LinearLayout>
         </RelativeLayout>
 
 
@@ -292,30 +258,15 @@
                 android:gravity="left"
                 android:layout_marginLeft="15dp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/param_traveldistance_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:textColor="@color/black"
+                android:textSize="18dp"
                 android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/param_traveldistance_title">
+                android:layout_below="@+id/param_traveldistance_title"/>
 
-                <EditText
-                    android:id="@+id/param_traveldistance_value"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:inputType="number"
-                    android:gravity="center"
-                    android:layout_below="@+id/param_traveldistance_title"/>
-
-                <Spinner
-                    android:id="@+id/param_traveldistance_viewspinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/param_traveldistance_value"/>
-            </LinearLayout>
         </RelativeLayout>
 
 
