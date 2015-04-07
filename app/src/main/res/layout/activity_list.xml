@@ -49,6 +49,21 @@
             android:textSize="22dp"/>
     </RelativeLayout>
 
+    <!-- Greeting -->
+    <TextView
+        android:id="@+id/greeting"
+        android:text="@string/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="21sp"/>
+
+    <!-- List whose dataset is defined in code with an adapter -->
+    <ListView
+        android:id="@+id/bucketlistview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <!-- Handles creation of the Unaccomlished and Accomplished tabs below the Action Bar -->
     <LinearLayout
@@ -83,26 +98,6 @@
             android:layout_marginLeft="-4.5dp"
             android:layout_gravity="center" />
     </LinearLayout>
-
-
-
-    <!-- Greeting -->
-    <TextView
-        android:id="@+id/greeting"
-        android:text="@string/greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="21sp"/>
-
-    <!-- List whose dataset is defined in code with an adapter -->
-    <ListView
-        android:id="@+id/bucketlistview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-
 
 
 </LinearLayout>

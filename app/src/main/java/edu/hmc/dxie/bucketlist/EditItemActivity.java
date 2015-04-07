@@ -1,6 +1,7 @@
 package edu.hmc.dxie.bucketlist;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.KeyListener;
@@ -12,6 +13,8 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 /**
  * Created by Kaitlyn Anderson on 4/3/2015.
  */
@@ -20,150 +23,57 @@ import android.widget.TextView;
 
 public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener {
 
-
-    TextView itemTextView;
-    Intent viewItem;
-
+    Resources res;
+    Intent editItem;
     ItemModel currentItem;
 
-    //Deadline layout View objects
+    EditText itemTextEditText;
+
+    // Deadline layout View objects
     EditText deadlineValueEditText;
     Spinner deadlineSpinner;
 
-    //Priority layout View objects
+    // Priority layout View objects
     TextView priorityTextView;
     SeekBar prioritySeekBar;
 
-    //Time cost layout View objects
-    EditText timecostValueEditText;
-    Spinner timecostSpinner;
+    // Duration layout View objects
+    EditText durationValueEditText;
+    Spinner durationSpinner;
 
-    //Money Cost layout View objects
-    EditText moneycostEditText;
+    // Cost layout View objects
+    EditText costEditText;
 
     //Travel Distance layout View objects
-    EditText traveldistanceValueEditText;
-    Spinner traveldistanceSpinner;
+    EditText travelDistanceValueEditText;
+    Spinner travelDistanceSpinner;
 
-    private int position;    //index of item in bucket list
-
-    //Key listeners for every parameter
-    private KeyListener deadlineListener;
-    private KeyListener moneycostListener;
-    private KeyListener timecostListener;
-    private KeyListener traveldistanceListener;
+    // Key listeners for every parameter
+    KeyListener itemTextListener;
+    KeyListener deadlineListener;
+    KeyListener costListener;
+    KeyListener durationListener;
+    KeyListener travelDistanceListener;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
+        res = getResources();
 
-        // Get the text of the item to be viewed
-        viewItem = getIntent();
-        String serializedItem = viewItem.getStringExtra("item");
+        // Get the item to be viewed
+        editItem = getIntent();
+        String serializedItem = editItem.getStringExtra("item");
         currentItem = ItemModel.deserialize(serializedItem);
-
-        position = viewItem.getIntExtra("item position", 0);
-
-        // Initialize the Item Name textView and set its text
-        itemTextView = (TextView) findViewById(R.id.text_itemtext);
-
-        //////////////////////////////////////////////
-        // Initialize DEADLINE PARAMETER View Objects
-        //////////////////////////////////////////////
-
-
-        //Initialize EditText
-        deadlineValueEditText = (EditText) findViewById(R.id.param_deadline_value);
-
-
-        ArrayAdapter<CharSequence> deadlineAdapter = ArrayAdapter.createFromResource(this,
-                R.array.deadline_units, android.R.layout.simple_spinner_item);
-        deadlineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        deadlineSpinner = (Spinner) findViewById(R.id.param_deadline_spinner);
-        deadlineSpinner.setAdapter(deadlineAdapter);
-
-        // Get the listener for the EditText
-        deadlineListener = deadlineValueEditText.getKeyListener();
-
-
-        //////////////////////////////////////////////
-        // Initialize PRIORITY PARAMETER View Objects
-        //////////////////////////////////////////////
-
-        //Initialize the TextView that displays the Priority value
-        priorityTextView = (TextView) findViewById(R.id.param_priority);
-
-        //Initialize the SeekBar used for changing the priority value
-        prioritySeekBar = (SeekBar) findViewById(R.id.param_priority_seekbar);
-        prioritySeekBar.setOnSeekBarChangeListener(this);
-
-
-        ////////////////////////////////////////////////
-        // Initialize MONEY COST PARAMETER View Objects
-        ////////////////////////////////////////////////
-
-        moneycostEditText = (EditText) findViewById(R.id.param_moneycost);
-
-        // Get the listener for the EditText
-        moneycostListener = moneycostEditText.getKeyListener();
-
-
-        //////////////////////////////////////////////
-        // Initialize TIME COST PARAMETER View Objects
-        //////////////////////////////////////////////
-
-        //Split the time cost into its value and units
-        String timecostString = currentItem.getTimeCost();
-        String timecostSplit[] = timecostString.split(" ");
-        String timecostValue = timecostSplit[0];
-        String timecostUnit = timecostSplit[1];
-
-
-        //Initialize the time cost's EditText
-        timecostValueEditText = (EditText) findViewById(R.id.param_timecost_value);
-
-        //Initialize Spinners
-        ArrayAdapter<CharSequence> timeCostAdapter = ArrayAdapter.createFromResource(this,
-                R.array.timecost_units, android.R.layout.simple_spinner_item);
-        timeCostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        timecostSpinner = (Spinner)findViewById(R.id.param_timecost_spinner);
-        timecostSpinner.setAdapter(timeCostAdapter);
-
-
-        // Get the listener for the EditText
-        timecostListener = timecostValueEditText.getKeyListener();
-
-        /////////////////////////////////////////////////////
-        // Initialize TRAVEL DISTANCE PARAMETER View Objects
-        /////////////////////////////////////////////////////
-
-        //Split the travel distance into its value and its unit
-        String traveldistanceString = currentItem.getTravelDistance();
-        String traveldistanceSplit[] = traveldistanceString.split(" ");
-        String traveldistanceValue = traveldistanceSplit[0];
-        String traveldistanceUnit = traveldistanceSplit[1];
-
-
-        //Initialize EditText
-        traveldistanceValueEditText = (EditText) findViewById(R.id.param_traveldistance_value);
-
-        //Initialize Spinners
-        ArrayAdapter<CharSequence> travelDistanceAdapter = ArrayAdapter.createFromResource(this,
-                R.array.traveldistance_units, android.R.layout.simple_spinner_item);
-        travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        traveldistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
-        traveldistanceSpinner.setAdapter(travelDistanceAdapter);
-
-        // Get the listener for the EditText
-        traveldistanceListener = traveldistanceValueEditText.getKeyListener();
-
-        refreshItemData(currentItem);
-
+        
+        // Initialize the editing UI
+        initItemTextEditing();
+        initDeadlineEditing();
+        initPriorityEditing();
+        initCostEditing();
+        initDurationEditing();
+        initTravelDistanceEditing();
     }
 
 
@@ -190,24 +100,25 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
                 /* When the user is finished editing, the app should take them back to
                  * ViewItemActivity
                  */
-
+    
+                String itemText = itemTextEditText.getText().toString();
+                currentItem.setItemText(itemText);
                 String deadlineValue = deadlineValueEditText.getText().toString();
                 String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
                 currentItem.setDeadline(deadlineValue, deadlineUnit);
                 currentItem.setPriority(prioritySeekBar.getProgress());
-                currentItem.setMoneyCost((moneycostEditText.getText()).toString());
-                String timecostValue = timecostValueEditText.getText().toString();
-                String timecostUnit = timecostSpinner.getSelectedItem().toString();
-                currentItem.setTimeCost(timecostValue, timecostUnit);
-                String traveldistanceValue = traveldistanceValueEditText.getText().toString();
-                String traveldistanceUnit = traveldistanceSpinner.getSelectedItem().toString();
-                currentItem.setTravelDistance(traveldistanceValue, traveldistanceUnit);
+                currentItem.setCost((costEditText.getText()).toString());
+                String durationValue = durationValueEditText.getText().toString();
+                String durationUnit = durationSpinner.getSelectedItem().toString();
+                currentItem.setDuration(durationValue, durationUnit);
+                String travelDistanceValue = travelDistanceValueEditText.getText().toString();
+                String travelDistanceUnit = travelDistanceSpinner.getSelectedItem().toString();
+                currentItem.setTravelDistance(travelDistanceValue, travelDistanceUnit);
 
                 // Serialize the new item to JSON
                 String serializedItem = currentItem.serialize();
 
                 // Store the serialized item in the intent
-                Intent editItem = getIntent();
                 editItem.putExtra("item", serializedItem);
                 setResult(RESULT_OK, editItem);
                 finish();
@@ -215,17 +126,14 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
 
             // "Delete" button
             case R.id.menu_item_discard:
-                viewItem.putExtra("button clicked", "Delete");
-                setResult(RESULT_OK, viewItem);
+                editItem.putExtra("item", "");
+                setResult(RESULT_OK, editItem);
                 finish();
-                break;
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 
     /*
@@ -251,18 +159,16 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
      */
     @Override
     public Intent getSupportParentActivityIntent() {
-        viewItem.putExtra("button clicked", "Back");
 
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
 
         // Store the serialized item in the intent
-        viewItem.putExtra("item", serializedItem);
-        viewItem.putExtra("item position", position);
-        setResult(RESULT_OK, viewItem);
-        this.finish();
+        editItem.putExtra("item", serializedItem);
+        setResult(RESULT_OK, editItem);
+        finish();
 
-        return viewItem;
+        return editItem;
     }
 
     /*
@@ -271,16 +177,14 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
      */
     @Override
     public void onBackPressed() {
-        viewItem.putExtra("button clicked", "Back");
 
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
 
         // Store the serialized item in the intent
-        viewItem.putExtra("item", serializedItem);
-        viewItem.putExtra("item position", position);
-        setResult(RESULT_OK, viewItem);
-        this.finish();
+        editItem.putExtra("item", serializedItem);
+        setResult(RESULT_OK, editItem);
+        finish();
     }
 
     /*
@@ -296,151 +200,125 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
 
     }
 
+    /////////////////////////////////////////////////////////////
+    // Helper functions for initializing the parameter viewing
+    ////////////////////////////////////////////////////////////
+    
+    private void initItemTextEditing() {
+        
+        // Initialize the TextView that displays the item text
+        itemTextEditText = (EditText) findViewById(R.id.param_itemtext);
+        itemTextEditText.setText( currentItem.getItemText() );
 
-    /*
-     * Returns the index of the array of deadline units that corresponds with the input unit
-     * for the deadline parameter.  This is the same array used by the deadline Spinner.
-     * The input String must be only the units of the parameter, such as "week(s)" or "month(s)"
-     */
-    public int getDeadlineSpinnerIndex(String deadlineUnit){
-        switch(deadlineUnit) {
-            case "day(s)":
-                return 0;
-            case "week(s)":
-                return 1;
-            case "month(s)":
-                return 2;
-            case "year(s)":
-                return 3;
-            default:
-                return 0;
-        }
+        // Get the listener for the EditText
+        itemTextListener = itemTextEditText.getKeyListener();
     }
+    
+    private void initDeadlineEditing() {
 
-    /*
-     * Returns the index of the array of travel distance units that corresponds with the input unit
-     * for the travel distance parameter.  This is the same array used by the travel distance Spinner.
-     * The input String must be only the units of the parameter, such as "miles(s)"
-     */
-    public int getTraveldistanceSpinnerIndex(String traveldistanceUnit){
-        switch(traveldistanceUnit) {
-            case "mile(s)":
-                return 0;
-            case "kilometer(s)":
-                return 1;
-            default:
-                return 0;
-        }
-    }
-
-
-    /*
-     * Returns the index of the array of time cost units that corresponds with the input unit
-     * for the time cost parameter.  This is the same array used by the time cost Spinner.
-     * The input String must be only the units of the parameter, such as "miles(s)"
-     */
-    public int getTimecostSpinnerIndex(String timecostUnit){
-        switch(timecostUnit) {
-            case "minute(s)":
-                return 0;
-            case "hour(s)":
-                return 1;
-            case "day(s)":
-                return 2;
-            case "week(s)":
-                return 3;
-            case "month(s)":
-                return 4;
-            case "year(s)":
-                return 5;
-            default:
-                return 0;
-        }
-    }
-
-    private void refreshItemData(ItemModel item){
-
-        // Initialize the Item Name textView and set its text
-        itemTextView.setText(item.getItemText());
-
-        //////////////////////////////////////////////
-        // Initialize DEADLINE PARAMETER View Objects
-        //////////////////////////////////////////////
-
-        //Split the deadline into its value and its unit
-        String deadlineString = item.getDeadline();
-        String deadlineSplit[] = deadlineString.split(" ");
+        // Split the deadline into its value and its unit
+        String deadlineString = currentItem.getDeadline();
+        String[] deadlineSplit = deadlineString.split(" ");
         String deadlineValue = deadlineSplit[0];
         String deadlineUnit = deadlineSplit[1];
-
-        //Initialize EditText
+        
+        // Setup displaying/editing for value
+        deadlineValueEditText = (EditText) findViewById(R.id.param_deadline_value);
         deadlineValueEditText.setText(deadlineValue);
-
-        //Initialize spinner
-        int spinnerVal = getDeadlineSpinnerIndex(deadlineUnit);
-
+        
+        // Setup displaying/editing for unit
+        ArrayAdapter<CharSequence> deadlineAdapter = ArrayAdapter.createFromResource(this,
+                R.array.deadline_units, android.R.layout.simple_spinner_item);
+        deadlineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        deadlineSpinner = (Spinner) findViewById(R.id.param_deadline_spinner);
+        deadlineSpinner.setAdapter(deadlineAdapter);
+        String[] units = res.getStringArray(R.array.deadline_units);
+        int spinnerVal = Arrays.asList(units).indexOf(deadlineUnit);
         deadlineSpinner.setSelection(spinnerVal);
+        
+        // Get the listener for the EditText
+        deadlineListener = deadlineValueEditText.getKeyListener();
+    }
 
+    private void initPriorityEditing() {
 
-
-        //////////////////////////////////////////////
-        // Initialize PRIORITY PARAMETER View Objects
-        //////////////////////////////////////////////
-
-        //Initialize the TextView that displays the Priority value
-        if (item.getPriority() != -1) {
-            priorityTextView.setText(String.valueOf(item.getPriority()));
+        // Initialize the TextView that displays the Priority value
+        priorityTextView = (TextView) findViewById(R.id.param_priority);
+        if (currentItem.getPriority() != -1) {
+            priorityTextView.setText(String.valueOf(currentItem.getPriority()));
         }
 
         //Initialize the SeekBar used for changing the priority value
-        if (item.getPriority() != - 1) {
-            prioritySeekBar.setProgress(item.getPriority());
+        prioritySeekBar = (SeekBar) findViewById(R.id.param_priority_seekbar);
+        prioritySeekBar.setOnSeekBarChangeListener(this);
+        if (currentItem.getPriority() != - 1) {
+            prioritySeekBar.setProgress( currentItem.getPriority() );
+        }
+    }
+    
+    private void initCostEditing() {
+        
+        // Initialize the TextView that displays the cost
+        costEditText = (EditText) findViewById(R.id.param_cost);
+        if(currentItem.getCost() != -1) {
+            costEditText.setText(String.valueOf(currentItem.getCost()));
         }
 
-        ////////////////////////////////////////////////
-        // Initialize MONEY COST PARAMETER View Objects
-        ////////////////////////////////////////////////
+        // Get the listener for the EditText
+        costListener = costEditText.getKeyListener();
+    }
+    
+    private void initDurationEditing() {
 
-        if(item.getMoneyCost() != -1) {
-            moneycostEditText.setText(String.valueOf(item.getMoneyCost()));
-        }
+        //Split the duration into its value and units
+        String durationString = currentItem.getDuration();
+        String[] durationSplit = durationString.split(" ");
+        String durationValue = durationSplit[0];
+        String durationUnit = durationSplit[1];
+
+        // Setup displaying/editing for value
+        durationValueEditText = (EditText) findViewById(R.id.param_duration_value);
+        durationValueEditText.setText(durationValue);
+
+        // Setup displaying/editing for unit
+        ArrayAdapter<CharSequence> durationAdapter = ArrayAdapter.createFromResource(this,
+                R.array.duration_units, android.R.layout.simple_spinner_item);
+        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        durationSpinner = (Spinner)findViewById(R.id.param_duration_spinner);
+        durationSpinner.setAdapter(durationAdapter);
+        String[] units = res.getStringArray(R.array.duration_units);
+        int spinnerVal = Arrays.asList(units).indexOf(durationUnit);
+        durationSpinner.setSelection(spinnerVal);
 
 
-        //////////////////////////////////////////////
-        // Initialize TIME COST PARAMETER View Objects
-        //////////////////////////////////////////////
-
-        //Split the time cost into its value and units
-        String timecostString = item.getTimeCost();
-        String timecostSplit[] = timecostString.split(" ");
-        String timecostValue = timecostSplit[0];
-        String timecostUnit = timecostSplit[1];
-
-        spinnerVal = getTimecostSpinnerIndex(timecostUnit);
-
-        //Initialize the time cost's EditText
-        timecostValueEditText.setText(timecostValue);
-
-        //Initialize Spinners
-        timecostSpinner.setSelection(spinnerVal);
-
-        /////////////////////////////////////////////////////
-        // Initialize TRAVEL DISTANCE PARAMETER View Objects
-        /////////////////////////////////////////////////////
+        // Get the listener for the EditText
+        durationListener = durationValueEditText.getKeyListener();
+    }
+    
+    private void initTravelDistanceEditing() {
 
         //Split the travel distance into its value and its unit
-        String traveldistanceString = item.getTravelDistance();
-        String traveldistanceSplit[] = traveldistanceString.split(" ");
-        String traveldistanceValue = traveldistanceSplit[0];
-        String traveldistanceUnit = traveldistanceSplit[1];
+        String travelDistanceString = currentItem.getTravelDistance();
+        String[] travelDistanceSplit = travelDistanceString.split(" ");
+        String travelDistanceValue = travelDistanceSplit[0];
+        String travelDistanceUnit = travelDistanceSplit[1];
 
-        spinnerVal = getTraveldistanceSpinnerIndex(traveldistanceUnit);
+        // Setup displaying/editing for value
+        travelDistanceValueEditText = (EditText) findViewById(R.id.param_traveldistance_value);
+        travelDistanceValueEditText.setText(travelDistanceValue);
 
-        //Initialize EditText
-        traveldistanceValueEditText.setText(traveldistanceValue);
+        // Setup displaying/editing for unit
+        ArrayAdapter<CharSequence> travelDistanceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.traveldistance_units, android.R.layout.simple_spinner_item);
+        travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        travelDistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
+        travelDistanceSpinner.setAdapter(travelDistanceAdapter);
+        String[] units = res.getStringArray(R.array.traveldistance_units);
+        int spinnerVal = Arrays.asList(units).indexOf(travelDistanceUnit);
+        travelDistanceSpinner.setSelection(spinnerVal);
 
-        //Initialize Spinners
-        traveldistanceSpinner.setSelection(spinnerVal);
+        // Get the listener for the EditText
+        travelDistanceListener = travelDistanceValueEditText.getKeyListener();
     }
 
 }

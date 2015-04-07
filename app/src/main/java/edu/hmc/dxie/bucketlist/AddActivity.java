@@ -30,12 +30,12 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         deadlineSpinner.setAdapter(deadlineAdapter);
 
 
-        // Initialize the Time Cost spinner with its units
-        Spinner timeCostSpinner = (Spinner) findViewById(R.id.add_spinner_timecost);
-        ArrayAdapter<CharSequence> timeCostAdapter = ArrayAdapter.createFromResource(this,
-                R.array.timecost_units, android.R.layout.simple_spinner_item);
-        timeCostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timeCostSpinner.setAdapter(timeCostAdapter);
+        // Initialize the Duration spinner with its units
+        Spinner durationSpinner = (Spinner) findViewById(R.id.add_spinner_duration);
+        ArrayAdapter<CharSequence> durationAdapter = ArrayAdapter.createFromResource(this,
+                R.array.duration_units, android.R.layout.simple_spinner_item);
+        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        durationSpinner.setAdapter(durationAdapter);
 
         // Initialize the Travel Distance spinner with its units
         Spinner travelDistanceSpinner = (Spinner) findViewById(R.id.add_spinner_traveldistance);
@@ -105,9 +105,9 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             EditText deadlineEditText = (EditText) findViewById(R.id.add_edittext_deadline);
             Spinner  deadlineSpinner = (Spinner) findViewById(R.id.add_spinner_deadline);
             SeekBar prioritySeekBar = (SeekBar) findViewById(R.id.add_seekbar_priority);
-            EditText moneyCostEditText = (EditText) findViewById(R.id.add_edittext_moneycost);
-            EditText timeCostEditText = (EditText) findViewById(R.id.add_edittext_timecost);
-            Spinner timeCostSpinner = (Spinner) findViewById(R.id.add_spinner_timecost);
+            EditText costEditText = (EditText) findViewById(R.id.add_edittext_cost);
+            EditText durationEditText = (EditText) findViewById(R.id.add_edittext_duration);
+            Spinner durationSpinner = (Spinner) findViewById(R.id.add_spinner_duration);
             EditText travelDistanceEditText = (EditText) findViewById(R.id.add_edittext_traveldistance);
             Spinner travelDistanceSpinner = (Spinner) findViewById(R.id.add_spinner_traveldistance);
 
@@ -115,9 +115,9 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             String deadlineNum = deadlineEditText.getText().toString();
             String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
             int priority = prioritySeekBar.getProgress();
-            String moneyCost = moneyCostEditText.getText().toString();
-            String timeCost = timeCostEditText.getText().toString();
-            String timeCostUnit = timeCostSpinner.getSelectedItem().toString();
+            String cost = costEditText.getText().toString();
+            String duration = durationEditText.getText().toString();
+            String durationUnit = durationSpinner.getSelectedItem().toString();
             String travelDistance = travelDistanceEditText.getText().toString();
             String travelDistanceUnit = travelDistanceSpinner.getSelectedItem().toString();
 
@@ -125,8 +125,8 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             newItem.setItemText(itemText);
             newItem.setDeadline(deadlineNum, deadlineUnit);
             newItem.setPriority(priority);
-            newItem.setMoneyCost(moneyCost);
-            newItem.setTimeCost(timeCost, timeCostUnit);
+            newItem.setCost(cost);
+            newItem.setDuration(duration, durationUnit);
             newItem.setTravelDistance(travelDistance, travelDistanceUnit);
 
             // Serialize the new item to JSON

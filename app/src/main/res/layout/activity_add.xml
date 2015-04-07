@@ -212,7 +212,7 @@
                     android:layout_marginBottom="@dimen/input_divider_padding"/>
 
                 <EditText
-                    android:id="@+id/add_edittext_moneycost"
+                    android:id="@+id/add_edittext_cost"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -252,7 +252,7 @@
                 android:layout_below="@+id/add_timecost_title">
 
                 <EditText
-                    android:id="@+id/add_edittext_timecost"
+                    android:id="@+id/add_edittext_duration"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -261,7 +261,7 @@
                     android:layout_marginBottom="@dimen/input_divider_padding"/>
 
                 <Spinner
-                    android:id="@+id/add_spinner_timecost"
+                    android:id="@+id/add_spinner_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

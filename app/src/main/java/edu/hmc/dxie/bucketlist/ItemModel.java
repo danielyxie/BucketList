@@ -10,9 +10,9 @@ public class ItemModel {
     private String itemText;
     private boolean completed;
     private String deadline;
-    private double moneyCost;
+    private double cost;
     private int priority;
-    private String timeCost;
+    private String duration;
     private String travelDistance;
 
     // Default initializes all values. To set them use available mutator methods.
@@ -20,9 +20,9 @@ public class ItemModel {
         this.itemText = "";
         this.completed = false;
         this.deadline = "";
-        this.moneyCost = -1;
+        this.cost = -1;
         this.priority = -1;
-        this.timeCost = "";
+        this.duration = "";
         this.travelDistance = "";
     }
 
@@ -33,9 +33,9 @@ public class ItemModel {
         this.itemText = Integer.toString(i);
         this.completed = false;
         this.deadline = Integer.toString(i) + " day(s)";
-        this.moneyCost = i;
+        this.cost = i;
         this.priority = i;
-        this.timeCost = Integer.toString(i) + " minute(s)";
+        this.duration = Integer.toString(i) + " minute(s)";
         this.travelDistance = Integer.toString(i) + " mile(s)";
     }
 
@@ -46,9 +46,9 @@ public class ItemModel {
         this.itemText = name;
         this.completed = false;
         this.deadline = "";
-        this.moneyCost = -1;
+        this.cost = -1;
         this.priority = -1;
-        this.timeCost = "";
+        this.duration = "";
         this.travelDistance = "";
     }
 
@@ -69,16 +69,16 @@ public class ItemModel {
         return this.deadline;
     }
 
-    public double getMoneyCost() {
-        return this.moneyCost;
+    public double getCost() {
+        return this.cost;
     }
 
     public int getPriority() {
         return this.priority;
     }
 
-    public String getTimeCost() {
-        return this.timeCost;
+    public String getDuration() {
+        return this.duration;
     }
 
     public String getTravelDistance() {
@@ -118,7 +118,7 @@ public class ItemModel {
     //convert duration to minutes, and cast it as a double
     //TO-DO: Need some case for handling int overflow
     public double getDurationForSort(){
-        String split[] = this.timeCost.split(" ");
+        String split[] = this.duration.split(" ");
         double durationValue = Double.parseDouble(split[0]);
         String durationUnit = split[1];
 
@@ -163,22 +163,18 @@ public class ItemModel {
     public void setItemText(String itemText) {
         this.itemText = itemText;
     }
-
-    public void complete() {
-        this.completed = true;
-    }
-
-    public void uncomplete() {
-        this.completed = false;
+    
+    public void toggleCompleted() {
+        this.completed = !this.completed;
     }
 
     public void setDeadline(String number, String unit) {
         this.deadline = number + " " + unit;
     }
 
-    public void setMoneyCost(String moneyCost) {
-        if (!moneyCost.isEmpty()) {
-            this.moneyCost = Double.parseDouble(moneyCost);
+    public void setCost(String cost) {
+        if (!cost.isEmpty()) {
+            this.cost = Double.parseDouble(cost);
         }
     }
 
@@ -186,12 +182,12 @@ public class ItemModel {
         this.priority = priority;
     }
 
-    public void setTimeCost(String timeCost, String unit) {
-        this.timeCost = timeCost + " " + unit;
+    public void setDuration(String duration, String unit) {
+        this.duration = duration + " " + unit;
     }
 
-    public void setTimeCost(String timeCost) {
-        this.timeCost = timeCost;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public void setTravelDistance(String travelDistance, String unit) {
