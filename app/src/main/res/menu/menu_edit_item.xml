@@ -4,8 +4,13 @@
 
     <!-- Finish Editing Button -->
     <item
-        android:id="@+id/menu_item_finis_edit"
+        android:id="@+id/menu_item_finish_edit"
         android:title="FinishEdit"
         android:icon="@drawable/ic_action_accept"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_item_discard"
+        android:title="Discard"
+        android:icon="@drawable/ic_action_discard"
         app:showAsAction="always" />
 </menu>

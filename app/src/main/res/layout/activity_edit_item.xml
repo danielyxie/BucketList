@@ -95,12 +95,13 @@
                     android:gravity="center_horizontal"
                     android:layout_below="@+id/param_deadline_title"/>
 
-               <Spinner
-                    android:id="@+id/param_deadline_viewspinner"
+                <Spinner
+                    android:id="@+id/param_deadline_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/light_brown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
+
             </LinearLayout>
         </RelativeLayout>
 
@@ -126,14 +127,14 @@
                 android:layout_marginLeft="15dp"/>
 
             <TextView
-            android:id="@+id/param_priority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:layout_below="@+id/param_priority_title"
-            android:layout_marginLeft="15dp"/>
+                android:id="@+id/param_priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:layout_below="@+id/param_priority_title"
+                android:layout_marginLeft="15dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -261,7 +262,7 @@
                     android:layout_below="@+id/param_timecost_title"/>
 
                 <Spinner
-                    android:id="@+id/param_timecost_viewspinner"
+                    android:id="@+id/param_timecost_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/param_timecost_value"/>
@@ -311,10 +312,11 @@
                     android:layout_below="@+id/param_traveldistance_title"/>
 
                 <Spinner
-                    android:id="@+id/param_traveldistance_viewspinner"
+                    android:id="@+id/param_traveldistance_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/param_traveldistance_value"/>
+
             </LinearLayout>
         </RelativeLayout>
 
