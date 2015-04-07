@@ -123,7 +123,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
 
             // "Delete" button
             case R.id.menu_item_discard:
-                editItem.putExtra("button clicked", "Delete");
+                editItem.putExtra("item", "");
                 setResult(RESULT_OK, editItem);
                 finish();
                 return true;
@@ -156,7 +156,6 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
      */
     @Override
     public Intent getSupportParentActivityIntent() {
-        editItem.putExtra("button clicked", "Back");
 
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
@@ -175,7 +174,6 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
      */
     @Override
     public void onBackPressed() {
-        editItem.putExtra("button clicked", "Back");
 
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();

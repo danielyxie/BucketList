@@ -1,5 +1,6 @@
 package edu.hmc.dxie.bucketlist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -26,11 +27,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     TextView traveldistanceTextView;
 
     Button completeButton;
-
-
-    public enum RequestCode{
-        EDIT_ITEM
-    }
 
 
     @Override
@@ -100,10 +96,10 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
             // "Delete" button
             case R.id.menu_item_discard:
-                viewItem.putExtra("button clicked", "Delete");
+                viewItem.putExtra("item", "");
                 setResult(RESULT_OK, viewItem);
                 finish();
-                break;
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -121,7 +117,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             
             // "Complete" button
             case R.id.button_complete:
-                viewItem.putExtra("button clicked", completeButton.getText());
+                currentItem.toggleCompleted();
+                String serializedItem = currentItem.serialize();
+                viewItem.putExtra("item", serializedItem);
                 setResult(RESULT_OK, viewItem);
                 finish();
                 break;
@@ -139,7 +137,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
      */
     @Override
     public Intent getSupportParentActivityIntent() {
-        viewItem.putExtra("button clicked", "Back");
 
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
@@ -147,7 +144,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         // Store the serialized item in the intent
         viewItem.putExtra("item", serializedItem);
         setResult(RESULT_OK, viewItem);
-        this.finish();
+        finish();
 
         return viewItem;
     }
@@ -158,7 +155,6 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
      */
     @Override
     public void onBackPressed() {
-        viewItem.putExtra("button clicked", "Back");
 
         // Serialize the new item to JSON
         String serializedItem = currentItem.serialize();
@@ -176,9 +172,33 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        String serializedItem = data.getStringExtra("item");
-        currentItem = ItemModel.deserialize(serializedItem);
-        refreshItemData();
+        // If the request was to add an item
+        if (requestCode == RequestCode.EDIT_ITEM.ordinal()) {
+
+            // If the request went well
+            if (resultCode == Activity.RESULT_OK) {
+
+                // Recover the edited item
+                String serializedItem = data.getStringExtra("item");
+                viewItem.putExtra("item", serializedItem);
+                
+                // Check whether the item was deleted
+                if (serializedItem.isEmpty()) {
+                    
+                    // If so, return to ListActivity
+                    setResult(RESULT_OK, viewItem);
+                    finish();
+                } else {
+                    
+                    // Otherwise, recover the item and
+                    currentItem = ItemModel.deserialize(serializedItem);
+
+                    // Update the UI to reflect the updated data
+                    refreshItemData();
+                }
+            }
+        }
+        
     }
 
     /*

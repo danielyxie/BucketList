@@ -38,10 +38,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     SearchView searchView;
 
 
-    public enum RequestCode{
-        ADD_ITEM, VIEW_ITEM
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,40 +195,21 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             if (resultCode == Activity.RESULT_OK) {
 
                 // Get the viewed item's position; default to 0 (should never happen)
-                int position = data.getIntExtra("item position", 0);
+                int position = data.getIntExtra("item position", -1);
 
                 // Get the serialized item
                 String serializedItem = data.getStringExtra("item");
-                ItemModel viewedItem = ItemModel.deserialize(serializedItem);
-                bucketModel.setItem(position, viewedItem);
 
-                // Get the button clicked
-                String buttonClicked = data.getStringExtra("button clicked");
-
-                switch (buttonClicked) {
-                    case "Complete":
-
-                        // Mark the item as completed
-                        bucketModel.getItem(position).complete();
-                        break;
-
-                    case "Uncomplete":
-
-                        // Mark the item as not completed
-                        bucketModel.getItem(position).uncomplete();
-                        break;
-
-                    case "Edit":
-                        break;
-
-                    case "Delete":
-                        
-                        // Delete the item
-                        bucketModel.removeItem(position);
-                        break;
-
-                    default:
-                        break;
+                // Check whether the item was deleted
+                if (serializedItem.isEmpty()) {
+                    
+                    // If so, delete it
+                    bucketModel.removeItem(position);
+                } else {
+                    
+                    // Otherwise, update the item's parameters
+                    ItemModel viewedItem = ItemModel.deserialize(serializedItem);
+                    bucketModel.setItem(position, viewedItem);
                 }
 
                 // Update the bucketView

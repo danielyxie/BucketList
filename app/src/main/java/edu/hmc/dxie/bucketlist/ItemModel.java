@@ -171,6 +171,10 @@ public class ItemModel {
     public void uncomplete() {
         this.completed = false;
     }
+    
+    public void toggleCompleted() {
+        this.completed = !this.completed;
+    }
 
     public void setDeadline(String number, String unit) {
         this.deadline = number + " " + unit;
