@@ -363,28 +363,28 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         ItemModel itemModelObject = new ItemModel();
 
-        Class itemModelClass = itemModelObject.getClass();
-        Method paramMethod = null;
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod;
 
         try {
             switch(param) {
                 case "Item Name":
-                    paramMethod = itemModelClass.getMethod("getItemText", null);
+                    paramMethod = itemModelClass.getMethod("getItemText");
                     break;
                 case "Deadline":
-                    paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+                    paramMethod = itemModelClass.getMethod("getDeadlineForSort");
                     break;
                 case "Priority":
-                    paramMethod = itemModelClass.getMethod("getPriorityForSort", null);
+                    paramMethod = itemModelClass.getMethod("getPriorityForSort");
                     break;
                 case "Cost":
-                    paramMethod = itemModelClass.getMethod("getMoneyCost", null);
+                    paramMethod = itemModelClass.getMethod("getMoneyCost");
                     break;
                 case "Duration":
-                    paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+                    paramMethod = itemModelClass.getMethod("getDurationForSort");
                     break;
                 case "Travel Distance":
-                    paramMethod = itemModelClass.getMethod("getTravelDistanceForSort", null);
+                    paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
                     break;
                 default:
                     return;
@@ -410,9 +410,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         if (length > 2) try {
             quickSortAscending(0, length - 1, paramMethod);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
@@ -435,11 +433,11 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         ItemModel itemModelObject = new ItemModel();
 
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method getItemTextMethod = null;
 
         try {
-            getItemTextMethod = itemModelClass.getMethod("getItemText", null);
+            getItemTextMethod = itemModelClass.getMethod("getItemText");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -450,7 +448,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         int pivotIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
         ItemModel pivotItem = bucketModel.getItem(pivotIndex);
-        Object pivotObj = paramMethod.invoke(pivotItem, null);
+        Object pivotObj = paramMethod.invoke(pivotItem);
         if (paramMethod.equals(getItemTextMethod)) {
             pivotString = (String)pivotObj;
         } else {
@@ -485,7 +483,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 while (iCompare < 0) {
                     i++;
                     i_item = bucketModel.getItem(i);
-                    i_obj = paramMethod.invoke(i_item, null);
+                    i_obj = paramMethod.invoke(i_item);
                     i_string = (String) i_obj;
                     iCompare = i_string.compareTo(pivotString);
                 }
@@ -494,7 +492,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 while (jCompare > 0) {
                     j--;
                     j_item = bucketModel.getItem(j);
-                    j_obj = paramMethod.invoke(j_item, null);
+                    j_obj = paramMethod.invoke(j_item);
                     j_string = (String) j_obj;
                     jCompare = j_string.compareTo(pivotString);
                 }
@@ -508,13 +506,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 while (i_value < pivot) {
                     i++;
                     i_item = bucketModel.getItem(i);
-                    i_obj = paramMethod.invoke(i_item, null);
+                    i_obj = paramMethod.invoke(i_item);
                     i_value = (double) i_obj;
                 }
                 while (j_value > pivot) {
                     j--;
                     j_item = bucketModel.getItem(j);
-                    j_obj = paramMethod.invoke(j_item, null);
+                    j_obj = paramMethod.invoke(j_item);
                     j_value = (double) j_obj;
                 }
                 if (i <= j) {
@@ -543,9 +541,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         if (length > 2) try {
             quickSortDescending(0, length - 1, paramMethod);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
@@ -568,11 +564,11 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         ItemModel itemModelObject = new ItemModel();
 
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method getItemTextMethod = null;
 
         try {
-            getItemTextMethod = itemModelClass.getMethod("getItemText", null);
+            getItemTextMethod = itemModelClass.getMethod("getItemText");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -583,7 +579,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         int pivotIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
         ItemModel pivotItem = bucketModel.getItem(pivotIndex);
-        Object pivotObj = paramMethod.invoke(pivotItem, null);
+        Object pivotObj = paramMethod.invoke(pivotItem);
         if (paramMethod.equals(getItemTextMethod)) {
             pivotString = (String)pivotObj;
         } else {
@@ -598,8 +594,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             i_item = bucketModel.getItem(i);
             j_item = bucketModel.getItem(j);
 
-            i_obj = paramMethod.invoke(i_item, null);
-            j_obj = paramMethod.invoke(j_item, null);
+            i_obj = paramMethod.invoke(i_item);
+            j_obj = paramMethod.invoke(j_item);
 
             if (paramMethod.equals(getItemTextMethod)) {
                 i_string = (String) i_obj;
@@ -620,7 +616,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 while (iCompare < 0) {
                     i++;
                     i_item = bucketModel.getItem(i);
-                    i_obj = paramMethod.invoke(i_item, null);
+                    i_obj = paramMethod.invoke(i_item);
                     i_string = (String) i_obj;
                     iCompare = i_string.compareTo(pivotString);
                 }
@@ -629,7 +625,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 while (jCompare > 0) {
                     j--;
                     j_item = bucketModel.getItem(j);
-                    j_obj = paramMethod.invoke(j_item, null);
+                    j_obj = paramMethod.invoke(j_item);
                     j_string = (String) j_obj;
                     jCompare = j_string.compareTo(pivotString);
                 }
@@ -643,13 +639,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 while (i_value > pivot) {
                     i++;
                     i_item = bucketModel.getItem(i);
-                    i_obj = paramMethod.invoke(i_item, null);
+                    i_obj = paramMethod.invoke(i_item);
                     i_value = (double) i_obj;
                 }
                 while (j_value < pivot) {
                     j--;
                     j_item = bucketModel.getItem(j);
-                    j_obj = paramMethod.invoke(j_item, null);
+                    j_obj = paramMethod.invoke(j_item);
                     j_value = (double) j_obj;
                 }
                 if (i <= j) {
