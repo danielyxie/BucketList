@@ -53,7 +53,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         String serializedItem = viewItem.getStringExtra("item");
         currentItem = ItemModel.deserialize(serializedItem);
 
-        refreshItemData(currentItem);
+        refreshItemData();
         
         // Initialize the Complete button
         completeButton = (Button) findViewById(R.id.button_complete);
@@ -178,32 +178,32 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
         String serializedItem = data.getStringExtra("item");
         currentItem = ItemModel.deserialize(serializedItem);
-        refreshItemData(currentItem);
+        refreshItemData();
     }
 
     /*
      * Refreshes the parameters of the item being displayed
      */
-    private void refreshItemData(ItemModel item){
-        itemTextView.setText( item.getItemText() );
-        deadlineTextView.setText( item.getDeadline() );
+    private void refreshItemData(){
+        itemTextView.setText( currentItem.getItemText() );
+        deadlineTextView.setText( currentItem.getDeadline() );
 
         //Initialize the TextView that displays the Priority value
-        if (item.getPriority() != -1) {
-            priorityTextView.setText(String.valueOf(item.getPriority()));
+        if (currentItem.getPriority() != -1) {
+            priorityTextView.setText(String.valueOf(currentItem.getPriority()));
         }
 
         //Initialize the SeekBar used for changing the priority value
-        if (item.getPriority() != - 1) {
-            prioritySeekBar.setProgress( item.getPriority() );
+        if (currentItem.getPriority() != - 1) {
+            prioritySeekBar.setProgress( currentItem.getPriority() );
         }
 
-        if(item.getMoneyCost() != -1) {
-            moneycostTextView.setText(String.valueOf(item.getMoneyCost()));
+        if(currentItem.getMoneyCost() != -1) {
+            moneycostTextView.setText(String.valueOf(currentItem.getMoneyCost()));
         }
 
-        timecostTextView.setText( item.getTimeCost() );
-        traveldistanceTextView.setText( item.getTravelDistance() );
+        timecostTextView.setText( currentItem.getTimeCost() );
+        traveldistanceTextView.setText( currentItem.getTravelDistance() );
     }
 
 }
