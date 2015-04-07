@@ -372,9 +372,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         if (length > 2) try {
             quickSort(0, length - 1, paramMethod);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
@@ -396,7 +394,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         // Calculate pivot number.  Here, the middle of the array will always be the pivot
         int pivotIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
         ItemModel pivotItem = bucketModel.getItem(pivotIndex);
-        Object pivotValue = paramMethod.invoke(pivotItem, null);
+        Object pivotValue = paramMethod.invoke(pivotItem);
         double pivot = (double)pivotValue;
 
 
@@ -406,8 +404,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             i_item = bucketModel.getItem(i);
             j_item = bucketModel.getItem(j);
 
-            i_obj = paramMethod.invoke(i_item, null);
-            j_obj = paramMethod.invoke(j_item, null);
+            i_obj = paramMethod.invoke(i_item);
+            j_obj = paramMethod.invoke(j_item);
 
             i_value = (double)i_obj;
             j_value = (double)j_obj;
@@ -422,13 +420,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             while (i_value < pivot) {
                 i++;
                 i_item = bucketModel.getItem(i);
-                i_obj = paramMethod.invoke(i_item, null);
+                i_obj = paramMethod.invoke(i_item);
                 i_value = (double)i_obj;
             }
             while (j_value > pivot) {
                 j--;
                 j_item = bucketModel.getItem(j);
-                j_obj = paramMethod.invoke(j_item, null);
+                j_obj = paramMethod.invoke(j_item);
                 j_value = (double)j_obj;
             }
             if (i <= j) {
