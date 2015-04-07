@@ -29,31 +29,31 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
 
     EditText itemTextEditText;
 
-    //Deadline layout View objects
+    // Deadline layout View objects
     EditText deadlineValueEditText;
     Spinner deadlineSpinner;
 
-    //Priority layout View objects
+    // Priority layout View objects
     TextView priorityTextView;
     SeekBar prioritySeekBar;
 
-    //Time cost layout View objects
-    EditText timecostValueEditText;
-    Spinner timecostSpinner;
+    // Duration layout View objects
+    EditText durationValueEditText;
+    Spinner durationSpinner;
 
-    //Money Cost layout View objects
-    EditText moneycostEditText;
+    // Cost layout View objects
+    EditText costEditText;
 
     //Travel Distance layout View objects
-    EditText traveldistanceValueEditText;
-    Spinner traveldistanceSpinner;
+    EditText travelDistanceValueEditText;
+    Spinner travelDistanceSpinner;
 
-    //Key listeners for every parameter
+    // Key listeners for every parameter
     KeyListener itemTextListener;
     KeyListener deadlineListener;
-    KeyListener moneycostListener;
-    KeyListener timecostListener;
-    KeyListener traveldistanceListener;
+    KeyListener costListener;
+    KeyListener durationListener;
+    KeyListener travelDistanceListener;
 
 
     @Override
@@ -71,9 +71,9 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         initItemTextEditing();
         initDeadlineEditing();
         initPriorityEditing();
-        initMoneycostEditing();
-        initTimecostEditing();
-        initTraveldistanceEditing();
+        initCostEditing();
+        initDurationEditing();
+        initTravelDistanceEditing();
     }
 
 
@@ -107,13 +107,13 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
                 String deadlineUnit = deadlineSpinner.getSelectedItem().toString();
                 currentItem.setDeadline(deadlineValue, deadlineUnit);
                 currentItem.setPriority(prioritySeekBar.getProgress());
-                currentItem.setMoneyCost((moneycostEditText.getText()).toString());
-                String timecostValue = timecostValueEditText.getText().toString();
-                String timecostUnit = timecostSpinner.getSelectedItem().toString();
-                currentItem.setTimeCost(timecostValue, timecostUnit);
-                String traveldistanceValue = traveldistanceValueEditText.getText().toString();
-                String traveldistanceUnit = traveldistanceSpinner.getSelectedItem().toString();
-                currentItem.setTravelDistance(traveldistanceValue, traveldistanceUnit);
+                currentItem.setCost((costEditText.getText()).toString());
+                String durationValue = durationValueEditText.getText().toString();
+                String durationUnit = durationSpinner.getSelectedItem().toString();
+                currentItem.setDuration(durationValue, durationUnit);
+                String travelDistanceValue = travelDistanceValueEditText.getText().toString();
+                String travelDistanceUnit = travelDistanceSpinner.getSelectedItem().toString();
+                currentItem.setTravelDistance(travelDistanceValue, travelDistanceUnit);
 
                 // Serialize the new item to JSON
                 String serializedItem = currentItem.serialize();
@@ -256,69 +256,69 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         }
     }
     
-    private void initMoneycostEditing() {
+    private void initCostEditing() {
         
         // Initialize the TextView that displays the cost
-        moneycostEditText = (EditText) findViewById(R.id.param_moneycost);
-        if(currentItem.getMoneyCost() != -1) {
-            moneycostEditText.setText(String.valueOf(currentItem.getMoneyCost()));
+        costEditText = (EditText) findViewById(R.id.param_cost);
+        if(currentItem.getCost() != -1) {
+            costEditText.setText(String.valueOf(currentItem.getCost()));
         }
 
         // Get the listener for the EditText
-        moneycostListener = moneycostEditText.getKeyListener();
+        costListener = costEditText.getKeyListener();
     }
     
-    private void initTimecostEditing() {
+    private void initDurationEditing() {
 
-        //Split the time cost into its value and units
-        String timecostString = currentItem.getTimeCost();
-        String[] timecostSplit = timecostString.split(" ");
-        String timecostValue = timecostSplit[0];
-        String timecostUnit = timecostSplit[1];
+        //Split the duration into its value and units
+        String durationString = currentItem.getDuration();
+        String[] durationSplit = durationString.split(" ");
+        String durationValue = durationSplit[0];
+        String durationUnit = durationSplit[1];
 
         // Setup displaying/editing for value
-        timecostValueEditText = (EditText) findViewById(R.id.param_timecost_value);
-        timecostValueEditText.setText(timecostValue);
+        durationValueEditText = (EditText) findViewById(R.id.param_duration_value);
+        durationValueEditText.setText(durationValue);
 
         // Setup displaying/editing for unit
-        ArrayAdapter<CharSequence> timeCostAdapter = ArrayAdapter.createFromResource(this,
-                R.array.timecost_units, android.R.layout.simple_spinner_item);
-        timeCostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timecostSpinner = (Spinner)findViewById(R.id.param_timecost_spinner);
-        timecostSpinner.setAdapter(timeCostAdapter);
-        String[] units = res.getStringArray(R.array.timecost_units);
-        int spinnerVal = Arrays.asList(units).indexOf(timecostUnit);
-        timecostSpinner.setSelection(spinnerVal);
+        ArrayAdapter<CharSequence> durationAdapter = ArrayAdapter.createFromResource(this,
+                R.array.duration_units, android.R.layout.simple_spinner_item);
+        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        durationSpinner = (Spinner)findViewById(R.id.param_duration_spinner);
+        durationSpinner.setAdapter(durationAdapter);
+        String[] units = res.getStringArray(R.array.duration_units);
+        int spinnerVal = Arrays.asList(units).indexOf(durationUnit);
+        durationSpinner.setSelection(spinnerVal);
 
 
         // Get the listener for the EditText
-        timecostListener = timecostValueEditText.getKeyListener();
+        durationListener = durationValueEditText.getKeyListener();
     }
     
-    private void initTraveldistanceEditing() {
+    private void initTravelDistanceEditing() {
 
         //Split the travel distance into its value and its unit
-        String traveldistanceString = currentItem.getTravelDistance();
-        String traveldistanceSplit[] = traveldistanceString.split(" ");
-        String traveldistanceValue = traveldistanceSplit[0];
-        String traveldistanceUnit = traveldistanceSplit[1];
+        String travelDistanceString = currentItem.getTravelDistance();
+        String[] travelDistanceSplit = travelDistanceString.split(" ");
+        String travelDistanceValue = travelDistanceSplit[0];
+        String travelDistanceUnit = travelDistanceSplit[1];
 
         // Setup displaying/editing for value
-        traveldistanceValueEditText = (EditText) findViewById(R.id.param_traveldistance_value);
-        traveldistanceValueEditText.setText(traveldistanceValue);
+        travelDistanceValueEditText = (EditText) findViewById(R.id.param_traveldistance_value);
+        travelDistanceValueEditText.setText(travelDistanceValue);
 
         // Setup displaying/editing for unit
         ArrayAdapter<CharSequence> travelDistanceAdapter = ArrayAdapter.createFromResource(this,
                 R.array.traveldistance_units, android.R.layout.simple_spinner_item);
         travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        traveldistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
-        traveldistanceSpinner.setAdapter(travelDistanceAdapter);
+        travelDistanceSpinner = (Spinner)findViewById(R.id.param_traveldistance_spinner);
+        travelDistanceSpinner.setAdapter(travelDistanceAdapter);
         String[] units = res.getStringArray(R.array.traveldistance_units);
-        int spinnerVal = Arrays.asList(units).indexOf(traveldistanceUnit);
-        traveldistanceSpinner.setSelection(spinnerVal);
+        int spinnerVal = Arrays.asList(units).indexOf(travelDistanceUnit);
+        travelDistanceSpinner.setSelection(spinnerVal);
 
         // Get the listener for the EditText
-        traveldistanceListener = traveldistanceValueEditText.getKeyListener();
+        travelDistanceListener = travelDistanceValueEditText.getKeyListener();
     }
 
 }

@@ -190,7 +190,7 @@
                     android:layout_marginBottom="@dimen/input_divider_padding"/>
 
                 <TextView
-                    android:id="@+id/param_moneycost"
+                    android:id="@+id/param_cost"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -223,7 +223,7 @@
                 android:layout_marginLeft="15dp"/>
 
             <TextView
-                android:id="@+id/param_timecost_value"
+                android:id="@+id/param_duration_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"

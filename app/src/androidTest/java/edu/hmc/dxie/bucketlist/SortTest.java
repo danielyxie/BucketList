@@ -105,11 +105,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getPriorityForSort", null);
+            paramMethod = itemModelClass.getMethod("getPriorityForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -131,11 +131,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+            paramMethod = itemModelClass.getMethod("getDeadlineForSort");
             Log.w("bucket list", "Method found for basicsortdeadline");
         } catch (NoSuchMethodException e) {
             Log.w("bucket list", "Method not found in basicsortdeadline");
@@ -158,11 +158,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort", null);
+            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -183,11 +183,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+            paramMethod = itemModelClass.getMethod("getDurationForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -208,11 +208,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getMoneyCost", null);
+            paramMethod = itemModelClass.getMethod("getCost");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -235,11 +235,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(item5);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+            paramMethod = itemModelClass.getMethod("getDeadlineForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -262,11 +262,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(item4);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getPriorityForSort", null);
+            paramMethod = itemModelClass.getMethod("getPriorityForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -289,11 +289,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(item3);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort", null);
+            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -316,11 +316,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(item2);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+            paramMethod = itemModelClass.getMethod("getDurationForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -343,11 +343,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(item7);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getMoneyCost", null);
+            paramMethod = itemModelClass.getMethod("getCost");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -363,11 +363,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getPriorityForSort", null);
+            paramMethod = itemModelClass.getMethod("getPriorityForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -382,11 +382,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+            paramMethod = itemModelClass.getMethod("getDeadlineForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -401,11 +401,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort", null);
+            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -420,11 +420,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+            paramMethod = itemModelClass.getMethod("getDurationForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -439,11 +439,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getMoneyCost", null);
+            paramMethod = itemModelClass.getMethod("getCost");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -467,11 +467,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(new ItemModel("neg"));
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getItemText", null);
+            paramMethod = itemModelClass.getMethod("getItemText");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -496,11 +496,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(new ItemModel("bm"));
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getItemText", null);
+            paramMethod = itemModelClass.getMethod("getItemText");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -522,11 +522,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(new ItemModel(" **?>"));
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getItemText", null);
+            paramMethod = itemModelClass.getMethod("getItemText");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -558,11 +558,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(mock4);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+            paramMethod = itemModelClass.getMethod("getDeadlineForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -596,16 +596,16 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         ItemModel mock9 = new ItemModel("9");
         ItemModel mock10 = new ItemModel("10");
 
-        mock1.setTimeCost("200", "minute(s)");
-        mock2.setTimeCost("4", "hour(s)");
-        mock3.setTimeCost("1", "day(s)");
-        mock4.setTimeCost("25", "hour(s)");
-        mock5.setTimeCost("5", "day(s)");
-        mock6.setTimeCost("1", "week(s)");
-        mock7.setTimeCost("1", "month(s)");
-        mock8.setTimeCost("1", "year(s)");
-        mock9.setTimeCost("15", "month(s)");
-        mock10.setTimeCost("2", "year(s)");
+        mock1.setDuration("200", "minute(s)");
+        mock2.setDuration("4", "hour(s)");
+        mock3.setDuration("1", "day(s)");
+        mock4.setDuration("25", "hour(s)");
+        mock5.setDuration("5", "day(s)");
+        mock6.setDuration("1", "week(s)");
+        mock7.setDuration("1", "month(s)");
+        mock8.setDuration("1", "year(s)");
+        mock9.setDuration("15", "month(s)");
+        mock10.setDuration("2", "year(s)");
 
         mListActivity.bucketModel.addItem(mock3);
         mListActivity.bucketModel.addItem(mock2);
@@ -619,11 +619,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.addItem(mock6);
 
         ItemModel itemModelObject = new ItemModel();
-        Class itemModelClass = itemModelObject.getClass();
+        Class<?> itemModelClass = itemModelObject.getClass();
         Method paramMethod = null;
 
         try {
-            paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+            paramMethod = itemModelClass.getMethod("getDurationForSort");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -631,24 +631,24 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.sortBucketListAscending(paramMethod);
 
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(0).getTimeCost().equals("200 minute(s)"));
+                mListActivity.bucketModel.getItem(0).getDuration().equals("200 minute(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(1).getTimeCost().equals("4 hour(s)"));
+                mListActivity.bucketModel.getItem(1).getDuration().equals("4 hour(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(2).getTimeCost().equals("1 day(s)"));
+                mListActivity.bucketModel.getItem(2).getDuration().equals("1 day(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(3).getTimeCost().equals("25 hour(s)"));
+                mListActivity.bucketModel.getItem(3).getDuration().equals("25 hour(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(4).getTimeCost().equals("5 day(s)"));
+                mListActivity.bucketModel.getItem(4).getDuration().equals("5 day(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(5).getTimeCost().equals("1 week(s)"));
+                mListActivity.bucketModel.getItem(5).getDuration().equals("1 week(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(6).getTimeCost().equals("1 month(s)"));
+                mListActivity.bucketModel.getItem(6).getDuration().equals("1 month(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(7).getTimeCost().equals("1 year(s)"));
+                mListActivity.bucketModel.getItem(7).getDuration().equals("1 year(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(8).getTimeCost().equals("15 month(s)"));
+                mListActivity.bucketModel.getItem(8).getDuration().equals("15 month(s)"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(9).getTimeCost().equals("2 year(s)"));
+                mListActivity.bucketModel.getItem(9).getDuration().equals("2 year(s)"));
     }
 }

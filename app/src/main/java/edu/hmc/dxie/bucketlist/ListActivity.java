@@ -355,7 +355,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                     paramMethod = itemModelClass.getMethod("getPriorityForSort");
                     break;
                 case "Cost":
-                    paramMethod = itemModelClass.getMethod("getMoneyCost");
+                    paramMethod = itemModelClass.getMethod("getCost");
                     break;
                 case "Duration":
                     paramMethod = itemModelClass.getMethod("getDurationForSort");

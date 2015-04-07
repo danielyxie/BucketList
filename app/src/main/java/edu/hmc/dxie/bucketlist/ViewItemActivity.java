@@ -22,9 +22,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     TextView deadlineTextView;
     TextView priorityTextView;
     SeekBar prioritySeekBar;
-    TextView timecostTextView;
-    TextView moneycostTextView;
-    TextView traveldistanceTextView;
+    TextView durationTextView;
+    TextView costTextView;
+    TextView travelDistanceTextView;
 
     Button completeButton;
 
@@ -40,9 +40,9 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         priorityTextView = (TextView) findViewById(R.id.param_priority);
         prioritySeekBar = (SeekBar) findViewById(R.id.param_priority_seekbar);
         prioritySeekBar.setEnabled(false);
-        moneycostTextView = (TextView) findViewById(R.id.param_moneycost);
-        timecostTextView = (TextView) findViewById(R.id.param_timecost_value);
-        traveldistanceTextView = (TextView) findViewById(R.id.param_traveldistance_value);
+        costTextView = (TextView) findViewById(R.id.param_cost);
+        durationTextView = (TextView) findViewById(R.id.param_duration_value);
+        travelDistanceTextView = (TextView) findViewById(R.id.param_traveldistance_value);
 
         // Get the item to be viewed
         viewItem = getIntent();
@@ -218,12 +218,12 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             prioritySeekBar.setProgress( currentItem.getPriority() );
         }
 
-        if(currentItem.getMoneyCost() != -1) {
-            moneycostTextView.setText(String.valueOf(currentItem.getMoneyCost()));
+        if(currentItem.getCost() != -1) {
+            costTextView.setText(String.valueOf(currentItem.getCost()));
         }
 
-        timecostTextView.setText( currentItem.getTimeCost() );
-        traveldistanceTextView.setText( currentItem.getTravelDistance() );
+        durationTextView.setText(currentItem.getDuration());
+        travelDistanceTextView.setText(currentItem.getTravelDistance());
     }
 
 }

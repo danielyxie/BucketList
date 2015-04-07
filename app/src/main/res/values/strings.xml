@@ -19,7 +19,7 @@
         <item>month(s)</item>
         <item>year(s)</item>
     </string-array>
-    <string-array name="timecost_units">
+    <string-array name="duration_units">
         <item>minute(s)</item>
         <item>hour(s)</item>
         <item>day(s)</item>
