@@ -8,11 +8,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,9 +33,9 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     bucketlistArrayAdapter bucketArrayAdapter;
     SharedPreferences persistentData;
     Spinner sortSpinner;
+    ImageButton sortButton;
+    boolean sortAscending = true;    //Determines whether sorting by ascending or descending items
     SearchView searchView;
-
-
 
 
     public enum RequestCode{
@@ -89,7 +91,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         unaccomplishedToggle.setOnClickListener(this);
         accomplishedToggle.setOnClickListener(this);
 
-        //Initialize the spinner that is used as a menu
+        //Initialize the spinner that is used as a menu for sorting
         //This spinner will let users choose which parameter to sort by.
         sortSpinner = (Spinner) findViewById(R.id.sort_spinner);
         ArrayAdapter<CharSequence> sortSpinnerAdapter = ArrayAdapter.createFromResource(this,
@@ -97,6 +99,12 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         sortSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortSpinnerAdapter);
         sortSpinner.setOnItemSelectedListener(this);
+
+        //Initialize the ImageButton that lets users to choose whether to sort in
+        //ascending or descending order
+        sortButton = (ImageButton) findViewById(R.id.sort_button);
+
+        sortButton.setOnClickListener(this);
     }
 
     @Override
@@ -262,41 +270,10 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      */
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        String param = (String) sortSpinner.getSelectedItem();
+        sortBucketList();
 
-        ItemModel itemModelObject = new ItemModel();
-
-        Class<?> itemModelClass = itemModelObject.getClass();
-        Method paramMethod;
-
-        try {
-            switch(param) {
-                case "---":
-                    return;
-                case "Deadline":
-                    paramMethod = itemModelClass.getMethod("getDeadlineForSort");
-                    break;
-                case "Priority":
-                    paramMethod = itemModelClass.getMethod("getPriorityForSort");
-                    break;
-                case "Cost":
-                    paramMethod = itemModelClass.getMethod("getMoneyCost");
-                    break;
-                case "Duration":
-                    paramMethod = itemModelClass.getMethod("getDurationForSort");
-                    break;
-                case "Travel Distance":
-                    paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
-                    break;
-                default:
-                    return;
-            }
-            sortBucketList(paramMethod);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-
+        //Update the bucketview
+        this.bucketArrayAdapter.notifyDataSetChanged();
     }
 
 
@@ -342,6 +319,22 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 // Update the bucketView
                 bucketArrayAdapter.notifyDataSetChanged();
                 break;
+
+            //Sort ImageButton for choosing ascending or descending sorting order
+            case R.id.sort_button:
+                if (sortAscending) {
+                    int id = getResources().getIdentifier("edu.hmc.dxie.bucketlist:drawable/sort_down_arrow", null, null);
+                    sortButton.setImageResource(id);
+                    sortAscending = false;
+                } else {
+                    int id = getResources().getIdentifier("edu.hmc.dxie.bucketlist:drawable/sort_up_arrow", null, null);
+                    sortButton.setImageResource(id);
+                    sortAscending = true;
+                }
+
+                sortBucketList();
+                //Update the bucketview
+                this.bucketArrayAdapter.notifyDataSetChanged();
         }
     }
 
@@ -361,41 +354,108 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
     }
 
-
-    /*
-     * The method used to sort the Bucket List by parameters.  The "Sort Selection menu" will
-     * call this sorting function when a menu item is selected by the user.
+    /* Sort the Bucket List.  This function automatically calls
+     * helper functions to determine how to sort (ascending/descending,
+     * what parameters, etc.)
      */
-    public void sortBucketList(Method paramMethod) {
-        int length = bucketModel.size();
+    public void sortBucketList() {
+        String param = (String) sortSpinner.getSelectedItem();
 
-        if (length > 2) try {
-            quickSort(0, length - 1, paramMethod);
-        } catch (InvocationTargetException | IllegalAccessException e) {
+        ItemModel itemModelObject = new ItemModel();
+
+        Class itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            switch(param) {
+                case "Item Name":
+                    paramMethod = itemModelClass.getMethod("getItemText", null);
+                    break;
+                case "Deadline":
+                    paramMethod = itemModelClass.getMethod("getDeadlineForSort", null);
+                    break;
+                case "Priority":
+                    paramMethod = itemModelClass.getMethod("getPriorityForSort", null);
+                    break;
+                case "Cost":
+                    paramMethod = itemModelClass.getMethod("getMoneyCost", null);
+                    break;
+                case "Duration":
+                    paramMethod = itemModelClass.getMethod("getDurationForSort", null);
+                    break;
+                case "Travel Distance":
+                    paramMethod = itemModelClass.getMethod("getTravelDistanceForSort", null);
+                    break;
+                default:
+                    return;
+            }
+            if (sortAscending) {
+                sortBucketListAscending(paramMethod);
+            } else {
+                sortBucketListDescending(paramMethod);
+            }
+        } catch (NoSuchMethodException e) {
+            Log.w("bucket list", "can't get method");
             e.printStackTrace();
         }
     }
 
-    private void quickSort(int lowerIndex, int higherIndex, Method paramMethod) throws InvocationTargetException, IllegalAccessException {
+    /*
+     * The method used to sort the Bucket List by parameters in ascending order.
+     * The "Sort Selection menu" will call this sorting function when a menu item
+     * is selected by the user.
+     */
+    public void sortBucketListAscending(Method paramMethod) {
+        int length = bucketModel.size();
+
+        if (length > 2) try {
+            quickSortAscending(0, length - 1, paramMethod);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void quickSortAscending(int lowerIndex, int higherIndex, Method paramMethod) throws InvocationTargetException, IllegalAccessException {
 
         int i = lowerIndex;
         int j = higherIndex;
 
         ItemModel i_item;
         Object i_obj;
-        double i_value;
+        double i_value = 0;
+        String i_string = null;
 
         ItemModel j_item;
         Object j_obj;
-        double j_value;
+        double j_value = 0;
+        String j_string = null;
 
+        ItemModel itemModelObject = new ItemModel();
+
+        Class itemModelClass = itemModelObject.getClass();
+        Method getItemTextMethod = null;
+
+        try {
+            getItemTextMethod = itemModelClass.getMethod("getItemText", null);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
         // Calculate pivot number.  Here, the middle of the array will always be the pivot
+        double pivot = 0;
+        String pivotString = null;
+
         int pivotIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
         ItemModel pivotItem = bucketModel.getItem(pivotIndex);
-        Object pivotValue = paramMethod.invoke(pivotItem);
-        double pivot = (double)pivotValue;
-
+        Object pivotObj = paramMethod.invoke(pivotItem, null);
+        if (paramMethod.equals(getItemTextMethod)) {
+            pivotString = (String)pivotObj;
+        } else {
+            pivot = (double)pivotObj;
+        }
 
         // Divide into two arrays
         while (i <= j) {
@@ -406,8 +466,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             i_obj = paramMethod.invoke(i_item);
             j_obj = paramMethod.invoke(j_item);
 
-            i_value = (double)i_obj;
-            j_value = (double)j_obj;
+            if (paramMethod.equals(getItemTextMethod)) {
+                i_string = (String) i_obj;
+                j_string = (String) j_obj;
+            } else {
+                i_value = (double) i_obj;
+                j_value = (double) j_obj;
+            }
 
             /**
              * In each iteration, we will identify a number from left side which
@@ -415,34 +480,191 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
              * from right side which is less then the pivot value. Once the search
              * is done, then we exchange both numbers.
              */
+            if (paramMethod.equals(getItemTextMethod)) {
+                int iCompare = i_string.compareTo(pivotString);
+                while (iCompare < 0) {
+                    i++;
+                    i_item = bucketModel.getItem(i);
+                    i_obj = paramMethod.invoke(i_item, null);
+                    i_string = (String) i_obj;
+                    iCompare = i_string.compareTo(pivotString);
+                }
 
-            while (i_value < pivot) {
-                i++;
-                i_item = bucketModel.getItem(i);
-                i_obj = paramMethod.invoke(i_item);
-                i_value = (double)i_obj;
-            }
-            while (j_value > pivot) {
-                j--;
-                j_item = bucketModel.getItem(j);
-                j_obj = paramMethod.invoke(j_item);
-                j_value = (double)j_obj;
-            }
-            if (i <= j) {
-                bucketModel.swapItems(i, j);
-                //move index to next position on both sides
-                i++;
-                j--;
+                int jCompare = j_string.compareTo(pivotString);
+                while (jCompare > 0) {
+                    j--;
+                    j_item = bucketModel.getItem(j);
+                    j_obj = paramMethod.invoke(j_item, null);
+                    j_string = (String) j_obj;
+                    jCompare = j_string.compareTo(pivotString);
+                }
+                if (i <= j) {
+                    bucketModel.swapItems(i, j);
+                    //move index to next position on both sides
+                    i++;
+                    j--;
+                }
+            } else {
+                while (i_value < pivot) {
+                    i++;
+                    i_item = bucketModel.getItem(i);
+                    i_obj = paramMethod.invoke(i_item, null);
+                    i_value = (double) i_obj;
+                }
+                while (j_value > pivot) {
+                    j--;
+                    j_item = bucketModel.getItem(j);
+                    j_obj = paramMethod.invoke(j_item, null);
+                    j_value = (double) j_obj;
+                }
+                if (i <= j) {
+                    bucketModel.swapItems(i, j);
+                    //move index to next position on both sides
+                    i++;
+                    j--;
+                }
             }
         }
-        // call quickSort() method recursively
+        // call quickSortAscending() method recursively
         if (lowerIndex < j)
-            quickSort(lowerIndex, j, paramMethod);
+            quickSortAscending(lowerIndex, j, paramMethod);
         if (i < higherIndex)
-            quickSort(i, higherIndex, paramMethod);
+            quickSortAscending(i, higherIndex, paramMethod);
 
-        //Update the bucketview
-        bucketArrayAdapter.notifyDataSetChanged();
+    }
+
+    /*
+     * The method used to sort the Bucket List by parameters in descending order
+     * The "Sort Selection menu" will
+     * call this sorting function when a menu item is selected by the user.
+     */
+    public void sortBucketListDescending(Method paramMethod) {
+        int length = bucketModel.size();
+
+        if (length > 2) try {
+            quickSortDescending(0, length - 1, paramMethod);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void quickSortDescending(int lowerIndex, int higherIndex, Method paramMethod) throws InvocationTargetException, IllegalAccessException {
+
+        int i = lowerIndex;
+        int j = higherIndex;
+
+        ItemModel i_item;
+        Object i_obj;
+        double i_value = 0;
+        String i_string = null;
+
+        ItemModel j_item;
+        Object j_obj;
+        double j_value = 0;
+        String j_string = null;
+
+        ItemModel itemModelObject = new ItemModel();
+
+        Class itemModelClass = itemModelObject.getClass();
+        Method getItemTextMethod = null;
+
+        try {
+            getItemTextMethod = itemModelClass.getMethod("getItemText", null);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        // Calculate pivot number.  Here, the middle of the array will always be the pivot
+        double pivot = 0;
+        String pivotString = null;
+
+        int pivotIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
+        ItemModel pivotItem = bucketModel.getItem(pivotIndex);
+        Object pivotObj = paramMethod.invoke(pivotItem, null);
+        if (paramMethod.equals(getItemTextMethod)) {
+            pivotString = (String)pivotObj;
+        } else {
+            pivot = (double)pivotObj;
+        }
+
+
+
+        // Divide into two arrays
+        while (i <= j) {
+
+            i_item = bucketModel.getItem(i);
+            j_item = bucketModel.getItem(j);
+
+            i_obj = paramMethod.invoke(i_item, null);
+            j_obj = paramMethod.invoke(j_item, null);
+
+            if (paramMethod.equals(getItemTextMethod)) {
+                i_string = (String) i_obj;
+                j_string = (String) j_obj;
+            } else {
+                i_value = (double) i_obj;
+                j_value = (double) j_obj;
+            }
+
+            /**
+             * In each iteration, we will identify a number from left side which
+             * is greater then the pivot value, and also we will identify a number
+             * from right side which is less then the pivot value. Once the search
+             * is done, then we exchange both numbers.
+             */
+            if (paramMethod.equals(getItemTextMethod)) {
+                int iCompare = i_string.compareTo(pivotString);
+                while (iCompare < 0) {
+                    i++;
+                    i_item = bucketModel.getItem(i);
+                    i_obj = paramMethod.invoke(i_item, null);
+                    i_string = (String) i_obj;
+                    iCompare = i_string.compareTo(pivotString);
+                }
+
+                int jCompare = j_string.compareTo(pivotString);
+                while (jCompare > 0) {
+                    j--;
+                    j_item = bucketModel.getItem(j);
+                    j_obj = paramMethod.invoke(j_item, null);
+                    j_string = (String) j_obj;
+                    jCompare = j_string.compareTo(pivotString);
+                }
+                if (i <= j) {
+                    bucketModel.swapItems(i, j);
+                    //move index to next position on both sides
+                    i++;
+                    j--;
+                }
+            } else {
+                while (i_value > pivot) {
+                    i++;
+                    i_item = bucketModel.getItem(i);
+                    i_obj = paramMethod.invoke(i_item, null);
+                    i_value = (double) i_obj;
+                }
+                while (j_value < pivot) {
+                    j--;
+                    j_item = bucketModel.getItem(j);
+                    j_obj = paramMethod.invoke(j_item, null);
+                    j_value = (double) j_obj;
+                }
+                if (i <= j) {
+                    bucketModel.swapItems(i, j);
+                    //move index to next position on both sides
+                    i++;
+                    j--;
+                }
+            }
+        }
+        // call quickSortAscending() method recursively
+        if (lowerIndex < j)
+            quickSortDescending(lowerIndex, j, paramMethod);
+        if (i < higherIndex)
+            quickSortDescending(i, higherIndex, paramMethod);
 
     }
     
