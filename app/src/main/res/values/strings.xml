@@ -10,6 +10,8 @@
     <string name="priority_min">0</string> <!-- 0 for ease of use with SeekBar -->
     <string name="priority_max">10</string>
     <string name="search_hint">Search for an item!</string>
+    <string name="search_title">Search</string>
+    <string name="add_item_title">Add</string>
     <string name="empty_text_error">Woops! The text field is empty. Give a title to your item to add it to your bucket list.</string>
     <string-array name="deadline_units">
         <item>day(s)</item>
