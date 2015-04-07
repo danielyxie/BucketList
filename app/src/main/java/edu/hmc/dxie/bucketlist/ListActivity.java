@@ -21,7 +21,6 @@ import android.widget.ToggleButton;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-// TODO: Consider replacing magic strings with constants in strings.xml
 public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
                                                                View.OnClickListener,
                                                                AdapterView.OnItemSelectedListener,
