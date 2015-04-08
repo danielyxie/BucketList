@@ -101,7 +101,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
                  * ViewItemActivity
                  */
     
-                String itemText = itemTextEditText.getText().toString();
+                String itemText = itemTextEditText.getText().toString().trim();
                 currentItem.setItemText(itemText);
                 String deadlineValue = deadlineValueEditText.getText().toString();
                 String deadlineUnit = deadlineSpinner.getSelectedItem().toString();

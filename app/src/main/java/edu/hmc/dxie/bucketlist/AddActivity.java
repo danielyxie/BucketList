@@ -87,7 +87,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         EditText textEditText = (EditText) findViewById(R.id.add_edittext_text);
 
         // Get the text from the EditText
-        String itemText = textEditText.getText().toString();
+        String itemText = textEditText.getText().toString().trim();
 
         // If there is no text
         if (itemText.isEmpty()) {
