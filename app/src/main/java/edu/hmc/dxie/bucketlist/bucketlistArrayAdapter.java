@@ -71,9 +71,9 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             checkBox.setOnClickListener(this);
             
             if(accomplishedToggle) {
-                text.setBackgroundColor(res.getColor(R.color.mint));
+                text.setBackgroundColor(res.getColor(R.color.light_blue));
             } else {
-                text.setBackgroundColor(res.getColor(R.color.red_orange));
+                text.setBackgroundColor(res.getColor(R.color.white));
             }
         } else {
             itemView = inflater.inflate(R.layout.empty_list_item, parent, false);

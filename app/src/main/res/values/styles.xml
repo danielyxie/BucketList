@@ -8,8 +8,8 @@
 
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/brown</item>
-        <item name="background">@color/brown</item>
+        <item name="android:background">@color/charcoal</item>
+        <item name="background">@color/charcoal</item>
         <item name="android:icon">@drawable/ic_launcher</item>
         <item name="icon">@drawable/ic_launcher</item>
     </style>
