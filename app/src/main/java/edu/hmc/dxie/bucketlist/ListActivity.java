@@ -419,7 +419,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             e.printStackTrace();
         }
 
-        // Calculate pivot number.  Here, the middle of the array will always be the pivot
+        // Calculate pivot value.  Here, the middle of the array will always be the pivot
         double pivot = 0;
         String pivotString = null;
 
@@ -435,6 +435,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         // Divide into two arrays
         while (i <= j) {
 
+            //Get the relevant values from the items in the bucket
+            //list
             i_item = bucketModel.getItem(i);
             j_item = bucketModel.getItem(j);
 
@@ -590,7 +592,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
              */
             if (paramMethod.equals(getItemTextMethod)) {
                 int iCompare = i_string.compareTo(pivotString);
-                while (iCompare < 0) {
+                while (iCompare > 0) {
                     i++;
                     i_item = bucketModel.getItem(i);
                     i_obj = paramMethod.invoke(i_item);
@@ -599,7 +601,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 }
 
                 int jCompare = j_string.compareTo(pivotString);
-                while (jCompare > 0) {
+                while (jCompare < 0) {
                     j--;
                     j_item = bucketModel.getItem(j);
                     j_obj = paramMethod.invoke(j_item);

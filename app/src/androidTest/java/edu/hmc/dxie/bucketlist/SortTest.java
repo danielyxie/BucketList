@@ -48,7 +48,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
      * values for every parameter (which is currently the case).  May change this later
      */
 
-    public void sortedParamCheck() {
+    public void sortedParamCheckAscending() {
         //Iterate through all items in the bucket list and check that each is
         //less than or equal to the last
         ItemModel i;
@@ -56,7 +56,25 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
             i = mListActivity.bucketModel.getItem(k);
             j = mListActivity.bucketModel.getItem(k+1);
-            assertTrue("sortedParamCheck failed", i.getPriority() <= j.getPriority());
+            assertTrue("sortedParamCheckAscending failed", i.getPriority() <= j.getPriority());
+        }
+    }
+
+    /*Checks that the Bucket List is properly sorted (in descending order, for now).
+     *It simply iterates through the Bucket List and checks that each item is less
+     *than or equal to the last.
+     *
+     * NOTE: This function, as it is right now, requires that each item has the same
+     * values for every parameter (which is currently the case).  May change this later
+     */
+
+    public void sortedParamCheckDescending() {
+        ItemModel i;
+        ItemModel j;
+        for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
+            i = mListActivity.bucketModel.getItem(k);
+            j = mListActivity.bucketModel.getItem(k+1);
+            assertTrue("sortedParamCheckAscending failed", i.getPriority() >= j.getPriority());
         }
     }
 
@@ -68,7 +86,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
      * values for every parameter (which is currently the case).  May change this later
      */
 
-    public void sortedNameCheck() {
+    public void sortedNameCheckAscending() {
         ItemModel i, j;
         String i_Name, j_Name;
         int comp;
@@ -78,7 +96,29 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             i_Name = i.getItemText();
             j_Name = j.getItemText();
             comp = i_Name.compareTo(j_Name);
-            assertTrue("sortedParamCheck failed", i.getPriority() <= 0);
+            assertTrue("sortedParamCheckAscending failed", comp <= 0);
+        }
+    }
+
+    /*Checks that the Bucket List is properly sorted by name (in descending order, for now).
+     *It simply iterates through the Bucket List and checks that each String is lexicographically
+     * below the next string
+     *
+     * NOTE: This function, as it is right now, requires that each item has the same
+     * values for every parameter (which is currently the case).  May change this later
+     */
+
+    public void sortedNameCheckDescending() {
+        ItemModel i, j;
+        String i_Name, j_Name;
+        int comp;
+        for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
+            i = mListActivity.bucketModel.getItem(k);
+            j = mListActivity.bucketModel.getItem(k+1);
+            i_Name = i.getItemText();
+            j_Name = j.getItemText();
+            comp = i_Name.compareTo(j_Name);
+            assertTrue("sortedParamCheckDescending failed", comp >= 0);
         }
     }
 
@@ -115,9 +155,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        //Check
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Basic sorting test to sort 10 items with distinct values using the
@@ -143,8 +183,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Basic sorting test to sort 10 items with distinct values using the
@@ -168,8 +209,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Basic sorting test to sort 10 items with distinct values using the
@@ -193,8 +235,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Basic sorting test to sort 10 items with distinct values using the
@@ -218,8 +261,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test items that have identical (repeating) values to check that the
@@ -245,8 +289,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test items that have identical (repeating) values to check that the
@@ -272,8 +317,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test items that have identical (repeating) values to check that the
@@ -299,8 +345,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test items that have identical (repeating) values to check that the
@@ -326,8 +373,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test items that have identical (repeating) values to check that the
@@ -353,8 +401,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
 
@@ -373,8 +422,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test sorting on an empty bucket list when sorting by the Deadline parameter
@@ -392,8 +442,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test sorting on an empty bucket list when sorting by the Travel Distance parameter
@@ -411,8 +462,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test sorting on an empty bucket list when sorting by the Duration parameter
@@ -430,8 +482,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test sorting on an empty bucket list when sorting by the Money Cost parameter
@@ -449,8 +502,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedParamCheck();
+        sortedParamCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedParamCheckDescending();
     }
 
     //Test sorting by "Item Name" when all the first letters are different
@@ -477,8 +531,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedNameCheck();
+        sortedNameCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedNameCheckDescending();
     }
 
     //Test sorting by "Item Name" when all of the first letters are identical but the
@@ -506,8 +561,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedNameCheck();
+        sortedNameCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedNameCheckDescending();
     }
 
     //Test sorting by "Item Name" with non-alphanumeric characters
@@ -532,8 +588,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         }
 
         mListActivity.sortBucketListAscending(paramMethod);
-
-        sortedNameCheck();
+        sortedNameCheckAscending();
+        mListActivity.sortBucketListDescending(paramMethod);
+        sortedNameCheckDescending();
     }
 
     //Test that units are converted correctly when sorting by the Deadline parameter

@@ -62,9 +62,25 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
         {
             itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
 
+            //Initialize the item name
             TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
             text.setText(currentItem.toString());
 
+            //Initialize the item parameters
+            TextView deadline_text = (TextView) itemView.findViewById(R.id.item_deadline);
+            TextView priority_text = (TextView) itemView.findViewById(R.id.item_priority);
+            TextView cost_text = (TextView) itemView.findViewById(R.id.item_cost);
+            TextView duration_text = (TextView) itemView.findViewById(R.id.item_duration);
+            TextView traveldistance_text =
+                                     (TextView) itemView.findViewById(R.id.item_traveldistance);
+
+            deadline_text.setText(currentItem.getDeadline());
+            priority_text.setText(Integer.toString(currentItem.getPriority()));
+            cost_text.setText(Double.toString(currentItem.getCost()));
+            duration_text.setText(currentItem.getDuration());
+            traveldistance_text.setText(currentItem.getTravelDistance());
+
+            //Handle the checkbox
             CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.item_checkbox_completed);
             checkBox.setChecked(accomplishedToggle);
             checkBox.setTag(currentItem);

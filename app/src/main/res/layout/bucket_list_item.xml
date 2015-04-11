@@ -5,28 +5,106 @@
     android:layout_height="?listPreferredItemHeight"
     android:background="@color/mint">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/white"
         android:gravity="center"
-        android:layout_centerHorizontal="true"
+        android:background="@color/white"
         android:layout_marginBottom="7dp"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp">
 
-        <!-- TextView for ListView elements -->
-        <TextView
-            android:id="@+id/bucketListText"
-            android:layout_width="match_parent"
+        <!-- Showing the Deadline and Priority parameters -->
+        <LinearLayout
+            android:id="@+id/deadlinepriority_layout"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="21sp"
-            android:textColor="@color/black"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="7dp"/>
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:id="@+id/item_deadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/item_priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <!-- Showing the Cost and Duration parameters -->
+        <LinearLayout
+            android:id="@+id/costduration_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/deadlinepriority_layout"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="4dp">
+
+            <TextView
+                android:id="@+id/item_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/item_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <!-- Showing the Travel Distance parameter -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/costduration_layout"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="4dp">
+
+            <TextView
+                android:id="@+id/item_traveldistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/item_dummy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
 
         <!-- CheckBox for marking elements as completed -->
         <CheckBox
@@ -38,7 +116,20 @@
             android:focusableInTouchMode="false"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:paddingRight="14dp"
-            android:paddingEnd="14dp"/>
-    </LinearLayout>
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"/>
+
+        <!-- Item Name of the Bucket List Item -->
+        <TextView
+            android:id="@+id/bucketListText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/deadlinepriority_layout"
+            android:textSize="21sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="7dp"/>
+    </RelativeLayout>
 </RelativeLayout>
