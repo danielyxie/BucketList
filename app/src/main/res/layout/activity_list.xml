@@ -10,6 +10,14 @@
     android:background="@color/mint"
     tools:context=".MainActivity">
 
+    <!-- Categories! -->
+    <GridView
+        android:id="@+id/list_categories"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:numColumns="auto_fit"
+        android:background="@color/charcoal"/>
+
     <!-- Menu used to select which parameter to sort by -->
     <RelativeLayout
         android:layout_width="fill_parent"

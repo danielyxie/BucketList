@@ -22,7 +22,7 @@ public class Category {
         return this.name;
     }
 
-    public int getIcon() {
+    public int getIconID() {
         return this.iconID;
     }
 
@@ -34,7 +34,7 @@ public class Category {
         this.name = name;
     }
 
-    public void setIcon(int iconID) {
+    public void setIconID(int iconID) {
         this.iconID = iconID;
     }
 
