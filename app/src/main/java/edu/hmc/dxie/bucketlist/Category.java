@@ -8,14 +8,14 @@ import com.google.gson.Gson;
 public class Category {
 
     private String name;
-    private int icon;
-    private boolean state = false; // If true, show items in this category
+    private int iconID;
+    private boolean state = true; // If true, show items in this category
 
     // NO DEFAULT CONSTRUCTOR!
 
-    public Category(String name, int icon) {
+    public Category(String name, int iconID) {
         this.name = name;
-        this.icon = icon;
+        this.iconID = iconID;
     }
 
     public String getName() {
@@ -23,7 +23,7 @@ public class Category {
     }
 
     public int getIcon() {
-        return this.icon;
+        return this.iconID;
     }
 
     public boolean getState() {
@@ -34,8 +34,8 @@ public class Category {
         this.name = name;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setIcon(int iconID) {
+        this.iconID = iconID;
     }
 
     public void toggleState() {

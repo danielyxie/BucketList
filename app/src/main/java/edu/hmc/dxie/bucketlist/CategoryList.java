@@ -11,10 +11,18 @@ public class CategoryList {
 
     private ArrayList<Category> categories = new ArrayList<>();
 
-    /*
-     * No explicit constructor necessary because all class fields are assigned a specific value
-     * on initialization.
-     */
+    public CategoryList(String[] names, int[] iconIDs) {
+
+        // Assert that the arrays have equal length
+        if (BuildConfig.DEBUG && names.length != iconIDs.length) {
+            throw new AssertionError("The arrays in the array CategoryList constructor do not have equal length!");
+        }
+
+        // If so, add the categories
+        for (int i = 0; i < names.length; i++) {
+            addCategory(new Category(names[i], iconIDs[i]));
+        }
+    }
 
     public ArrayList<Category> getCategories() {
         return this.categories;
