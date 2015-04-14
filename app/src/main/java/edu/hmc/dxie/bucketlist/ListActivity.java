@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -31,11 +32,21 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     ListModel bucketModel;
     ListView bucketView;
     bucketlistArrayAdapter bucketArrayAdapter;
+    CategoryList categories;
+    CategoryArrayAdapter catArrayAdapter;
+    GridView catView;
     SharedPreferences persistentData;
     Spinner sortSpinner;
     ImageButton sortButton;
     boolean sortAscending = true;    //Determines whether sorting by ascending or descending items
     SearchView searchView;
+
+    static final String[] DEFAULT_NAMES = {"Adventure", "Arts", "Entertainment", "Food",
+                                            "Friends & Family", "Misc", "Self-Improvement", "Travel"};
+    static final int[] DEFAULT_ICON_IDS = {R.drawable.ic_category_adventure, R.drawable.ic_category_arts,
+                                        R.drawable.ic_category_entertainment, R.drawable.ic_category_food,
+                                        R.drawable.ic_category_friends_family, R.drawable.ic_category_misc,
+                                        R.drawable.ic_category_self_improvement, R.drawable.ic_category_travel};
 
 
     @Override
@@ -50,21 +61,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         // Get persistent data
         persistentData = getSharedPreferences("persistent data", Context.MODE_PRIVATE);
 
-        // Get the JSON of the bucketModel if it exists, otherwise get an empty string
-        String bucketModelJSON = persistentData.getString("bucket model", "");
-
-        // Check whether a bucketModel exists
-
-        // If a bucketModel does not exist
-        if (bucketModelJSON.isEmpty()) {
-            
-            // Create a new one for holding list items
-            bucketModel = new ListModel();
-        } else {
-            
-            // Otherwise, recover the existing bucketModel
-            bucketModel = ListModel.deserialize(bucketModelJSON);
-        }
+        initBucketModel();
 
         // Setup an ArrayAdapter for the ListView
         bucketArrayAdapter = new bucketlistArrayAdapter(this,
@@ -75,6 +72,18 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
         // Set this activity to react to list items being processed
         bucketView.setOnItemClickListener(this);
+
+        initCategories();
+
+        // Setup an ArrayAdapter for the GridView
+        catArrayAdapter = new CategoryArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                categories.getCategories());
+        catView = (GridView) findViewById(R.id.list_categories);
+        catView.setAdapter(catArrayAdapter);
+
+        // Set this activity to react to list items being processed
+        //c.setOnItemClickListener(this);
 
         // Set greeting
         setGreeting();
@@ -685,6 +694,46 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         bucketArrayAdapter.setSearchQuery(searchView.getQuery().toString());
         bucketArrayAdapter.notifyDataSetChanged();
         return true;
+    }
+
+    // Initializes the bucketModel
+    private void initBucketModel() {
+
+        // Get the JSON of the bucketModel if it exists, otherwise get an empty string
+        String bucketModelJSON = persistentData.getString("bucket model", "");
+
+        // Check whether a bucketModel exists
+
+        // If a bucketModel does not exist
+        if (bucketModelJSON.isEmpty()) {
+
+            // Create a new one for holding list items
+            bucketModel = new ListModel();
+        } else {
+
+            // Otherwise, recover the existing bucketModel
+            bucketModel = ListModel.deserialize(bucketModelJSON);
+        }
+    }
+
+    private void initCategories() {
+
+        // Get the JSON of the categories object if it exists, otherwise get an empty string
+        String categoriesJSON = persistentData.getString("categories", "");
+
+        // Check whether a categories object exists
+
+        // If a categories object does not exist
+        if (categoriesJSON.isEmpty()) {
+
+            // Create a new one for holding categories
+            categories = new CategoryList(DEFAULT_NAMES, DEFAULT_ICON_IDS);
+
+        } else {
+
+            // Otherwise, recover the existing categories object
+            categories = CategoryList.deserialize(categoriesJSON);
+        }
     }
 }
 

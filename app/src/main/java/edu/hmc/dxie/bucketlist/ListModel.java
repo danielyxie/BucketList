@@ -10,11 +10,12 @@ import java.util.Collections;
  */
 public class ListModel {
     
-    private ArrayList<ItemModel> bucket;
+    private ArrayList<ItemModel> bucket = new ArrayList<>();
 
-    public ListModel() {
-        this.bucket = new ArrayList<>();
-    }
+    /*
+     * No explicit constructor necessary because all class fields are assigned a specific value
+     * on initialization.
+     */
 
     public int size() { return bucket.size(); }
 

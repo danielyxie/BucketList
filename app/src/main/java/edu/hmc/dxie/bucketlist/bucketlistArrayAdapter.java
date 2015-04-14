@@ -28,7 +28,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
     private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
     private String query;
 
-    public bucketlistArrayAdapter(Context context, int textViewResourceId , ArrayList<ItemModel> list )
+    public bucketlistArrayAdapter(Context context, int textViewResourceId, ArrayList<ItemModel> list)
     {
         super(context, textViewResourceId, list);
         mContext = context;
