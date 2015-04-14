@@ -37,6 +37,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     boolean sortAscending = true;    //Determines whether sorting by ascending or descending items
     SearchView searchView;
 
+    static final String[] DEFAULT_NAMES = {"Adventure", "Arts", "Entertainment", "Food",
+                                            "Friends & Family", "Misc", "Self-Improvement", "Travel"};
+    static final int[] DEFAULT_ICONS = {R.drawable.ic_category_adventure, R.drawable.ic_category_arts,
+                                        R.drawable.ic_category_entertainment, R.drawable.ic_category_food,
+                                        R.drawable.ic_category_friends_family, R.drawable.ic_category_misc,
+                                        R.drawable.ic_category_self_improvement, R.drawable.ic_category_travel};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +68,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             // Create a new one for holding list items
             bucketModel = new ListModel();
         } else {
-            
+
             // Otherwise, recover the existing bucketModel
             bucketModel = ListModel.deserialize(bucketModelJSON);
         }

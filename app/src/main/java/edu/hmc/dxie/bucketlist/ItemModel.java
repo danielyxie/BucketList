@@ -2,6 +2,8 @@ package edu.hmc.dxie.bucketlist;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 /**
  * Created by justisallen and kaitlynanderson on 2/15/15.
  */
@@ -14,6 +16,7 @@ public class ItemModel {
     private int priority;
     private String duration;
     private String travelDistance;
+    private ArrayList<Category> categories;
 
     // Default initializes all values. To set them use available mutator methods.
     public ItemModel() {
@@ -24,6 +27,7 @@ public class ItemModel {
         this.priority = -1;
         this.duration = "";
         this.travelDistance = "";
+        //this.categories = new ArrayList<>();
     }
 
     // Constructor used for testing purposes only.
@@ -163,7 +167,7 @@ public class ItemModel {
     public void setItemText(String itemText) {
         this.itemText = itemText;
     }
-    
+
     public void toggleCompleted() {
         this.completed = !this.completed;
     }
@@ -192,6 +196,18 @@ public class ItemModel {
 
     public void setTravelDistance(String travelDistance, String unit) {
         this.travelDistance = travelDistance + " " + unit;
+    }
+
+    public void addCategory(Category category) {
+        if (!categories.contains(category)) {
+            this.categories.add(category);
+        }
+    }
+
+    public void removeCategory(Category category) {
+        if (categories.contains(category)) {
+            this.categories.remove(category);
+        }
     }
 
     @Override
