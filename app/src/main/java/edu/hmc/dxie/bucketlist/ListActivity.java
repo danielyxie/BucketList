@@ -230,7 +230,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         // Get the clicked item
         ItemModel clickedItem = bucketModel.getItem(position);
 
-        // Serialize the item to JSON
         String serializedItem = clickedItem.serialize();
 
         // Go to ViewItemActivity with the clicked item
@@ -377,6 +376,36 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         }
     }
 
+
+    /*
+     * Helper method for Sorting.  This method will take all the items
+     * in the bucket list that have no input value for a parameter
+     * and will put them at the bottom of the bucket list.  The
+     * function will then return an integer that represents the index
+     * in the bucket list at which these items with no parameter values
+     * begins. The paramMethod argument determines which parameter
+     * to filter by.
+     */
+    public int filterItemsWithNoParameters(Method paramMethod) {
+        Method getDeadlineMethod, getPriorityMethod, getDurationMethod,
+               getTravelDistanceMethod, getCostMethod;
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+
+        try {
+            getDeadlineMethod = itemModelClass.getMethod("getDeadlineForSort");
+            getPriorityMethod = itemModelClass.getMethod("getPriorityForSort");
+            getDurationMethod = itemModelClass.getMethod("getDurationForSort");
+            getTravelDistanceMethod = itemModelClass.getMethod("getTravelDistanceForSort");
+            getCostMethod = itemModelClass.getMethod("getCost");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return 1;
+    }
+
     /*
      * The method used to sort the Bucket List by parameters in ascending order.
      * The "Sort Selection menu" will call this sorting function when a menu item
@@ -390,7 +419,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
     }
 
     private void quickSortAscending(int lowerIndex, int higherIndex, Method paramMethod) throws InvocationTargetException, IllegalAccessException {

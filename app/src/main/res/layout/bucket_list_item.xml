@@ -127,6 +127,8 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@id/deadlinepriority_layout"
             android:textSize="21sp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
