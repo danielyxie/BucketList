@@ -117,12 +117,14 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     protected void onPause() {
         super.onPause();
 
-        // Serialize the current state of the bucketModel to JSON
-        String serializedData = bucketModel.serialize();
+        // Serialize persistent data
+        String serializedBucket = bucketModel.serialize();
+        String serializedCategories = categories.serialize();
 
         // Save the serialized data into a shared preference
         SharedPreferences.Editor dataEditor = persistentData.edit();
-        dataEditor.putString("bucket model", serializedData);
+        dataEditor.putString("bucket model", serializedBucket);
+        dataEditor.putString("categories", serializedCategories);
         dataEditor.apply();
     }
 
