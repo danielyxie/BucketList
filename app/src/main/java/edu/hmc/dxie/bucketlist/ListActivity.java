@@ -14,12 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.jess.ui.TwoWayGridView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,7 +35,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     bucketlistArrayAdapter bucketArrayAdapter;
     CategoryList categories;
     CategoryArrayAdapter catArrayAdapter;
-    GridView catView;
+    TwoWayGridView catView;
     SharedPreferences persistentData;
     Spinner sortSpinner;
     ImageButton sortButton;
@@ -79,7 +80,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         catArrayAdapter = new CategoryArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 categories.getCategories());
-        catView = (GridView) findViewById(R.id.list_categories);
+        catView = (TwoWayGridView) findViewById(R.id.list_categories);
         catView.setAdapter(catArrayAdapter);
 
         // Set this activity to react to list items being processed
