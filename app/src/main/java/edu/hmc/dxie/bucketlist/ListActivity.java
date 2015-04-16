@@ -62,18 +62,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         // Get persistent data
         persistentData = getSharedPreferences("persistent data", Context.MODE_PRIVATE);
 
-        initBucketModel();
-
-        // Setup an ArrayAdapter for the ListView
-        bucketArrayAdapter = new bucketlistArrayAdapter(this,
-                android.R.layout.simple_list_item_1,
-                bucketModel.getBucket());
-        bucketView = (ListView) findViewById(R.id.bucketlistview);
-        bucketView.setAdapter(bucketArrayAdapter);
-
-        // Set this activity to react to list items being processed
-        bucketView.setOnItemClickListener(this);
-
         initCategories();
 
         // Setup an ArrayAdapter for the GridView
@@ -82,6 +70,19 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 categories.getCategories());
         catView = (TwoWayGridView) findViewById(R.id.list_categories);
         catView.setAdapter(catArrayAdapter);
+
+        initBucketModel();
+
+        // Setup an ArrayAdapter for the ListView
+        bucketArrayAdapter = new bucketlistArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                bucketModel.getBucket(),
+                categories.getCategories());
+        bucketView = (ListView) findViewById(R.id.bucketlistview);
+        bucketView.setAdapter(bucketArrayAdapter);
+
+        // Set this activity to react to list items being processed
+        bucketView.setOnItemClickListener(this);
 
         // Set this activity to react to list items being processed
         //c.setOnItemClickListener(this);
@@ -323,6 +324,15 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 sortBucketList();
                 //Update the bucketview
                 this.bucketArrayAdapter.notifyDataSetChanged();
+                break;
+
+            // Category toggled
+            case R.id.category_toggle:
+                Category category = (Category) v.getTag();
+                category.toggleState();
+                bucketArrayAdapter.notifyDataSetChanged();
+                catArrayAdapter.notifyDataSetChanged();
+                break;
         }
     }
 

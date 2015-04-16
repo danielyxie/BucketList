@@ -27,7 +27,7 @@ public class ItemModel {
         this.priority = -1;
         this.duration = "";
         this.travelDistance = "";
-        //this.categories = new ArrayList<>();
+        this.categories = new ArrayList<>();
     }
 
     // Constructor used for testing purposes only.
@@ -196,6 +196,18 @@ public class ItemModel {
 
     public void setTravelDistance(String travelDistance, String unit) {
         this.travelDistance = travelDistance + " " + unit;
+    }
+
+    // Checks whether the item is in one of the specified categories
+    public boolean isInCategory(ArrayList<Category> categories) {
+
+        // Gets the intersection of the item's categories and the specified categories
+        //  and stores the result in the given categories Container
+        boolean changed = categories.retainAll(this.categories);
+
+        // Returns true if the intersection is non-empty,
+        //  or if the intersection is empty, but the active categories were empty to begin
+        return !categories.isEmpty() && changed;
     }
 
     public void addCategory(Category category) {
