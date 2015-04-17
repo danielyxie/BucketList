@@ -9,7 +9,7 @@ public class Category {
 
     private String name;
     private int iconID;
-    private boolean state = true; // If true, show items in this category
+    private boolean state = false; // If true, show items in this category
 
     // NO DEFAULT CONSTRUCTOR!
 
