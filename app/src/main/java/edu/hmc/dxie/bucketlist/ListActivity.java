@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class ListActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
                                                                View.OnClickListener,
@@ -374,10 +375,16 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 default:
                     return;
             }
+
+            int noParamIndex; //The index that indicates the start of items with no
+                              //parameter values
+
             if (sortAscending) {
-                sortBucketListAscending(paramMethod);
+                noParamIndex = filterItemsWithNoParameters(paramMethod);
+                sortBucketListAscending(paramMethod, noParamIndex);
             } else {
-                sortBucketListDescending(paramMethod);
+                noParamIndex = filterItemsWithNoParameters(paramMethod);
+                sortBucketListDescending(paramMethod, noParamIndex);
             }
         } catch (NoSuchMethodException e) {
             Log.w("bucket list", "can't get method");
@@ -397,10 +404,18 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      */
     public int filterItemsWithNoParameters(Method paramMethod) {
         Method getDeadlineMethod, getPriorityMethod, getDurationMethod,
-               getTravelDistanceMethod, getCostMethod;
+               getTravelDistanceMethod, getCostMethod, getItemTextMethod;
 
         ItemModel itemModelObject = new ItemModel();
         Class<?> itemModelClass = itemModelObject.getClass();
+
+        ArrayList<ItemModel> withParams = new ArrayList<>();
+        ArrayList<ItemModel> noParams   = new ArrayList<>();
+
+        //The index variable is the return value and also represents the index
+        //of the bucket list at which to add the next item with no
+        //parameter value
+        int bottomIndex = bucketModel.size() - 1;
 
         try {
             getDeadlineMethod = itemModelClass.getMethod("getDeadlineForSort");
@@ -408,11 +423,60 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             getDurationMethod = itemModelClass.getMethod("getDurationForSort");
             getTravelDistanceMethod = itemModelClass.getMethod("getTravelDistanceForSort");
             getCostMethod = itemModelClass.getMethod("getCost");
+            getItemTextMethod = itemModelClass.getMethod("getItemText");
+
+            if(paramMethod.equals(getDeadlineMethod)) {
+                for ( int i = 0; i < bucketModel.size(); i++ ) {
+                    if (bucketModel.getItem(i).hasNoDeadline()) {
+                        noParams.add(bucketModel.getItem(i));
+                    } else {
+                        withParams.add(bucketModel.getItem(i));
+                    }
+                }
+            } else if (paramMethod.equals(getPriorityMethod)) {
+                for ( int i = 0; i < bucketModel.size(); i++ ) {
+                    if (bucketModel.getItem(i).hasNoPriority()) {
+                        noParams.add(bucketModel.getItem(i));
+                    } else {
+                        withParams.add(bucketModel.getItem(i));
+                    }
+                }
+            } else if (paramMethod.equals(getDurationMethod)) {
+                for ( int i = 0; i < bucketModel.size(); i++ ) {
+                    if (bucketModel.getItem(i).hasNoDuration()) {
+                        noParams.add(bucketModel.getItem(i));
+                    } else {
+                        withParams.add(bucketModel.getItem(i));
+                    }
+                }
+            } else if (paramMethod.equals(getTravelDistanceMethod)) {
+                for ( int i = 0; i < bucketModel.size(); i++ ) {
+                    if (bucketModel.getItem(i).hasNoTravelDistance()) {
+                        noParams.add(bucketModel.getItem(i));
+                    } else {
+                        withParams.add(bucketModel.getItem(i));
+                    }
+                }
+            } else if (paramMethod.equals(getCostMethod)) {
+                for ( int i = 0; i < bucketModel.size(); i++ ) {
+                    if (bucketModel.getItem(i).hasNoCost()) {
+                        noParams.add(bucketModel.getItem(i));
+                    } else {
+                        withParams.add(bucketModel.getItem(i));
+                    }
+                }
+            } else {
+                return (bucketModel.size() - 1);
+            }
+
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 
-        return 1;
+        bucketModel.clearItems();
+        bucketModel.addAll(withParams);
+        bucketModel.addAll(noParams);
+        return (withParams.size() - 1);
     }
 
     /*
@@ -420,14 +484,25 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      * The "Sort Selection menu" will call this sorting function when a menu item
      * is selected by the user.
      */
-    public void sortBucketListAscending(Method paramMethod) {
-        int length = bucketModel.size();
+    public void sortBucketListAscending(Method paramMethod, int noParamIndex) {
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method getItemNameMethod = null;
+        try {
+            getItemNameMethod = itemModelClass.getMethod("getItemText");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
-        if (length > 2) try {
-            quickSortAscending(0, length - 1, paramMethod);
+        if (bucketModel.size() >= 2) try {
+            quickSortAscending(0, noParamIndex, paramMethod);
+            if (noParamIndex != bucketModel.size() - 1) {
+                quickSortAscending(noParamIndex + 1, bucketModel.size() - 1, getItemNameMethod);
+            }
         } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
+
     }
 
     private void quickSortAscending(int lowerIndex, int higherIndex, Method paramMethod) throws InvocationTargetException, IllegalAccessException {
@@ -552,11 +627,21 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      * The "Sort Selection menu" will
      * call this sorting function when a menu item is selected by the user.
      */
-    public void sortBucketListDescending(Method paramMethod) {
-        int length = bucketModel.size();
+    public void sortBucketListDescending(Method paramMethod, int noParamIndex) {
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method getItemNameMethod = null;
+        try {
+            getItemNameMethod = itemModelClass.getMethod("getItemText");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
-        if (length > 2) try {
-            quickSortDescending(0, length - 1, paramMethod);
+        if (bucketModel.size() >= 2) try {
+            quickSortDescending(0, noParamIndex, paramMethod);
+            if (noParamIndex < bucketModel.size() - 1) {
+                quickSortDescending(noParamIndex + 1, bucketModel.size() - 1, getItemNameMethod);
+            }
         } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }

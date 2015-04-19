@@ -11,10 +11,11 @@ import java.util.Random;
  */
 public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
 
-    public SortTest() {super(ListActivity.class); }
+    public SortTest() {
+        super(ListActivity.class);
+    }
 
     private ListActivity mListActivity;
-    ItemModel item0 = new ItemModel(0);
     ItemModel item1 = new ItemModel(1);
     ItemModel item2 = new ItemModel(2);
     ItemModel item3 = new ItemModel(3);
@@ -25,7 +26,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
     ItemModel item8 = new ItemModel(8);
     ItemModel item9 = new ItemModel(9);
 
-    ItemModel[] items = {item0, item1, item2,
+    ItemModel[] items = {item1, item2,
             item3, item4, item5,
             item6, item7, item8,
             item9};
@@ -53,9 +54,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         //less than or equal to the last
         ItemModel i;
         ItemModel j;
-        for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
+        for (int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
             i = mListActivity.bucketModel.getItem(k);
-            j = mListActivity.bucketModel.getItem(k+1);
+            j = mListActivity.bucketModel.getItem(k + 1);
             assertTrue("sortedParamCheckAscending failed", i.getPriority() <= j.getPriority());
         }
     }
@@ -71,9 +72,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
     public void sortedParamCheckDescending() {
         ItemModel i;
         ItemModel j;
-        for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
+        for (int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
             i = mListActivity.bucketModel.getItem(k);
-            j = mListActivity.bucketModel.getItem(k+1);
+            j = mListActivity.bucketModel.getItem(k + 1);
             assertTrue("sortedParamCheckAscending failed", i.getPriority() >= j.getPriority());
         }
     }
@@ -90,9 +91,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         ItemModel i, j;
         String i_Name, j_Name;
         int comp;
-        for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
+        for (int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
             i = mListActivity.bucketModel.getItem(k);
-            j = mListActivity.bucketModel.getItem(k+1);
+            j = mListActivity.bucketModel.getItem(k + 1);
             i_Name = i.getItemText();
             j_Name = j.getItemText();
             comp = i_Name.compareTo(j_Name);
@@ -112,9 +113,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         ItemModel i, j;
         String i_Name, j_Name;
         int comp;
-        for(int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
+        for (int k = 0; k < mListActivity.bucketModel.size() - 1; k++) {
             i = mListActivity.bucketModel.getItem(k);
-            j = mListActivity.bucketModel.getItem(k+1);
+            j = mListActivity.bucketModel.getItem(k + 1);
             i_Name = i.getItemText();
             j_Name = j.getItemText();
             comp = i_Name.compareTo(j_Name);
@@ -129,7 +130,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
      */
     public void addRandomItem() {
         Random r = new Random();
-        int randInt = r.nextInt(10);
+        int randInt = r.nextInt(8) + 1;
         mListActivity.bucketModel.addItem(items[randInt]);
     }
 
@@ -140,7 +141,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
 
@@ -154,9 +155,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -166,7 +168,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
 
@@ -182,9 +184,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -194,7 +197,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
 
@@ -208,9 +211,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -220,7 +224,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
 
@@ -234,9 +238,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -246,7 +251,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.bucketModel.clearItems();
 
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
 
@@ -260,9 +265,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -273,7 +279,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
 
         mListActivity.bucketModel.addItem(item5);
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
         mListActivity.bucketModel.addItem(item5);
@@ -288,9 +294,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -301,7 +308,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
 
         mListActivity.bucketModel.addItem(item4);
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
         mListActivity.bucketModel.addItem(item4);
@@ -316,9 +323,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -329,7 +337,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
 
         mListActivity.bucketModel.addItem(item3);
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
         mListActivity.bucketModel.addItem(item3);
@@ -344,9 +352,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -357,7 +366,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
 
         mListActivity.bucketModel.addItem(item2);
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
         mListActivity.bucketModel.addItem(item2);
@@ -372,9 +381,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -385,7 +395,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
 
         mListActivity.bucketModel.addItem(item7);
         //Add 10 random items
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             addRandomItem();
         }
         mListActivity.bucketModel.addItem(item7);
@@ -400,9 +410,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -421,9 +432,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -441,9 +453,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -461,9 +474,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -481,9 +495,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -501,9 +516,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedParamCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedParamCheckDescending();
     }
 
@@ -530,9 +546,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedNameCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedNameCheckDescending();
     }
 
@@ -560,9 +577,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedNameCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedNameCheckDescending();
     }
 
@@ -587,9 +605,10 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
         sortedNameCheckAscending();
-        mListActivity.sortBucketListDescending(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
         sortedNameCheckDescending();
     }
 
@@ -602,11 +621,11 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         ItemModel mock3 = new ItemModel("3");
         ItemModel mock4 = new ItemModel("4");
         ItemModel mock5 = new ItemModel("5");
-        mock1.setDeadline("6", "day(s)");
-        mock2.setDeadline("3", "week(s)");
-        mock3.setDeadline("2", "month(s)");
-        mock4.setDeadline("3", "month(s)");
-        mock5.setDeadline("1", "year(s)");
+        mock1.setDeadline("6", "days");
+        mock2.setDeadline("3", "weeks");
+        mock3.setDeadline("2", "months");
+        mock4.setDeadline("3", "months");
+        mock5.setDeadline("1", "years");
 
         mListActivity.bucketModel.addItem(mock3);
         mListActivity.bucketModel.addItem(mock2);
@@ -624,22 +643,23 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
 
         assertTrue("testConversionDeadline failed",
-                    mListActivity.bucketModel.getItem(0).getDeadline().equals("6 day(s)"));
+                mListActivity.bucketModel.getItem(0).getDeadline().equals("6 days"));
         assertTrue("testConversionDeadline failed",
-                    mListActivity.bucketModel.getItem(1).getDeadline().equals("3 week(s)"));
+                mListActivity.bucketModel.getItem(1).getDeadline().equals("3 weeks"));
         assertTrue("testConversionDeadline failed",
-                    mListActivity.bucketModel.getItem(2).getDeadline().equals("2 month(s)"));
+                mListActivity.bucketModel.getItem(2).getDeadline().equals("2 months"));
         assertTrue("testConversionDeadline failed",
-                    mListActivity.bucketModel.getItem(3).getDeadline().equals("3 month(s)"));
+                mListActivity.bucketModel.getItem(3).getDeadline().equals("3 months"));
         assertTrue("testConversionDeadline failed",
-                    mListActivity.bucketModel.getItem(4).getDeadline().equals("1 year(s)"));
+                mListActivity.bucketModel.getItem(4).getDeadline().equals("1 years"));
     }
 
-    //Test that units are converted correctly when sorting by the Deadline parameter
-    //(e.g. 1 week > 6 days, etc.)
+    //Test that units are converted correctly when sorting by the Duration parameter
+    //(e.g. 25 hours > 1 day, etc)
     public void testConversionDuration() {
         mListActivity.bucketModel.clearItems();
         ItemModel mock1 = new ItemModel("1");
@@ -653,16 +673,16 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         ItemModel mock9 = new ItemModel("9");
         ItemModel mock10 = new ItemModel("10");
 
-        mock1.setDuration("200", "minute(s)");
-        mock2.setDuration("4", "hour(s)");
-        mock3.setDuration("1", "day(s)");
-        mock4.setDuration("25", "hour(s)");
-        mock5.setDuration("5", "day(s)");
-        mock6.setDuration("1", "week(s)");
-        mock7.setDuration("1", "month(s)");
-        mock8.setDuration("1", "year(s)");
-        mock9.setDuration("15", "month(s)");
-        mock10.setDuration("2", "year(s)");
+        mock1.setDuration("200", "minutes");
+        mock2.setDuration("4", "hours");
+        mock3.setDuration("1", "days");
+        mock4.setDuration("25", "hours");
+        mock5.setDuration("5", "days");
+        mock6.setDuration("1", "weeks");
+        mock7.setDuration("1", "months");
+        mock8.setDuration("1", "years");
+        mock9.setDuration("15", "months");
+        mock10.setDuration("2", "years");
 
         mListActivity.bucketModel.addItem(mock3);
         mListActivity.bucketModel.addItem(mock2);
@@ -685,27 +705,243 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
             e.printStackTrace();
         }
 
-        mListActivity.sortBucketListAscending(paramMethod);
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
 
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(0).getDuration().equals("200 minute(s)"));
+                mListActivity.bucketModel.getItem(0).getDuration().equals("200 minutes"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(1).getDuration().equals("4 hour(s)"));
+                mListActivity.bucketModel.getItem(1).getDuration().equals("4 hours"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(2).getDuration().equals("1 day(s)"));
+                mListActivity.bucketModel.getItem(2).getDuration().equals("1 days"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(3).getDuration().equals("25 hour(s)"));
+                mListActivity.bucketModel.getItem(3).getDuration().equals("25 hours"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(4).getDuration().equals("5 day(s)"));
+                mListActivity.bucketModel.getItem(4).getDuration().equals("5 days"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(5).getDuration().equals("1 week(s)"));
+                mListActivity.bucketModel.getItem(5).getDuration().equals("1 weeks"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(6).getDuration().equals("1 month(s)"));
+                mListActivity.bucketModel.getItem(6).getDuration().equals("1 months"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(7).getDuration().equals("1 year(s)"));
+                mListActivity.bucketModel.getItem(7).getDuration().equals("1 years"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(8).getDuration().equals("15 month(s)"));
+                mListActivity.bucketModel.getItem(8).getDuration().equals("15 months"));
         assertTrue("testConversionDuration failed",
-                mListActivity.bucketModel.getItem(9).getDuration().equals("2 year(s)"));
+                mListActivity.bucketModel.getItem(9).getDuration().equals("2 years"));
     }
+
+    //Test that units are properly converted when sorting by Travel Distance
+    public void testConversionTravelDistance() {
+        mListActivity.bucketModel.clearItems();
+        ItemModel mock1 = new ItemModel("1");
+        ItemModel mock2 = new ItemModel("2");
+        ItemModel mock3 = new ItemModel("3");
+        ItemModel mock4 = new ItemModel("4");
+        ItemModel mock5 = new ItemModel("5");
+
+        mock1.setTravelDistance("1", "miles");
+        mock2.setTravelDistance("5", "miles");
+        mock3.setTravelDistance("1", "kilometers");
+        mock4.setTravelDistance("5", "kilometers");
+        mock5.setTravelDistance("6", "kilometers");
+
+        mListActivity.bucketModel.addItem(mock3);
+        mListActivity.bucketModel.addItem(mock2);
+        mListActivity.bucketModel.addItem(mock5);
+        mListActivity.bucketModel.addItem(mock1);
+        mListActivity.bucketModel.addItem(mock4);
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
+
+        assertTrue("testConversionTravelDistance failed",
+                mListActivity.bucketModel.getItem(0).getTravelDistance().equals("1 kilometers"));
+        assertTrue("testConversionTravelDistance failed",
+                mListActivity.bucketModel.getItem(1).getTravelDistance().equals("1 miles"));
+        assertTrue("testConversionTravelDistance failed",
+                mListActivity.bucketModel.getItem(2).getTravelDistance().equals("5 kilometers"));
+        assertTrue("testConversionTravelDistance failed",
+                mListActivity.bucketModel.getItem(3).getTravelDistance().equals("6 kilometers"));
+        assertTrue("testConversionTravelDistance failed",
+                mListActivity.bucketModel.getItem(4).getTravelDistance().equals("5 miles"));
+    }
+
+    //Test whether items with no Deadline parameter get sorted to the bottom (regardless of which
+    //direction it is being sorted in.
+    public void testNullItemsDeadline() {
+        mListActivity.bucketModel.clearItems();
+
+        ItemModel null1 = new ItemModel("Testing");
+        ItemModel null2 = new ItemModel("NullTest");
+
+        mListActivity.bucketModel.addItem(item1);
+        mListActivity.bucketModel.addItem(null1);
+        mListActivity.bucketModel.addItem(item6);
+        mListActivity.bucketModel.addItem(item5);
+        mListActivity.bucketModel.addItem(item3);
+        mListActivity.bucketModel.addItem(null2);
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            paramMethod = itemModelClass.getMethod("getDeadlineForSort");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("1"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("3"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("6"));
+        assertTrue("testNullItemsDeadline failed",
+                   mListActivity.bucketModel.getItem(4).getItemText().equals("NullTest"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("Testing"));
+
+        noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("6"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("3"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("1"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("NullTest"));
+    }
+
+    //Test whether items with no Duration parameter get sorted to the bottom (regardless of which
+    //direction it is being sorted in.
+    public void testNullItemsDuration() {
+        mListActivity.bucketModel.clearItems();
+
+        ItemModel null1 = new ItemModel("Testing");
+
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(null1);
+        mListActivity.bucketModel.addItem(item1);
+        mListActivity.bucketModel.addItem(item1);
+        mListActivity.bucketModel.addItem(item3);
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            paramMethod = itemModelClass.getMethod("getDurationForSort");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("1"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("1"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("3"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+
+        noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("3"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("1"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("1"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+    }
+
+    //Test whether items with no TravelDistance parameter get sorted to the bottom (regardless of which
+    //direction it is being sorted in.
+    public void testNullItemsTravelDistance() {
+        mListActivity.bucketModel.clearItems();
+
+        ItemModel null1 = new ItemModel("Testing");
+        ItemModel null2 = new ItemModel("NullTest");
+
+        mListActivity.bucketModel.addItem(item2);
+        mListActivity.bucketModel.addItem(null1);
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(item5);
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(null2);
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            paramMethod = itemModelClass.getMethod("getTravelDistanceForSort");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("2"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("NullTest"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("Testing"));
+
+        noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("2"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("NullTest"));
+    }
+
 }

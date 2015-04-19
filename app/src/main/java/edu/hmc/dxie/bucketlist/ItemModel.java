@@ -22,11 +22,11 @@ public class ItemModel {
     public ItemModel() {
         this.itemText = "";
         this.completed = false;
-        this.deadline = "";
+        this.deadline = " days";
         this.cost = -1;
-        this.priority = -1;
-        this.duration = "";
-        this.travelDistance = "";
+        this.priority = 0;
+        this.duration = " minutes";
+        this.travelDistance = " miles";
         //this.categories = new ArrayList<>();
     }
 
@@ -36,11 +36,11 @@ public class ItemModel {
     public ItemModel(int i) {
         this.itemText = Integer.toString(i);
         this.completed = false;
-        this.deadline = Integer.toString(i) + " day(s)";
+        this.deadline = Integer.toString(i) + " days";
         this.cost = i;
         this.priority = i;
-        this.duration = Integer.toString(i) + " minute(s)";
-        this.travelDistance = Integer.toString(i) + " mile(s)";
+        this.duration = Integer.toString(i) + " minutes";
+        this.travelDistance = Integer.toString(i) + " miles";
     }
 
     // Constructor used for testing purposes only.
@@ -49,11 +49,11 @@ public class ItemModel {
     public ItemModel(String name) {
         this.itemText = name;
         this.completed = false;
-        this.deadline = "";
+        this.deadline = " days";
         this.cost = -1;
-        this.priority = -1;
-        this.duration = "";
-        this.travelDistance = "";
+        this.priority = 0;
+        this.duration = " minutes";
+        this.travelDistance = " miles";
     }
 
 
@@ -89,6 +89,34 @@ public class ItemModel {
         return this.travelDistance;
     }
 
+    public boolean hasNoDeadline() {
+        if (this.deadline.equals(" days") || this.deadline.equals(" weeks") ||
+            this.deadline.equals(" months") || this.deadline.equals(" years")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasNoCost() { return this.cost == -1; }
+
+    public boolean hasNoPriority() { return this.priority == 0; }
+
+    public boolean hasNoDuration() {
+        if (this.duration.equals(" minutes") || this.duration.equals(" hours") ||
+            this.duration.equals(" days") || this.duration.equals(" weeks") ||
+            this.duration.equals(" months") || this.duration.equals(" years")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasNoTravelDistance() {
+        if (this.travelDistance.equals(" miles") || this.travelDistance.equals(" kilometers")) {
+            return true;
+        }
+        return false;
+    }
+
     ////////////////////////////
     // Accessor Methods for Sort
     ////////////////////////////
@@ -100,13 +128,13 @@ public class ItemModel {
         String deadlineUnit = split[1];
 
         switch (deadlineUnit) {
-            case "day(s)":
+            case "days":
                 return deadlineValue;
-            case "week(s)":
+            case "weeks":
                 return deadlineValue * 7.0;
-            case "month(s)":
+            case "months":
                 return deadlineValue * 30.0;
-            case "year(s)":
+            case "years":
                 return deadlineValue * 365.0;
             default:
                 return 0;
@@ -127,17 +155,17 @@ public class ItemModel {
         String durationUnit = split[1];
 
         switch (durationUnit) {
-            case "minute(s)":
+            case "minutes":
                 return durationValue;
-            case "hour(s)":
+            case "hours":
                 return durationValue * 60.0;
-            case "day(s)":
+            case "days":
                 return durationValue * 1440.0;
-            case "week(s)":
+            case "weeks":
                 return durationValue * 10080.0;
-            case "month(s)":
+            case "months":
                 return durationValue * 43200.0;
-            case "year(s)":
+            case "years":
                 return durationValue * 525949.0;
             default:
                 return 0;
@@ -151,9 +179,9 @@ public class ItemModel {
         String travelDistanceUnit = split[1];
 
         switch (travelDistanceUnit) {
-            case "mile(s)":
+            case "miles":
                 return travelDistanceValue;
-            case "kilometer(s)":
+            case "kilometers":
                 return travelDistanceValue * 0.621371;
             default:
                 return 0;
@@ -161,7 +189,7 @@ public class ItemModel {
     }
 
     ////////////////////
-    // Mutator Methods
+    // Mutator (setter) Methods
     ////////////////////
 
     public void setItemText(String itemText) {

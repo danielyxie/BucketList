@@ -22,6 +22,8 @@ public class ListModel {
     public void addItem(ItemModel item) {
         this.bucket.add(item);
     }
+
+    public void addAll(ArrayList<ItemModel> items) { this.bucket.addAll(items); }
     
     public ArrayList<ItemModel> getBucket() {
         return this.bucket;

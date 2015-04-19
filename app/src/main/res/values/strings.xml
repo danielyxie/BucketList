@@ -14,22 +14,22 @@
     <string name="add_item_title">Add</string>
     <string name="empty_text_error">Woops! The text field is empty. Give a title to your item to add it to your bucket list.</string>
     <string-array name="deadline_units">
-        <item>day(s)</item>
-        <item>week(s)</item>
-        <item>month(s)</item>
-        <item>year(s)</item>
+        <item>days</item>
+        <item>weeks</item>
+        <item>months</item>
+        <item>years</item>
     </string-array>
     <string-array name="duration_units">
-        <item>minute(s)</item>
-        <item>hour(s)</item>
-        <item>day(s)</item>
-        <item>week(s)</item>
-        <item>month(s)</item>
-        <item>year(s)</item>
+        <item>minutes</item>
+        <item>hours</item>
+        <item>days</item>
+        <item>weeks</item>
+        <item>months</item>
+        <item>years</item>
     </string-array>
     <string-array name="traveldistance_units">
-        <item>mile(s)</item>
-        <item>kilometer(s)</item>
+        <item>miles</item>
+        <item>kilometers</item>
     </string-array>
 
     <string-array name="sort_params">
