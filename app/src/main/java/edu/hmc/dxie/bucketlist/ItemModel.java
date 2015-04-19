@@ -27,7 +27,7 @@ public class ItemModel {
         this.priority = 0;
         this.duration = " minutes";
         this.travelDistance = " miles";
-        //this.categories = new ArrayList<>();
+        this.categories = new ArrayList<>();
     }
 
     // Constructor used for testing purposes only.
