@@ -944,4 +944,122 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
                 mListActivity.bucketModel.getItem(5).getItemText().equals("NullTest"));
     }
 
+    //Test whether items with no Cost parameter get sorted to the bottom (regardless of which
+    //direction it is being sorted in.
+    public void testNullItemsCost() {
+        mListActivity.bucketModel.clearItems();
+
+        ItemModel null1 = new ItemModel("Testing");
+        ItemModel null2 = new ItemModel("NullTest");
+
+        mListActivity.bucketModel.addItem(item2);
+        mListActivity.bucketModel.addItem(null1);
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(item5);
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(null2);
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            paramMethod = itemModelClass.getMethod("getCost");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("2"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("NullTest"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("Testing"));
+
+        noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("2"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("NullTest"));
+    }
+
+    //Test whether items with no Priority parameter get sorted to the bottom (regardless of which
+    //direction it is being sorted in.
+    public void testNullItemsPriority() {
+        mListActivity.bucketModel.clearItems();
+
+        ItemModel null1 = new ItemModel("Testing");
+        ItemModel null2 = new ItemModel("NullTest");
+
+        mListActivity.bucketModel.addItem(item2);
+        mListActivity.bucketModel.addItem(null1);
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(item5);
+        mListActivity.bucketModel.addItem(item8);
+        mListActivity.bucketModel.addItem(null2);
+
+        ItemModel itemModelObject = new ItemModel();
+        Class<?> itemModelClass = itemModelObject.getClass();
+        Method paramMethod = null;
+
+        try {
+            paramMethod = itemModelClass.getMethod("getPriorityForSort");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        int noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("2"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("NullTest"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("Testing"));
+
+        noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
+        mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
+
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(0).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(1).getItemText().equals("8"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(2).getItemText().equals("5"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(3).getItemText().equals("2"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+        assertTrue("testNullItemsDeadline failed",
+                mListActivity.bucketModel.getItem(5).getItemText().equals("NullTest"));
+    }
+
+
+
 }

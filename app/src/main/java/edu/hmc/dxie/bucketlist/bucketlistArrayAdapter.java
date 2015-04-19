@@ -25,15 +25,20 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
     private Context mContext;
     private int id;
     private ArrayList<ItemModel> items;
+    private ArrayList<Category> categories;
+    private ArrayList<Category> activeCategories;
     private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
     private String query;
 
-    public bucketlistArrayAdapter(Context context, int textViewResourceId, ArrayList<ItemModel> list)
+    public bucketlistArrayAdapter(Context context, int textViewResourceId,
+                                  ArrayList<ItemModel> list, ArrayList<Category> categories)
     {
         super(context, textViewResourceId, list);
         mContext = context;
         id = textViewResourceId;
         items = list;
+        this.categories = categories;
+        activeCategories = getActiveCategories();
         accomplishedToggle = false;
         query = "";
     }
@@ -56,9 +61,11 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
         //  1) item exists
         //  2) item contains search text
         //  3) item matches the criteria of toggled accomplished tab
+        //  4) item is in an active category
         if(currentItem != null
                 && currentItem.toString().toLowerCase().contains(query.toLowerCase())
-                && currentItem.getCompleted() == accomplishedToggle)
+                && currentItem.getCompleted() == accomplishedToggle
+                && currentItem.isInCategory(activeCategories))
         {
             itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
 
@@ -98,6 +105,12 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
         return itemView;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        activeCategories = getActiveCategories();
+    }
+
     public void setAccomplishedToggle(boolean toggle){
         this.accomplishedToggle = toggle;      
     }
@@ -108,11 +121,24 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.item_checkbox_completed:
-                CheckBox checkBox = (CheckBox) v;
-                ItemModel item = (ItemModel) checkBox.getTag();
+                ItemModel item = (ItemModel) v.getTag();
                 item.toggleCompleted();
                 notifyDataSetChanged();
                 break;
         }
+    }
+
+    private ArrayList<Category> getActiveCategories() {
+        ArrayList<Category> activeCategories = new ArrayList<>();
+
+        // Iterate through all of the categories
+        for (Category category : categories) {
+
+            // Only add active categories
+            if (category.getState()) {
+                activeCategories.add(category);
+            }
+        }
+        return activeCategories;
     }
 }

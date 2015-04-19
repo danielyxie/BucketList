@@ -2,6 +2,7 @@ package edu.hmc.dxie.bucketlist;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,12 +40,16 @@ public class CategoryArrayAdapter extends ArrayAdapter<Category> {
         if (currentCat != null) {
             catView = inflater.inflate(R.layout.category, parent, false);
 
-            //Initialize the item name
+            // Initialize the item name and icon
             ToggleButton button = (ToggleButton) catView.findViewById(R.id.category_toggle);
-            button.setText(currentCat.getName());
             button.setTextOff(currentCat.getName());
             button.setTextOn(currentCat.getName());
             button.setButtonDrawable(currentCat.getIconID());
+
+            // Handle ToggleButton clicking
+            button.setChecked(currentCat.getState());
+            button.setTag(currentCat);
+            button.setOnClickListener((ListActivity) mContext);
             return catView;
         }
         return v;

@@ -226,6 +226,22 @@ public class ItemModel {
         this.travelDistance = travelDistance + " " + unit;
     }
 
+    // Checks whether the item is in one of the specified categories
+    public boolean isInCategory(ArrayList<Category> categories) {
+
+        // Create a shallow copy of the specified categories
+        //  because the next method, retainAll, modifies the Container on which it is called,
+        ArrayList<Category> shallowCategories = new ArrayList<>(categories);
+
+        // Gets the intersection of the item's categories and the specified categories
+        //  and stores the result in the given categories Container
+        boolean changed = shallowCategories.retainAll(this.categories);
+
+        // Returns true if the intersection is non-empty,
+        //  or if the intersection is empty, but the active categories were empty to begin
+        return !shallowCategories.isEmpty() || !changed;
+    }
+
     public void addCategory(Category category) {
         if (!categories.contains(category)) {
             this.categories.add(category);

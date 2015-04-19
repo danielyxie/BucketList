@@ -11,6 +11,8 @@ public class CategoryList {
 
     private ArrayList<Category> categories = new ArrayList<>();
 
+    // NO DEFAULT CONSTRUCTOR!
+
     public CategoryList(String[] names, int[] iconIDs) {
 
         // Assert that the arrays have equal length
