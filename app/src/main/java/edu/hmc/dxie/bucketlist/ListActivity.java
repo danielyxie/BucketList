@@ -313,11 +313,11 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             //Sort ImageButton for choosing ascending or descending sorting order
             case R.id.sort_button:
                 if (sortAscending) {
-                    int id = getResources().getIdentifier("edu.hmc.dxie.bucketlist:drawable/sort_down_arrow", null, null);
+                    int id = getResources().getIdentifier("edu.hmc.dxie.bucketlist:drawable/sort_highest_first", null, null);
                     sortButton.setImageResource(id);
                     sortAscending = false;
                 } else {
-                    int id = getResources().getIdentifier("edu.hmc.dxie.bucketlist:drawable/sort_up_arrow", null, null);
+                    int id = getResources().getIdentifier("edu.hmc.dxie.bucketlist:drawable/sort_lowest_first", null, null);
                     sortButton.setImageResource(id);
                     sortAscending = true;
                 }

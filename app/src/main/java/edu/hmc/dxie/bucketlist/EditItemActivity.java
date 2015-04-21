@@ -48,6 +48,9 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     EditText travelDistanceValueEditText;
     Spinner travelDistanceSpinner;
 
+    //Notes View objects
+    LinedEditText notesEditText;
+
     // Key listeners for every parameter
     KeyListener itemTextListener;
     KeyListener deadlineListener;
@@ -74,6 +77,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         initCostEditing();
         initDurationEditing();
         initTravelDistanceEditing();
+        initNotesEditing();
     }
 
 
@@ -114,6 +118,8 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
                 String travelDistanceValue = travelDistanceValueEditText.getText().toString();
                 String travelDistanceUnit = travelDistanceSpinner.getSelectedItem().toString();
                 currentItem.setTravelDistance(travelDistanceValue, travelDistanceUnit);
+                String n = notesEditText.getText().toString();
+                currentItem.setNotes(n);
 
                 // Serialize the new item to JSON
                 String serializedItem = currentItem.serialize();
@@ -319,6 +325,13 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
 
         // Get the listener for the EditText
         travelDistanceListener = travelDistanceValueEditText.getKeyListener();
+    }
+
+    private void initNotesEditing() {
+        String n = currentItem.getNotes();
+
+        notesEditText = (LinedEditText) findViewById(R.id.notepad_edit);
+        notesEditText.setText(n);
     }
 
 }

@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/light_brown">
+    android:background="@color/light_gray">
 
 
     <LinearLayout
@@ -17,7 +17,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/light_gray"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
 
@@ -55,7 +55,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Empty layout for aligning widgets to horizontal center -->
@@ -96,6 +96,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -159,7 +160,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -212,6 +213,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -244,7 +246,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="50dp"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -267,6 +269,39 @@
 
         </RelativeLayout>
 
+        <!-- Layout for Notes section-->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="5dp"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/notepad_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Notes"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"/>
+
+            <edu.hmc.dxie.bucketlist.LinedEditText
+                android:id="@+id/notepad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:lines="5"
+                android:focusable="false"
+                android:enabled="false"
+                android:gravity="center"
+                android:layout_below="@id/notepad_title"/>
+        </RelativeLayout>
+
 
         <!-- Layout for Buttons -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -277,7 +312,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Complete button -->

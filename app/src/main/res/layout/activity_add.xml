@@ -3,7 +3,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background = "@color/light_gray">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +13,7 @@
         android:layout_height="match_parent">
 
 
-        <!-- New Item -->
+        <!-- Task Name -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -21,46 +22,32 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
 
+            <!-- "I want to" text -->
             <TextView
-                android:id="@+id/add_newitem_title"
+                android:id="@+id/text_iwantto"
+                android:text="I want to..."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="New Item"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/input_divider_padding"/>
+                android:layout_marginLeft="15dp"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Text of item being viewed -->
+            <EditText
+                android:id="@+id/add_edittext_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/add_newitem_title">
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/add_edittext_text"
-                    android:inputType="textCapSentences"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/label_divider_padding"
-                    android:layout_marginBottom="@dimen/input_divider_padding"
-                    android:layout_weight="6"/>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-            </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:width="275dp"
+                android:layout_below="@+id/text_iwantto"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:gravity="center_horizontal" />
         </RelativeLayout>
 
 
@@ -73,7 +60,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/mint"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -118,7 +105,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -181,7 +168,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/mint"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -232,7 +219,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -277,7 +264,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/mint"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -322,7 +309,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView

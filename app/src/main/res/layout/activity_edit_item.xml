@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/light_brown">
+    android:background="@color/light_gray">
 
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_gray"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
 
@@ -58,7 +58,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Empty layout for aligning widgets to horizontal center -->
@@ -99,7 +99,6 @@
                     android:id="@+id/param_deadline_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/light_brown"
                     android:layout_toRightOf="@id/param_deadline_value"/>
 
             </LinearLayout>
@@ -115,6 +114,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -178,7 +178,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -232,6 +232,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -281,7 +282,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="50dp"
-            android:background="@color/light_brown"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -318,6 +319,40 @@
                     android:layout_toRightOf="@id/param_traveldistance_value"/>
 
             </LinearLayout>
+        </RelativeLayout>
+
+        <!-- Layout for Notes-->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="5dp"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/notes_title_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Notes"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"/>
+
+            <edu.hmc.dxie.bucketlist.LinedEditText
+                android:id="@+id/notepad_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:lines="5"
+                android:focusable="true"
+                android:enabled="true"
+                android:gravity="center"
+                android:layout_below="@id/notes_title_edit"/>
+
         </RelativeLayout>
 
     </LinearLayout>

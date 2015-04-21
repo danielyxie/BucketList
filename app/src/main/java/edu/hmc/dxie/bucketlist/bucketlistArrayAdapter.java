@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -69,6 +71,15 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
         {
             itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
 
+            //Get the View Objects so that their background colors can be set
+            RelativeLayout boxLayout = (RelativeLayout) itemView.findViewById(R.id.item_box_layout);
+            LinearLayout deadlinePriorityLayout
+                         = (LinearLayout) itemView.findViewById(R.id.deadlinepriority_layout);
+            LinearLayout costDurationLayout
+                         = (LinearLayout) itemView.findViewById(R.id.costduration_layout);
+            LinearLayout traveldistanceLayout
+                         = (LinearLayout) itemView.findViewById(R.id.traveldistance_layout);
+
             //Initialize the item name
             TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
             text.setText(currentItem.toString());
@@ -95,6 +106,15 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             
             if(accomplishedToggle) {
                 text.setBackgroundColor(res.getColor(R.color.light_blue));
+                boxLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                traveldistanceLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                costDurationLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                deadlinePriorityLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                duration_text.setBackgroundColor(res.getColor(R.color.light_blue));
+                cost_text.setBackgroundColor(res.getColor(R.color.light_blue));
+                deadline_text.setBackgroundColor(res.getColor(R.color.light_blue));
+                priority_text.setBackgroundColor(res.getColor(R.color.light_blue));
+                traveldistance_text.setBackgroundColor(res.getColor(R.color.light_blue));
             } else {
                 text.setBackgroundColor(res.getColor(R.color.white));
             }

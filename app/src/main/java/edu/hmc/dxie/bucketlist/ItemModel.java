@@ -17,6 +17,7 @@ public class ItemModel {
     private String duration;
     private String travelDistance;
     private ArrayList<Category> categories;
+    private String notes;
 
     // Default initializes all values. To set them use available mutator methods.
     public ItemModel() {
@@ -28,6 +29,7 @@ public class ItemModel {
         this.duration = " minutes";
         this.travelDistance = " miles";
         this.categories = new ArrayList<>();
+        this.notes = new String();
     }
 
     // Constructor used for testing purposes only.
@@ -88,6 +90,8 @@ public class ItemModel {
     public String getTravelDistance() {
         return this.travelDistance;
     }
+
+    public String getNotes() { return this.notes; }
 
     public boolean hasNoDeadline() {
         if (this.deadline.equals(" days") || this.deadline.equals(" weeks") ||
@@ -218,12 +222,12 @@ public class ItemModel {
         this.duration = duration + " " + unit;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
     public void setTravelDistance(String travelDistance, String unit) {
         this.travelDistance = travelDistance + " " + unit;
+    }
+
+    public void setNotes(String n) {
+        this.notes = n;
     }
 
     // Checks whether the item is in one of the specified categories
