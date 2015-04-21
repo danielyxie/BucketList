@@ -25,43 +25,51 @@
     <!-- Menu used to select which parameter to sort by -->
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp">
+        android:layout_marginRight="0dp"
+        android:background="@color/silver"
+>
 
         <TextView
             android:id="@+id/sortby_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_alignParentLeft="true"
             android:text="Sort by: "
-            android:textSize="20dp"/>
+            android:textSize="30sp"/>
 
         <ImageButton
             android:id="@+id/sort_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/sort_up_arrow"/>
+            android:src="@drawable/sort_lowest_first"/>
 
         <Spinner
             android:id="@+id/sort_spinner"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@id/sortby_text"
             android:layout_toLeftOf="@id/sort_button"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="10dp"
-            android:textSize="22dp"/>
+            android:textSize="28sp"/>
+
     </RelativeLayout>
 
     <!-- Greeting -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/charcoal"/>
+
     <TextView
         android:id="@+id/greeting"
         android:text="@string/greeting"
@@ -81,7 +89,7 @@
     <!-- Handles creation of the Unaccomlished and Accomplished tabs below the Action Bar -->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:layout_marginBottom="-7dp"
         android:layout_marginTop="-7dp"
@@ -91,7 +99,7 @@
 
         <ToggleButton
             android:layout_width="0dp"
-            android:layout_height= "60dp"
+            android:layout_height= "match_parent"
             android:textOn="Unaccomplished"
             android:textOff="Unaccomplished"
             android:id="@+id/list_toggle_unaccomplished"
@@ -102,7 +110,7 @@
 
         <ToggleButton
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:textOn="Accomplished"
             android:textOff="Accomplished"
             android:id="@+id/list_toggle_accomplished"
