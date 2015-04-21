@@ -25,6 +25,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     TextView durationTextView;
     TextView costTextView;
     TextView travelDistanceTextView;
+    LinedEditText notesEditView;
 
     Button completeButton;
 
@@ -43,6 +44,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         costTextView = (TextView) findViewById(R.id.param_cost);
         durationTextView = (TextView) findViewById(R.id.param_duration_value);
         travelDistanceTextView = (TextView) findViewById(R.id.param_traveldistance_value);
+        notesEditView = (LinedEditText) findViewById(R.id.notepad);
 
         // Get the item to be viewed
         viewItem = getIntent();
@@ -205,10 +207,13 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
      * Refreshes the parameters of the item being displayed
      */
     private void refreshItemData(){
+        //Item Text
         itemTextView.setText( currentItem.getItemText() );
+
+        //Deadline parameter
         deadlineTextView.setText( currentItem.getDeadline() );
 
-        //Initialize the TextView that displays the Priority value
+        //Priority parameter
         if (currentItem.getPriority() != -1) {
             priorityTextView.setText(String.valueOf(currentItem.getPriority()));
         }
@@ -218,12 +223,19 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
             prioritySeekBar.setProgress( currentItem.getPriority() );
         }
 
+        //Cost parameter
         if(currentItem.getCost() != -1) {
             costTextView.setText(String.valueOf(currentItem.getCost()));
         }
 
+        //Duration parameter
         durationTextView.setText(currentItem.getDuration());
+
+        //Travel distance parameter
         travelDistanceTextView.setText(currentItem.getTravelDistance());
+
+        //Notes
+        notesEditView.setText(currentItem.getNotes());
     }
 
 }

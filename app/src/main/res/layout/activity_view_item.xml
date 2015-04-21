@@ -243,7 +243,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
-            android:paddingBottom="50dp"
             android:background="@color/light_brown"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
@@ -263,8 +262,41 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:gravity="center"
-                android:layout_below="@+id/param_traveldistance_title"/>
+                android:layout_below="@id/param_traveldistance_title"/>
 
+        </RelativeLayout>
+
+        <!-- Layout for Notes section-->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="5dp"
+            android:background="@color/light_brown"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/notepad_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Notes"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"/>
+
+            <edu.hmc.dxie.bucketlist.LinedEditText
+                android:id="@+id/notepad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:lines="5"
+                android:focusable="false"
+                android:enabled="false"
+                android:gravity="center"
+                android:layout_below="@id/notepad_title"/>
         </RelativeLayout>
 
 
