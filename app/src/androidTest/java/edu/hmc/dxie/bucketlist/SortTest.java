@@ -1031,17 +1031,17 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         mListActivity.sortBucketListAscending(paramMethod, noParamIndex);
 
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(0).getItemText().equals("2"));
+                mListActivity.bucketModel.getItem(0).getItemText().equals("NullTest"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(1).getItemText().equals("5"));
+                mListActivity.bucketModel.getItem(1).getItemText().equals("Testing"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(2).getItemText().equals("8"));
+                mListActivity.bucketModel.getItem(2).getItemText().equals("2"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(3).getItemText().equals("8"));
+                mListActivity.bucketModel.getItem(3).getItemText().equals("5"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(4).getItemText().equals("NullTest"));
+                mListActivity.bucketModel.getItem(4).getItemText().equals("8"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(5).getItemText().equals("Testing"));
+                mListActivity.bucketModel.getItem(5).getItemText().equals("8"));
 
         noParamIndex = mListActivity.filterItemsWithNoParameters(paramMethod);
         mListActivity.sortBucketListDescending(paramMethod, noParamIndex);
@@ -1055,9 +1055,9 @@ public class SortTest extends ActivityInstrumentationTestCase2<ListActivity> {
         assertTrue("testNullItemsDeadline failed",
                 mListActivity.bucketModel.getItem(3).getItemText().equals("2"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(4).getItemText().equals("Testing"));
+                mListActivity.bucketModel.getItem(4).getItemText().equals("NullTest"));
         assertTrue("testNullItemsDeadline failed",
-                mListActivity.bucketModel.getItem(5).getItemText().equals("NullTest"));
+                mListActivity.bucketModel.getItem(5).getItemText().equals("Testing"));
     }
 
 

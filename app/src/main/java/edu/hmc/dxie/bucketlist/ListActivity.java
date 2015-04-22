@@ -447,13 +447,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                     }
                 }
             } else if (paramMethod.equals(getPriorityMethod)) {
-                for ( int i = 0; i < bucketModel.size(); i++ ) {
-                    if (bucketModel.getItem(i).hasNoPriority()) {
-                        noParams.add(bucketModel.getItem(i));
-                    } else {
-                        withParams.add(bucketModel.getItem(i));
-                    }
-                }
+                //All items should have a priority value
+                return (bucketModel.size() - 1);
             } else if (paramMethod.equals(getDurationMethod)) {
                 for ( int i = 0; i < bucketModel.size(); i++ ) {
                     if (bucketModel.getItem(i).hasNoDuration()) {

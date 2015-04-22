@@ -67,18 +67,17 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
         if(currentItem != null
                 && currentItem.toString().toLowerCase().contains(query.toLowerCase())
                 && currentItem.getCompleted() == accomplishedToggle
-                && currentItem.isInCategory(activeCategories))
-        {
+                && currentItem.isInCategory(activeCategories)) {
             itemView = inflater.inflate(R.layout.bucket_list_item, parent, false);
 
             //Get the View Objects so that their background colors can be set
             RelativeLayout boxLayout = (RelativeLayout) itemView.findViewById(R.id.item_box_layout);
             LinearLayout deadlinePriorityLayout
-                         = (LinearLayout) itemView.findViewById(R.id.deadlinepriority_layout);
+                    = (LinearLayout) itemView.findViewById(R.id.deadlinepriority_layout);
             LinearLayout costDurationLayout
-                         = (LinearLayout) itemView.findViewById(R.id.costduration_layout);
+                    = (LinearLayout) itemView.findViewById(R.id.costduration_layout);
             LinearLayout traveldistanceLayout
-                         = (LinearLayout) itemView.findViewById(R.id.traveldistance_layout);
+                    = (LinearLayout) itemView.findViewById(R.id.traveldistance_layout);
 
             //Initialize the item name
             TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
@@ -90,13 +89,47 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             TextView cost_text = (TextView) itemView.findViewById(R.id.item_cost);
             TextView duration_text = (TextView) itemView.findViewById(R.id.item_duration);
             TextView traveldistance_text =
-                                     (TextView) itemView.findViewById(R.id.item_traveldistance);
+                    (TextView) itemView.findViewById(R.id.item_traveldistance);
 
-            deadline_text.setText(currentItem.getDeadline());
+
+            //Set the texts of the parameter values
+            String deadlineString = currentItem.getDeadline();
+            if (currentItem.hasNoDeadline()) {
+                deadline_text.setText("----------");
+            } else if (deadlineString.length() > 10) {
+                deadline_text.setText(deadlineString.substring(0, 10) + "...");
+            } else {
+                deadline_text.setText(deadlineString);
+            }
+
             priority_text.setText(Integer.toString(currentItem.getPriority()));
-            cost_text.setText(Double.toString(currentItem.getCost()));
-            duration_text.setText(currentItem.getDuration());
-            traveldistance_text.setText(currentItem.getTravelDistance());
+
+            String costString = Double.toString(currentItem.getCost());
+            if (currentItem.hasNoCost()) {
+                cost_text.setText("----------");
+            } else if (costString.length() > 10) {
+                cost_text.setText(costString.substring(0, 10) + "...");
+            } else {
+                cost_text.setText(costString);
+            }
+
+            String durationString = currentItem.getDuration();
+            if (currentItem.hasNoDuration()) {
+                duration_text.setText("----------");
+            } else if (durationString.length() > 10) {
+                duration_text.setText(durationString.substring(0, 10) + "...");
+            } else {
+                duration_text.setText(durationString);
+            }
+
+            String traveldistanceString = currentItem.getTravelDistance();
+            if(currentItem.hasNoTravelDistance()) {
+                traveldistance_text.setText("----------");
+            } else if (traveldistanceString.length() > 10) {
+                traveldistance_text.setText(traveldistanceString.substring(0, 10) + "...");
+            } else {
+                traveldistance_text.setText(traveldistanceString);
+            }
 
             //Handle the checkbox
             CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.item_checkbox_completed);

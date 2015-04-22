@@ -103,8 +103,6 @@ public class ItemModel {
 
     public boolean hasNoCost() { return this.cost == -1; }
 
-    public boolean hasNoPriority() { return this.priority == 0; }
-
     public boolean hasNoDuration() {
         if (this.duration.equals(" minutes") || this.duration.equals(" hours") ||
             this.duration.equals(" days") || this.duration.equals(" weeks") ||
