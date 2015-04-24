@@ -42,6 +42,18 @@ public class Category {
         this.state = !this.state;
     }
 
+    // For use of retainAll when filtering
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Category)) {
+            return false;
+        } else if (obj == this) {
+            return true;
+        } else {
+            return (name.equals( ((Category) obj).getName() ) && iconID == ((Category) obj).getIconID());
+        }
+    }
+
     public String serialize() {
         Gson gson = new Gson();
         return gson.toJson(this);

@@ -30,6 +30,10 @@ public class CategoryList {
         return this.categories;
     }
 
+    public Category getCategory(int position) {
+        return this.categories.get(position);
+    }
+
     public void addCategory(Category category) {
         if (!categories.contains(category)) {
             this.categories.add(category);

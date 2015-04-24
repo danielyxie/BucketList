@@ -7,12 +7,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.method.KeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -21,7 +27,7 @@ import java.util.Arrays;
 
 
 
-public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener {
+public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
 
     Resources res;
     Intent editItem;
@@ -47,6 +53,10 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
     //Travel Distance layout View objects
     EditText travelDistanceValueEditText;
     Spinner travelDistanceSpinner;
+
+    // Stuff for categories
+    CategoryList categories;
+    ArrayList<Category> itemCats;
 
     //Notes View objects
     LinedEditText notesEditText;
@@ -77,6 +87,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         initCostEditing();
         initDurationEditing();
         initTravelDistanceEditing();
+        initCategoryEditing();
         initNotesEditing();
     }
 
@@ -327,6 +338,27 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         travelDistanceListener = travelDistanceValueEditText.getKeyListener();
     }
 
+    private void initCategoryEditing() {
+        String serializedCategories = editItem.getStringExtra("categories");
+        categories = CategoryList.deserialize(serializedCategories);
+        itemCats = currentItem.getCategories();
+        CategoryPickerAdapter catPickerAdapter = new CategoryPickerAdapter(this,
+                android.R.layout.simple_list_item_1,
+                categories.getCategories(), itemCats);
+        ListView categoryPicker = (ListView) findViewById(R.id.edit_categories);
+        categoryPicker.setAdapter(catPickerAdapter);
+        categoryPicker.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        categoryPicker.setOnItemClickListener(this);
+    }
+
     private void initNotesEditing() {
         String n = currentItem.getNotes();
 
@@ -334,4 +366,14 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         notesEditText.setText(n);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        CheckedTextView catPicker = (CheckedTextView) view;
+        catPicker.toggle();
+        if (catPicker.isChecked()) {
+            itemCats.add(categories.getCategory(position));
+        } else {
+            itemCats.remove(categories.getCategory(position));
+        }
+    }
 }

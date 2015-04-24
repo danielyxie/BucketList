@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Deadline"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="7dp"/>
 
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Priority"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="15dp"/>
 
             <TextView
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Cost"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="15dp"/>
 
 
@@ -221,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Duration"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="15dp"/>
 
             <TextView
@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Travel Distance"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="15dp"/>
 
             <TextView
@@ -267,6 +267,40 @@
 
         </RelativeLayout>
 
+        <!-- Categories -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/view_categories_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Categories"
+                android:gravity="start"
+                android:layout_marginTop="@dimen/input_divider_padding"/>
+
+            <TextView
+                android:id="@+id/view_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_categories_title"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"
+                android:gravity="center"/>
+        </RelativeLayout>
+
         <!-- Layout for Notes section-->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -275,7 +309,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
-            android:background="@color/light_blue"
+            android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <TextView
@@ -284,7 +318,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Notes"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="15dp"/>
 
             <edu.hmc.dxie.bucketlist.LinedEditText
@@ -308,7 +342,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:background="@color/light_gray"
+            android:background="@color/light_blue"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
             <!-- Complete button -->
@@ -317,7 +351,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Complete"
-                android:backgroundTint="@color/charcoal"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
