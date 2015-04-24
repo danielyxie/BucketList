@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:background="@color/light_gray">
 
-
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -245,7 +244,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="5dp"
-            android:paddingBottom="50dp"
             android:background="@color/light_gray"
             tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
 
@@ -321,6 +319,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Complete"
+                android:backgroundTint="@color/charcoal"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
 

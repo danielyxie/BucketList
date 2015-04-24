@@ -56,6 +56,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         // Initialize the Complete button
         completeButton = (Button) findViewById(R.id.button_complete);
         completeButton.setOnClickListener(this);
+        completeButton.setBackgroundColor(getResources().getColor(R.color.white));
         
         // Choose whether to show a "Complete" or "Uncomplete" Button
         if (currentItem.getCompleted()) {
