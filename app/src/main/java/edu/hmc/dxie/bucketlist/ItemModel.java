@@ -91,6 +91,21 @@ public class ItemModel {
         return this.travelDistance;
     }
 
+    public ArrayList<Category> getCategories() {
+        return this.categories;
+    }
+
+    public String getCategoriesText() {
+        String categories = "";
+        for (Category category : this.categories) {
+            categories += category.getName() + ", ";
+        }
+        if (!categories.isEmpty()) {
+            categories = categories.substring(0, categories.length() - 2);
+        }
+        return categories;
+    }
+
     public String getNotes() { return this.notes; }
 
     public boolean hasNoDeadline() {

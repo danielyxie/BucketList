@@ -247,11 +247,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         ItemModel clickedItem = bucketModel.getItem(position);
 
         String serializedItem = clickedItem.serialize();
+        String serializedCats = categories.serialize();
 
         // Go to ViewItemActivity with the clicked item
         Intent viewItem = new Intent(this, ViewItemActivity.class);
         viewItem.putExtra("item", serializedItem);
         viewItem.putExtra("item position", position);
+        viewItem.putExtra("categories", serializedCats);
         startActivityForResult(viewItem, RequestCode.VIEW_ITEM.ordinal());
     }
 

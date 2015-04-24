@@ -25,6 +25,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
     TextView durationTextView;
     TextView costTextView;
     TextView travelDistanceTextView;
+    TextView categoriesTextView;
     LinedEditText notesEditView;
 
     Button completeButton;
@@ -44,6 +45,7 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         costTextView = (TextView) findViewById(R.id.param_cost);
         durationTextView = (TextView) findViewById(R.id.param_duration_value);
         travelDistanceTextView = (TextView) findViewById(R.id.param_traveldistance_value);
+        categoriesTextView = (TextView) findViewById(R.id.view_categories);
         notesEditView = (LinedEditText) findViewById(R.id.notepad);
 
         // Get the item to be viewed
@@ -90,10 +92,12 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
 
                 // Serialize the new item to JSON
                 String serializedItem = currentItem.serialize();
+                String serializedCats = viewItem.getStringExtra("categories");
 
                 // Go to EditActivity
                 Intent editItem = new Intent(this, EditItemActivity.class);
                 editItem.putExtra("item", serializedItem);
+                editItem.putExtra("categories", serializedCats);
                 startActivityForResult(editItem, RequestCode.EDIT_ITEM.ordinal());
                 return true;
 
@@ -235,8 +239,10 @@ public class ViewItemActivity extends ActionBarActivity implements View.OnClickL
         //Travel distance parameter
         travelDistanceTextView.setText(currentItem.getTravelDistance());
 
+        // Categories
+        categoriesTextView.setText( currentItem.getCategoriesText() );
+
         //Notes
         notesEditView.setText(currentItem.getNotes());
     }
-
 }
