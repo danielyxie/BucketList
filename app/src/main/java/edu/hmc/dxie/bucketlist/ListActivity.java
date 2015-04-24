@@ -170,6 +170,8 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
 
             // Go to AddActivity
             Intent addItem = new Intent(this, AddActivity.class);
+            String serializedCategories = categories.serialize();
+            addItem.putExtra("categories", serializedCategories);
             startActivityForResult(addItem, RequestCode.ADD_ITEM.ordinal());
             return true;
         }

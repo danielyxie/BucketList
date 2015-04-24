@@ -4,18 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by justisallen and kaitlynanderson on 2/15/15.
  */
-public class AddActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class AddActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
+
+    CategoryList categories;
+    ArrayList<Category> itemCats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,26 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
                 R.array.traveldistance_units, android.R.layout.simple_spinner_item);
         travelDistanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         travelDistanceSpinner.setAdapter(travelDistanceAdapter);
+
+        // Initialize the Category Picker
+        itemCats = new ArrayList<>();
+        String serializedCategories = getIntent().getStringExtra("categories");
+        categories = CategoryList.deserialize(serializedCategories);
+        CategoryPickerAdapter catPickerAdapter = new CategoryPickerAdapter(this,
+                android.R.layout.simple_list_item_1,
+                categories.getCategories(), itemCats);
+        ListView categoryPicker = (ListView) findViewById(R.id.add_categories);
+        categoryPicker.setAdapter(catPickerAdapter);
+        categoryPicker.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        categoryPicker.setOnItemClickListener(this);
 
         // Initialize the "Add" Button
         Button addButton = (Button) findViewById(R.id.add_button_confirm);
@@ -128,6 +157,7 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
             newItem.setCost(cost);
             newItem.setDuration(duration, durationUnit);
             newItem.setTravelDistance(travelDistance, travelDistanceUnit);
+            newItem.setCategories(itemCats);
 
             // Serialize the new item to JSON
             String serializedItem = newItem.serialize();
@@ -171,5 +201,16 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        CheckedTextView catPicker = (CheckedTextView) view;
+        catPicker.toggle();
+        if (catPicker.isChecked()) {
+            itemCats.add(categories.getCategory(position));
+        } else {
+            itemCats.remove(categories.getCategory(position));
+        }
     }
 }

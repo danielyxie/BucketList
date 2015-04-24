@@ -256,6 +256,10 @@ public class ItemModel {
         }
     }
 
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+
     @Override
     public String toString() {
         return this.itemText;
