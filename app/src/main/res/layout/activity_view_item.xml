@@ -290,13 +290,11 @@
             <edu.hmc.dxie.bucketlist.LinedEditText
                 android:id="@+id/notepad"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:lines="5"
+                android:textSize="16dp"
                 android:focusable="false"
                 android:enabled="false"
-                android:gravity="center"
                 android:layout_below="@id/notepad_title"/>
         </RelativeLayout>
 

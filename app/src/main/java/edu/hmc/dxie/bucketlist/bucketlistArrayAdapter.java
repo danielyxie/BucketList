@@ -78,6 +78,16 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
                     = (LinearLayout) itemView.findViewById(R.id.costduration_layout);
             LinearLayout traveldistanceLayout
                     = (LinearLayout) itemView.findViewById(R.id.traveldistance_layout);
+            LinearLayout travelDistanceInnerLayout
+                    = (LinearLayout) itemView.findViewById(R.id.traveldistance_inner_layout);
+            LinearLayout costLayout
+                    = (LinearLayout) itemView.findViewById(R.id.cost_layout);
+            LinearLayout durationLayout
+                    = (LinearLayout) itemView.findViewById(R.id.duration_layout);
+            LinearLayout deadlineLayout
+                    = (LinearLayout) itemView.findViewById(R.id.deadline_layout);
+            LinearLayout priorityLayout
+                    = (LinearLayout) itemView.findViewById(R.id.priority_layout);
 
             //Initialize the item name
             TextView text = (TextView) itemView.findViewById(R.id.bucketListText);
@@ -95,7 +105,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
             //Set the texts of the parameter values
             String deadlineString = currentItem.getDeadline();
             if (currentItem.hasNoDeadline()) {
-                deadline_text.setText("----------");
+                deadline_text.setText("-----     ");
             } else if (deadlineString.length() > 10) {
                 deadline_text.setText(deadlineString.substring(0, 10) + "...");
             } else {
@@ -106,7 +116,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
 
             String costString = Double.toString(currentItem.getCost());
             if (currentItem.hasNoCost()) {
-                cost_text.setText("----------");
+                cost_text.setText("-----     ");
             } else if (costString.length() > 10) {
                 cost_text.setText(costString.substring(0, 10) + "...");
             } else {
@@ -115,7 +125,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
 
             String durationString = currentItem.getDuration();
             if (currentItem.hasNoDuration()) {
-                duration_text.setText("----------");
+                duration_text.setText("-----     ");
             } else if (durationString.length() > 10) {
                 duration_text.setText(durationString.substring(0, 10) + "...");
             } else {
@@ -124,7 +134,7 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
 
             String traveldistanceString = currentItem.getTravelDistance();
             if(currentItem.hasNoTravelDistance()) {
-                traveldistance_text.setText("----------");
+                traveldistance_text.setText("-----     ");
             } else if (traveldistanceString.length() > 10) {
                 traveldistance_text.setText(traveldistanceString.substring(0, 10) + "...");
             } else {
@@ -143,6 +153,11 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
                 traveldistanceLayout.setBackgroundColor(res.getColor(R.color.light_blue));
                 costDurationLayout.setBackgroundColor(res.getColor(R.color.light_blue));
                 deadlinePriorityLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                travelDistanceInnerLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                costLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                priorityLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                durationLayout.setBackgroundColor(res.getColor(R.color.light_blue));
+                deadlineLayout.setBackgroundColor(res.getColor(R.color.light_blue));
                 duration_text.setBackgroundColor(res.getColor(R.color.light_blue));
                 cost_text.setBackgroundColor(res.getColor(R.color.light_blue));
                 deadline_text.setBackgroundColor(res.getColor(R.color.light_blue));
