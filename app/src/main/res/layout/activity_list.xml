@@ -1,0 +1,123 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@color/mint"
+    tools:context=".MainActivity">
+
+    <!-- Categories! -->
+    <com.jess.ui.TwoWayGridView
+        android:id="@+id/list_categories"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        app:numRows="1"
+        app:scrollDirectionPortrait="horizontal"
+        app:scrollDirectionLandscape="horizontal"
+        android:background="@color/charcoal"/>
+
+    <!-- Menu used to select which parameter to sort by -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@color/silver">
+
+        <TextView
+            android:id="@+id/sortby_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:text="Sort by: "
+            android:textSize="30sp"/>
+
+        <ImageButton
+            android:id="@+id/sort_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/sort_lowest_first"/>
+
+        <Spinner
+            android:id="@+id/sort_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/sortby_text"
+            android:layout_toLeftOf="@id/sort_button"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="28sp"/>
+
+    </RelativeLayout>
+
+    <!-- Greeting -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/charcoal"/>
+
+    <TextView
+        android:id="@+id/greeting"
+        android:text="@string/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="21sp"/>
+
+    <!-- List whose dataset is defined in code with an adapter -->
+    <ListView
+        android:id="@+id/bucketlistview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"/>
+
+    <!-- Handles creation of the Unaccomlished and Accomplished tabs below the Action Bar -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="-7dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginLeft="-7dp"
+        android:layout_marginRight="-7dp">
+
+
+        <ToggleButton
+            android:layout_width="0dp"
+            android:layout_height= "match_parent"
+            android:textOn="Unaccomplished"
+            android:textOff="Unaccomplished"
+            android:id="@+id/list_toggle_unaccomplished"
+            android:layout_weight="1"
+            android:textColor="@drawable/toggle_text"
+            android:layout_marginRight="-4.5dp"
+            android:layout_gravity="center" />
+
+        <ToggleButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textOn="Accomplished"
+            android:textOff="Accomplished"
+            android:id="@+id/list_toggle_accomplished"
+            android:layout_weight="1"
+            android:textColor="@drawable/toggle_text"
+            android:layout_marginLeft="-4.5dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+
+</LinearLayout>

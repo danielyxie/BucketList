@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background = "@color/light_gray">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!-- Task Name -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+
+            <!-- "I want to" text -->
+            <TextView
+                android:id="@+id/text_iwantto"
+                android:text="I want to..."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <!-- Text of item being viewed -->
+            <EditText
+                android:id="@+id/add_edittext_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:width="275dp"
+                android:layout_below="@+id/text_iwantto"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:gravity="center_horizontal" />
+        </RelativeLayout>
+
+
+        <!-- Deadline -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_gray"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/add_deadline_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Deadline"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_below="@+id/add_deadline_title">
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_edittext_deadline"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/label_divider_padding"
+                    android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_spinner_deadline"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <!-- Priority -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/add_priority_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Priority"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/input_divider_padding"/>
+
+            <TextView
+                android:id="@+id/add_textview_priority_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/priority_min"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_below="@+id/add_priority_title"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/add_textview_priority_label">
+
+                <TextView
+                    android:id="@+id/add_textview_priority_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/priority_min"
+                    android:gravity="center|end"
+                    android:layout_weight="1"/>
+
+                <SeekBar
+                    android:id="@+id/add_seekbar_priority"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="@string/priority_max"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_textview_priority_max"
+                    android:text="@string/priority_max"
+                    android:gravity="center|start"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <!-- Cost -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_gray"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+            android:id="@+id/add_cost_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Cost"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/add_cost_title">
+
+                <TextView
+                    android:id="@+id/add_cost_dollarsign"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/label_divider_padding"
+                    android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+                <EditText
+                    android:id="@+id/add_edittext_cost"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/label_divider_padding"
+                    android:layout_marginBottom="@dimen/input_divider_padding"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <!-- Duration -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/add_duration_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Duration"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/input_divider_padding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_below="@+id/add_duration_title">
+
+                <EditText
+                    android:id="@+id/add_edittext_duration"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/label_divider_padding"
+                    android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+                <Spinner
+                    android:id="@+id/add_spinner_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <!-- Travel Distance -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_gray"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+            android:id="@+id/add_traveldistance_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Travel distance"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/input_divider_padding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_below="@+id/add_traveldistance_title">
+
+                <EditText
+                    android:id="@+id/add_edittext_traveldistance"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/label_divider_padding"
+                    android:layout_marginBottom="@dimen/input_divider_padding"/>
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_spinner_traveldistance"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <!-- Categories -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_blue"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+            <TextView
+                android:id="@+id/add_categories_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Categories"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/input_divider_padding"/>
+
+            <ListView
+                android:id="@+id/add_categories"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/add_categories_title"
+                android:layout_marginTop="@dimen/label_divider_padding"
+                android:layout_marginBottom="@dimen/input_divider_padding"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+
+        <!-- Confirm Button -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:background="@color/light_gray"
+            tools:context="edu.hmc.dxie.bucketlist.ViewItemActivity">
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:id="@+id/add_button_confirm" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

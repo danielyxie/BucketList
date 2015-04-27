@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" 
+    android:layout_height="?listPreferredItemHeight"
+    android:background="@color/mint">
+
+    <RelativeLayout
+        android:id="@+id/item_box_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp">
+
+
+        <!-- CheckBox for marking elements as completed -->
+        <CheckBox
+            android:id="@+id/item_checkbox_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="7dp"
+            android:paddingEnd="7dp"/>
+
+
+        <!-- Showing the Travel Distance parameter -->
+        <LinearLayout
+            android:id="@+id/traveldistance_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@id/item_checkbox_completed"
+            android:background="@color/white"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="4dp">
+
+            <!-- Travel Distance value and icon -->
+            <LinearLayout
+                android:id="@+id/traveldistance_inner_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/traveldistance_icon"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:src="@drawable/icon_distance"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/item_traveldistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/item_dummy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+
+        <!-- Showing the Cost and Duration parameters -->
+        <LinearLayout
+            android:id="@+id/costduration_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@id/traveldistance_layout"
+            android:background="@color/white"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="4dp">
+
+            <!-- Cost value and icon -->
+            <LinearLayout
+                android:id="@+id/cost_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/cost_icon"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:src="@drawable/icon_cost"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/item_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Duration value and icon -->
+            <LinearLayout
+                android:id="@+id/duration_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/duration_icon"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:src="@drawable/icon_duration"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/item_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- Showing the Deadline and Priority parameters -->
+        <LinearLayout
+            android:id="@+id/deadlinepriority_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_toLeftOf="@id/costduration_layout"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp">
+
+            <!-- Deadline value and icon -->
+            <LinearLayout
+                android:id="@+id/deadline_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/deadline_icon"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:src="@drawable/icon_deadline"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/item_deadline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Priority value and icon -->
+            <LinearLayout
+                android:id="@+id/priority_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/priority_icon"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:src="@drawable/icon_priority"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/item_priority"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <!-- Item Name of the Bucket List Item -->
+        <TextView
+            android:id="@+id/bucketListText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/deadlinepriority_layout"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="4dp"/>
+    </RelativeLayout>
+</RelativeLayout>

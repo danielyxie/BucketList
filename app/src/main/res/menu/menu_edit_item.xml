@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Finish Editing Button -->
+    <item
+        android:id="@+id/menu_item_finish_edit"
+        android:title="FinishEdit"
+        android:icon="@drawable/ic_action_accept"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_item_discard"
+        android:title="Discard"
+        android:icon="@drawable/ic_action_discard"
+        app:showAsAction="always" />
+</menu>

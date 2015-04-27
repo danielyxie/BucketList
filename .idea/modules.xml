@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BucketList.iml" filepath="$PROJECT_DIR$/BucketList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/TwoWayGridView/TwoWayGridView.iml" filepath="$PROJECT_DIR$/libs/TwoWayGridView/TwoWayGridView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
