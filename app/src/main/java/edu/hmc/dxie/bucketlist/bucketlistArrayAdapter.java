@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -192,6 +193,17 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
                 ItemModel item = (ItemModel) v.getTag();
                 item.toggleCompleted();
                 notifyDataSetChanged();
+                if(!accomplishedToggle) {
+                    CharSequence text = "Congrats! You completed an item! You can view this item in the Accomplished Tab.";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(mContext, text, duration);
+                    toast.show();
+                } else {
+                    CharSequence text = "You marked this item as incomplete. View this item in the Unaccomplished Tab.";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(mContext, text, duration);
+                    toast.show();
+                }
                 break;
         }
     }
