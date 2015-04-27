@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
 import android.text.method.KeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -363,6 +364,7 @@ public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSee
         String n = currentItem.getNotes();
 
         notesEditText = (LinedEditText) findViewById(R.id.notepad_edit);
+        notesEditText.setFilters(new InputFilter[] {new MaxLinesInputFilter(10)});
         notesEditText.setText(n);
     }
 
