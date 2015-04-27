@@ -31,8 +31,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:background="@color/silver"
->
+        android:background="@color/silver">
 
         <TextView
             android:id="@+id/sortby_text"

@@ -27,8 +27,8 @@
             android:focusableInTouchMode="false"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:paddingRight="10dp"
-            android:paddingEnd="10dp"/>
+            android:paddingRight="7dp"
+            android:paddingEnd="7dp"/>
 
 
         <!-- Showing the Travel Distance parameter -->
@@ -215,12 +215,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@id/deadlinepriority_layout"
-            android:textSize="21sp"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:layout_marginBottom="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="7dp"/>
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="4dp"/>
     </RelativeLayout>
 </RelativeLayout>
