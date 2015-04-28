@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/DXie/AndroidStudioProjects/BucketList/libs/TwoWayGridView/res/values/attrs.xml -->
+    <!-- From: file:/Applications/Android%20Studio.app/Contents/Android%20Studio%20Projects/BucketList/libs/TwoWayGridView/res/values/attrs.xml -->
     <eat-comment/>
     <attr name="gravity">
         <!-- Push object to the top of its container, not changing its size. -->
@@ -37,7 +37,7 @@
     <attr format="reference" name="gridViewStyle"/>
     <declare-styleable name="TwoWayAbsListView"><attr format="color|reference" name="listSelector"/><attr format="boolean" name="drawSelectorOnTop"/><attr format="boolean" name="stackFromBottom"/><attr format="boolean" name="scrollingCache"/><attr name="transcriptMode"><enum name="disabled" value="0"/><enum name="normal" value="1"/><enum name="alwaysScroll" value="2"/></attr><attr format="color" name="cacheColorHint"/><attr format="boolean" name="smoothScrollbar"/><attr name="scrollDirectionPortrait"><enum name="vertical" value="0"/><enum name="horizontal" value="1"/></attr><attr name="scrollDirectionLandscape"><enum name="vertical" value="0"/><enum name="horizontal" value="1"/></attr></declare-styleable>
     <declare-styleable name="TwoWayGridView"><attr format="dimension" name="horizontalSpacing"/><attr format="dimension" name="verticalSpacing"/><attr name="stretchMode"><enum name="none" value="0"/><enum name="spacingWidth" value="1"/><enum name="columnWidth" value="2"/><enum name="spacingWidthUniform" value="3"/></attr><attr format="dimension" name="columnWidth"/><attr format="dimension" name="rowHeight"/><attr format="integer" min="0" name="numColumns"><enum name="auto_fit" value="-1"/></attr><attr format="integer" min="0" name="numRows"><enum name="auto_fit" value="-1"/></attr><attr name="gravity"/></declare-styleable>
-    <!-- From: file:/C:/Users/DXie/AndroidStudioProjects/BucketList/libs/TwoWayGridView/res/values/strings.xml -->
+    <!-- From: file:/Applications/Android%20Studio.app/Contents/Android%20Studio%20Projects/BucketList/libs/TwoWayGridView/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">EverGrid</string>
 </resources>

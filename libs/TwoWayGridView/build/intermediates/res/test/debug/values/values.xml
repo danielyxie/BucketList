@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/DXie/AndroidStudioProjects/BucketList/libs/TwoWayGridView/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/Applications/Android%20Studio.app/Contents/Android%20Studio%20Projects/BucketList/libs/TwoWayGridView/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <attr name="gravity">
         <!-- Push object to the top of its container, not changing its size. -->
