@@ -858,7 +858,7 @@ public abstract class TwoWayAdapterView<T extends Adapter> extends ViewGroup {
 			if (mDataChanged) {
 				// Data has changed between when this SelectionNotifier
 				// was posted and now. We need to wait until the AdapterView
-				// has been synched to the new data.
+				// has been synced to the new data.
 				post(this);
 			} else {
 				fireOnSelected();
@@ -871,7 +871,7 @@ public abstract class TwoWayAdapterView<T extends Adapter> extends ViewGroup {
 			if (mInLayout || mBlockLayoutRequests) {
 				// If we are in a layout traversal, defer notification
 				// by posting. This ensures that the view tree is
-				// in a consistent state and is able to accomodate
+				// in a consistent state and is able to accommodate
 				// new layout or invalidate requests.
 				if (mSelectionNotifier == null) {
 					mSelectionNotifier = new SelectionNotifier();

@@ -14,12 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.jess.ui.TwoWayGridView;
@@ -34,20 +32,20 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                                                                SearchView.OnQueryTextListener{
 
     ListModel bucketModel;
-    ListView bucketView;
-    bucketlistArrayAdapter bucketArrayAdapter;
-    CategoryList categories;
-    CategoryArrayAdapter catArrayAdapter;
-    TwoWayGridView catView;
-    SharedPreferences persistentData;
-    Spinner sortSpinner;
-    ImageButton sortButton;
-    boolean sortAscending = true;    //Determines whether sorting by ascending or descending items
-    SearchView searchView;
 
-    static final String[] DEFAULT_NAMES = {"Adventure", "Arts", "Entertainment", "Food",
+    private bucketlistArrayAdapter bucketArrayAdapter;
+    private CategoryList categories;
+    private CategoryArrayAdapter catArrayAdapter;
+
+    private SharedPreferences persistentData;
+    private Spinner sortSpinner;
+    private ImageButton sortButton;
+    private boolean sortAscending = true;    //Determines whether sorting by ascending or descending items
+    private SearchView searchView;
+
+    private static final String[] DEFAULT_NAMES = {"Adventure", "Arts", "Entertainment", "Food",
                                             "Friends & Family", "Misc", "Self-Improvement", "Travel"};
-    static final int[] DEFAULT_ICON_IDS = {R.drawable.ic_category_adventure, R.drawable.ic_category_arts,
+    private static final int[] DEFAULT_ICON_IDS = {R.drawable.ic_category_adventure, R.drawable.ic_category_arts,
                                         R.drawable.ic_category_entertainment, R.drawable.ic_category_food,
                                         R.drawable.ic_category_friends_family, R.drawable.ic_category_misc,
                                         R.drawable.ic_category_self_improvement, R.drawable.ic_category_travel};
@@ -71,7 +69,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         catArrayAdapter = new CategoryArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 categories.getCategories());
-        catView = (TwoWayGridView) findViewById(R.id.list_categories);
+        TwoWayGridView catView = (TwoWayGridView) findViewById(R.id.list_categories);
         catView.setAdapter(catArrayAdapter);
 
         initBucketModel();
@@ -81,7 +79,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
                 android.R.layout.simple_list_item_1,
                 bucketModel.getBucket(),
                 categories.getCategories());
-        bucketView = (ListView) findViewById(R.id.bucketlistview);
+        ListView bucketView = (ListView) findViewById(R.id.bucketlistview);
         bucketView.setAdapter(bucketArrayAdapter);
 
         // Set this activity to react to list items being processed
@@ -348,7 +346,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      * Handles the greeting that tells users how to add an item to their Bucket List.  This
      * greeting will only show if the Bucket List has no items
      */
-    public void setGreeting(){
+    void setGreeting(){
         // Sets the greeting text to invisible when items in bucket
         TextView greetingTextView = (TextView) findViewById(R.id.greeting);
         if(bucketModel.isEmpty()){
@@ -363,7 +361,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      * helper functions to determine how to sort (ascending/descending,
      * what parameters, etc.)
      */
-    public void sortBucketList() {
+    void sortBucketList() {
         String param = (String) sortSpinner.getSelectedItem();
 
         ItemModel itemModelObject = new ItemModel();
@@ -423,7 +421,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
      */
     public int filterItemsWithNoParameters(Method paramMethod) {
         Method getDeadlineMethod, getPriorityMethod, getDurationMethod,
-               getTravelDistanceMethod, getCostMethod, getItemTextMethod;
+               getTravelDistanceMethod, getCostMethod;
 
         ItemModel itemModelObject = new ItemModel();
         Class<?> itemModelClass = itemModelObject.getClass();
@@ -434,7 +432,7 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
         //The index variable is the return value and also represents the index
         //of the bucket list at which to add the next item with no
         //parameter value
-        int bottomIndex = bucketModel.size() - 1;
+
 
         try {
             getDeadlineMethod = itemModelClass.getMethod("getDeadlineForSort");
@@ -442,7 +440,6 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
             getDurationMethod = itemModelClass.getMethod("getDurationForSort");
             getTravelDistanceMethod = itemModelClass.getMethod("getTravelDistanceForSort");
             getCostMethod = itemModelClass.getMethod("getCost");
-            getItemTextMethod = itemModelClass.getMethod("getItemText");
 
             if(paramMethod.equals(getDeadlineMethod)) {
                 for ( int i = 0; i < bucketModel.size(); i++ ) {

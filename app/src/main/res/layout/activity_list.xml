@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_alignParentLeft="true"
-            android:text="Sort by: "
+            android:text="@string/sortby"
             android:textSize="30sp"/>
 
         <ImageButton

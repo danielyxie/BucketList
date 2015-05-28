@@ -30,44 +30,44 @@ import java.util.Arrays;
 
 public class EditItemActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
 
-    Resources res;
-    Intent editItem;
-    ItemModel currentItem;
+    private Resources res;
+    private Intent editItem;
+    private ItemModel currentItem;
 
-    EditText itemTextEditText;
+    private EditText itemTextEditText;
 
     // Deadline layout View objects
-    EditText deadlineValueEditText;
-    Spinner deadlineSpinner;
+    private EditText deadlineValueEditText;
+    private Spinner deadlineSpinner;
 
     // Priority layout View objects
-    TextView priorityTextView;
-    SeekBar prioritySeekBar;
+    private TextView priorityTextView;
+    private SeekBar prioritySeekBar;
 
     // Duration layout View objects
-    EditText durationValueEditText;
-    Spinner durationSpinner;
+    private EditText durationValueEditText;
+    private Spinner durationSpinner;
 
     // Cost layout View objects
-    EditText costEditText;
+    private EditText costEditText;
 
     //Travel Distance layout View objects
-    EditText travelDistanceValueEditText;
-    Spinner travelDistanceSpinner;
+    private EditText travelDistanceValueEditText;
+    private Spinner travelDistanceSpinner;
 
     // Stuff for categories
-    CategoryList categories;
-    ArrayList<Category> itemCats;
+    private CategoryList categories;
+    private ArrayList<Category> itemCats;
 
     //Notes View objects
-    LinedEditText notesEditText;
+    private LinedEditText notesEditText;
 
     // Key listeners for every parameter
-    KeyListener itemTextListener;
-    KeyListener deadlineListener;
-    KeyListener costListener;
-    KeyListener durationListener;
-    KeyListener travelDistanceListener;
+    private KeyListener itemTextListener;
+    private KeyListener deadlineListener;
+    private KeyListener costListener;
+    private KeyListener durationListener;
+    private KeyListener travelDistanceListener;
 
 
     @Override

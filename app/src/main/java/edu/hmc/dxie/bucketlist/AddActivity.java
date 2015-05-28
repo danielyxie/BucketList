@@ -3,7 +3,6 @@ package edu.hmc.dxie.bucketlist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,11 +19,12 @@ import java.util.ArrayList;
 
 /**
  * Created by justisallen and kaitlynanderson on 2/15/15.
+ * The AddActivity is the view/controller for adding an item to the bucket list.
  */
 public class AddActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
 
-    CategoryList categories;
-    ArrayList<Category> itemCats;
+    private CategoryList categories;
+    private ArrayList<Category> itemCats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,26 +80,6 @@ public class AddActivity extends ActionBarActivity implements View.OnClickListen
         // Initialize the priority SeekBar
         SeekBar prioritySeekBar = (SeekBar) findViewById(R.id.add_seekbar_priority);
         prioritySeekBar.setOnSeekBarChangeListener(this);
-    }
-
-
-    /*
-     * This method implements what happens when the buttons on the Action Bar are pressed.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        }*/
-
-        return super.onOptionsItemSelected(item);
     }
 
 

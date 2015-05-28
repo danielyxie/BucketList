@@ -18,7 +18,7 @@
         android:layout_height="500dp"
         android:layout_centerInParent="true"
         android:layout_below="@id/SplashSpace"
-        android:src="@drawable/ic_launcher2" />
+        android:src="@drawable/ic_launcher" />
     <TextView
         android:id="@+id/text_splashText"
         android:textSize="50sp"

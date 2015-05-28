@@ -4,7 +4,7 @@
     <!-- Edit Button -->
     <item
         android:id="@+id/menu_item_edit"
-        android:title="Edit"
+        android:title="@string/edit"
         android:icon="@drawable/ic_action_edit"
         app:showAsAction="always" />
 

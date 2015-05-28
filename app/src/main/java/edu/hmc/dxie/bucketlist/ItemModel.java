@@ -109,29 +109,20 @@ public class ItemModel {
     public String getNotes() { return this.notes; }
 
     public boolean hasNoDeadline() {
-        if (this.deadline.equals(" days") || this.deadline.equals(" weeks") ||
-            this.deadline.equals(" months") || this.deadline.equals(" years")) {
-            return true;
-        }
-        return false;
+        return this.deadline.equals(" days") || this.deadline.equals(" weeks") ||
+                this.deadline.equals(" months") || this.deadline.equals(" years");
     }
 
     public boolean hasNoCost() { return this.cost == -1; }
 
     public boolean hasNoDuration() {
-        if (this.duration.equals(" minutes") || this.duration.equals(" hours") ||
-            this.duration.equals(" days") || this.duration.equals(" weeks") ||
-            this.duration.equals(" months") || this.duration.equals(" years")) {
-            return true;
-        }
-        return false;
+        return this.duration.equals(" minutes") || this.duration.equals(" hours") ||
+                this.duration.equals(" days") || this.duration.equals(" weeks") ||
+                this.duration.equals(" months") || this.duration.equals(" years");
     }
 
     public boolean hasNoTravelDistance() {
-        if (this.travelDistance.equals(" miles") || this.travelDistance.equals(" kilometers")) {
-            return true;
-        }
-        return false;
+        return this.travelDistance.equals(" miles") || this.travelDistance.equals(" kilometers");
     }
 
     ////////////////////////////

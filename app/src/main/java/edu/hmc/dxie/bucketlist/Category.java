@@ -47,11 +47,9 @@ public class Category {
     public boolean equals(Object obj) {
         if (!(obj instanceof Category)) {
             return false;
-        } else if (obj == this) {
-            return true;
-        } else {
-            return (name.equals( ((Category) obj).getName() ) && iconID == ((Category) obj).getIconID());
-        }
+        } else
+            return obj == this || (name.equals(((Category) obj).getName())
+                    && iconID == ((Category) obj).getIconID());
     }
 
     public String serialize() {

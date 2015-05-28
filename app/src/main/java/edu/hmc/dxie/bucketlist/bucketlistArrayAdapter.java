@@ -16,8 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Created by justisallen on 2/24/15.
- */
-/**
+ *
  * Custom ArrayAdapter that will allow the ListView to support several views, formats, and
  * control data assignment.  Essentially, this custom ArrayAdapter will allow us to customize
  * the UI of the ListView.  It simply overrides the getView() function in ArrayAdapter
@@ -25,10 +24,9 @@ import java.util.ArrayList;
 public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements View.OnClickListener {
 
 
-    private Context mContext;
-    private int id;
-    private ArrayList<ItemModel> items;
-    private ArrayList<Category> categories;
+    private final Context mContext;
+    private final ArrayList<ItemModel> items;
+    private final ArrayList<Category> categories;
     private ArrayList<Category> activeCategories;
     private boolean accomplishedToggle; //if true, viewing accomplished items. if false, viewing unaccomplished items
     private String query;
@@ -38,7 +36,6 @@ public class bucketlistArrayAdapter extends ArrayAdapter<ItemModel> implements V
     {
         super(context, textViewResourceId, list);
         mContext = context;
-        id = textViewResourceId;
         items = list;
         this.categories = categories;
         activeCategories = getActiveCategories();

@@ -29,7 +29,7 @@
             <!-- "I want to" text -->
             <TextView
                 android:id="@+id/text_iwantto"
-                android:text="I want to..."
+                android:text="@string/iwantto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Deadline"
+                android:text="@string/deadline"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/label_divider_padding"/>
 
@@ -113,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Priority"
+                android:text="@string/priority"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/input_divider_padding"/>
 
@@ -176,7 +176,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Cost"
+            android:text="@string/cost"
             android:gravity="center"
             android:layout_marginTop="@dimen/input_divider_padding"/>
 
@@ -192,7 +192,7 @@
                     android:id="@+id/add_cost_dollarsign"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content"
-                    android:text="$"
+                    android:text="@string/$"
                     android:textSize="24dp"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/label_divider_padding"
@@ -227,7 +227,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Duration"
+                android:text="@string/duration"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/input_divider_padding"/>
 
@@ -272,7 +272,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Travel distance"
+            android:text="@string/traveldistance"
             android:gravity="center"
             android:layout_marginTop="@dimen/input_divider_padding"/>
 
@@ -317,7 +317,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Categories"
+                android:text="@string/categories"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/input_divider_padding"/>
 
