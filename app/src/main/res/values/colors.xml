@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#FFE8E8E8</color>
     <color name="green">#FFBADA5F</color>
+    <color name="half_transparent_green">#CCBADA5F</color>
     <color name="light_brown">#FFDAC189</color>
     <color name="yellow">#FFFF00</color>
     <color name="dark_yellow">#FFB90F</color>
@@ -21,6 +22,7 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+    <color name="half_transparent_black">#CC000000</color>
     <color name="brown">#774F38</color>
     <color name="charcoal">#303030</color>
     <color name="forest_green">#006400</color>

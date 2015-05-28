@@ -1,2 +1,2 @@
-include ':app'
-include ':libs:TwoWayGridView'
+include ':app', ':TwoWayGridView'
+project(':TwoWayGridView').projectDir = new File('libs/TwoWayGridView')
