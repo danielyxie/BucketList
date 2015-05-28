@@ -45,11 +45,8 @@ public class Category {
     // For use of retainAll when filtering
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Category)) {
-            return false;
-        } else
-            return obj == this || (name.equals(((Category) obj).getName())
-                    && iconID == ((Category) obj).getIconID());
+        return obj instanceof Category && (obj == this || (name.equals(((Category) obj).getName())
+                && iconID == ((Category) obj).getIconID()));
     }
 
     public String serialize() {

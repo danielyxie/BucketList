@@ -8,17 +8,26 @@ package edu.hmc.dxie.bucketlist;
         import android.content.Intent;
         import android.os.Bundle;
         import android.os.Handler;
+        import android.view.animation.Animation;
+        import android.view.animation.AnimationUtils;
+        import android.widget.TextView;
 
 public class SplashScreen extends Activity {
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        TextView mainText = (TextView) findViewById(R.id.text_splashText);
+        Animation animFadeIn;
+        //mainText.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.enter_from_left));
+        animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.enter_from_left);
+        mainText.startAnimation(animFadeIn);
         new Handler().postDelayed(new Runnable() {
 
             /*
