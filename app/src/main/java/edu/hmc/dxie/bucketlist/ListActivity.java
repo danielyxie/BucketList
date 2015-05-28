@@ -43,12 +43,13 @@ public class ListActivity extends ActionBarActivity implements AdapterView.OnIte
     private boolean sortAscending = true;    //Determines whether sorting by ascending or descending items
     private SearchView searchView;
 
-    private static final String[] DEFAULT_NAMES = {"Adventure", "Arts", "Entertainment", "Food",
+    private static final String[] DEFAULT_NAMES = {"Select All", "Adventure", "Arts", "Entertainment", "Food",
                                             "Friends & Family", "Misc", "Self-Improvement", "Travel"};
-    private static final int[] DEFAULT_ICON_IDS = {R.drawable.ic_category_adventure, R.drawable.ic_category_arts,
-                                        R.drawable.ic_category_entertainment, R.drawable.ic_category_food,
-                                        R.drawable.ic_category_friends_family, R.drawable.ic_category_misc,
-                                        R.drawable.ic_category_self_improvement, R.drawable.ic_category_travel};
+    private static final int[] DEFAULT_ICON_IDS = {R.drawable.ic_category_select_all, R.drawable.ic_category_adventure,
+                                        R.drawable.ic_category_arts, R.drawable.ic_category_entertainment,
+                                        R.drawable.ic_category_food, R.drawable.ic_category_friends_family,
+                                        R.drawable.ic_category_misc, R.drawable.ic_category_self_improvement,
+                                        R.drawable.ic_category_travel};
 
 
     @Override
